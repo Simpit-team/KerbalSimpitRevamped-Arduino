@@ -29,6 +29,8 @@ class KerbalSimPit
   bool init();
   void inboundHandler(void (*packetHandler)(byte packetType,
                                             byte *msg, byte msgSize));
+  void registerChannel(byte channelID);
+  void deregisterChannel(byte channelID);
   void send(byte packetType, byte *msg, byte msgSize);
   void update();
 
