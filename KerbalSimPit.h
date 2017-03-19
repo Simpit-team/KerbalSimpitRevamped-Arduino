@@ -14,6 +14,8 @@ const byte ECHO_RESP_PACKET = 0x02;
 // Scene change packets are sent by the game when
 // entering or leaving the flight scene.
 const byte SCENE_CHANGE_PACKET = 0x03;
+// Altitude packets indicate sea level and surface altitude
+const byte ALTITUDE_PACKET = 0x04;
 
 // Register and deregister packets are sent by a device to register
 // or deregister to event channels.
