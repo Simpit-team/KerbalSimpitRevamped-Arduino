@@ -41,9 +41,11 @@ void loop() {
 }
 
 void packetHandler(byte packetType, byte *msg, byte msgSize) {
-  if (strcmp(msg, "low")) {
-    digitalWrite(13, LOW);
-  } else {
-    digitalWrite(13, HIGH);
+  if (packetType == ECHO_RESP_PACKET) {
+    if (strcmp(msg, "low")) {
+      digitalWrite(13, LOW);
+    } else {
+      digitalWrite(13, HIGH);
+    }
   }
 }
