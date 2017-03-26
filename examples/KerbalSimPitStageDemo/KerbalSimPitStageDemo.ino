@@ -1,5 +1,12 @@
 /* KerbalSimPitStageDemo
-   A simple staging button.
+   A simple staging button. This is intended to be a small
+   addition to the "Debounce" demo sketch included with the
+   Arduino IDE.
+
+   Hardware:
+   * A momentary pushbutton connecting pin 1 to ground.
+     (we're using the internal pull-up resistor on that pin)
+   * (optional) an LED on pin 8.
 */
 #include "KerbalSimPit.h"
 
@@ -18,14 +25,20 @@ long lastSendTime = 0;
 long sendDelay = 50;
 
 void setup() {
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
   mySimPit.init();
 }
 
 void loop() {
   // Polling the button state
-  int reading = digitalRead(buttonPin);
+  byte reading;
+  if (digitalRead(buttonPin)) {
+    reading = 1;
+  } else {
+    reading = 0;
+  }
+
   if (reading != lastButtonState) {
     lastDebounceTime = millis();
   }

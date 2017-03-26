@@ -1,6 +1,10 @@
 /* KerbalSimPitHelloWorld
-
-   Simplest hello world sketch
+   A very barebones Hello World sketch, that doesn't require
+   any extra hardware. It periodically sends EchoRequest packets
+   to the game, and uses the EchoReply packets to switch the
+   on-board LED on and off. Note that the game only activates the
+   echo handler during the flight scene.
+   Great for confirming basic connectivity.
 
    Peter Hardy <peter@hardy.dropbear.id.au>
 */

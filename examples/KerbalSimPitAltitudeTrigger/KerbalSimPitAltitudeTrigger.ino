@@ -1,7 +1,7 @@
 /* KerbalSimPitAltitudeTrigger
-
-   Subscribes to the altitude channel.
-   Turns on pin 13 LED when altitude > 5km.
+   A demonstration of subscribing to telemetry data from the game.
+   Subscribes to the altitude channel, and turns the pin 13 LED
+   on when the sea level altitude > 5km.
 
    Peter Hardy <peter@hardy.dropbear.id.au>
 */
