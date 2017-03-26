@@ -21,6 +21,7 @@ const byte ALTITUDE_PACKET = 0x04;
 // or deregister to event channels.
 const byte REGISTER_PACKET = 0x03;
 const byte DEREGISTER_PACKET = 0x04;
+const byte STAGE_PACKET = 0x05;
 
 class KerbalSimPit
 {
