@@ -21,7 +21,11 @@ const byte ALTITUDE_PACKET = 0x04;
 // or deregister to event channels.
 const byte REGISTER_PACKET = 0x03;
 const byte DEREGISTER_PACKET = 0x04;
+// Stage packet activates the next stage.
 const byte STAGE_PACKET = 0x05;
+// Custom action packets activate and deactivate custom action groups
+const byte CAGACTIVATE_PACKET = 0x06;
+const byte CAGDEACTIVATE_PACKET = 0x07;
 
 class KerbalSimPit
 {
