@@ -10,6 +10,7 @@
 */
 #include "KerbalSimPit.h"
 
+// 
 KerbalSimPit mySimPit(115200);
 
 const int buttonPin = 1;
@@ -21,40 +22,34 @@ int lastButtonState = LOW;
 
 long lastDebounceTime = 0;
 long debounceDelay = 50;
-long lastSendTime = 0;
-long sendDelay = 50;
 
 void setup() {
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
+  // 
   while (!mySimPit.init()) {
     delay(100);
   }
 }
 
 void loop() {
-  // Polling the button state
-  byte reading;
-  if (digitalRead(buttonPin)) {
-    reading = 1;
-  } else {
-    reading = 0;
-  }
+  int reading = digitalRead(buttonPin);
 
   if (reading != lastButtonState) {
     lastDebounceTime = millis();
   }
   if ((millis() - lastDebounceTime) > debounceDelay) {
     buttonState = reading;
+    // If the current button state is low, and the
+    // previous button state is high, then the button
+    // has just been pressed. So send a stage event.
+    if (!buttonState && lastButtonState) {
+      mySimPit.stageEvent();
+    }
   }
 
-  // Only send a packet every 50ms
-  if ((millis() - lastSendTime) > sendDelay) {
-    mySimPit.send(STAGE_PACKET, buttonState, sizeof(buttonState));
-    lastSendTime = millis();
-  }
   digitalWrite(ledPin, buttonState);
-  lastButtonState = reading;
+  lastButtonState = buttonState;
 }
 
     

@@ -39,6 +39,9 @@ class KerbalSimPit
   void send(byte packetType, byte *msg, byte msgSize);
   void update();
 
+  // Helper functions
+  void stageEvent();
+
  private:
   byte _inboundType;
   byte _inboundSize;
