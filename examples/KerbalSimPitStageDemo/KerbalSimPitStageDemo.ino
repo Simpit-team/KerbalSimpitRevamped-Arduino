@@ -27,7 +27,9 @@ long sendDelay = 50;
 void setup() {
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
-  mySimPit.init();
+  while (!mySimPit.init()) {
+    delay(100);
+  }
 }
 
 void loop() {

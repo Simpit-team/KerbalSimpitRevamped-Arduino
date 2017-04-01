@@ -19,18 +19,11 @@ altitudeStruct myAltitude;
 void setup() {
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
-  if (mySimPit.init()) {
-    mySimPit.inboundHandler(packetHandler);
-    mySimPit.registerChannel(ALTITUDE_PACKET);
-  } else {
-    // No connection. Abort.
-    while (true) {
-      digitalWrite(13, HIGH);
-      delay(50);
-      digitalWrite(13, LOW);
-      delay(50);
-    }
+  while (!mySimPit.init()) {
+    delay(100);
   }
+  mySimPit.inboundHandler(packetHandler);
+  mySimPit.registerChannel(ALTITUDE_PACKET);
 }
 
 void loop() {

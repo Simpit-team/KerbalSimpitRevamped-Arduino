@@ -21,12 +21,10 @@ void setup() {
 
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
-  if(mySimPit.init()) {
-    mySimPit.inboundHandler(packetHandler);
-  } else {
-    // Don't know what to do. Abort.
-    digitalWrite(13, HIGH);
-    while (true);
+  bool status = false;
+
+  while (!mySimPit.init()) {
+    delay(100);
   }
 }
 
