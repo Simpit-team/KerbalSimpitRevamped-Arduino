@@ -10,26 +10,32 @@
 */
 #include "KerbalSimPit.h"
 
-// 
+// KerbalSimPit object
 KerbalSimPit mySimPit(115200);
 
+// The pin the button is connected to
 const int buttonPin = 1;
+// The pin connected to an optional status LED
 const int ledPin = 8;
 
-int ledState = HIGH;
+// The current reading from the input pin
 int buttonState;
+// The previous reading from the input pin
 int lastButtonState = LOW;
 
+// the last time the output pin was toggled
 long lastDebounceTime = 0;
+// the debounce time; increase if the output flickers
 long debounceDelay = 50;
 
 void setup() {
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
-  // 
+  digitalWrite(ledPin, HIGH);
   while (!mySimPit.init()) {
     delay(100);
   }
+  digitalWrite(ledPin, LOW);
 }
 
 void loop() {

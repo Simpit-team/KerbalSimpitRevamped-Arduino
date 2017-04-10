@@ -10,23 +10,29 @@
 */
 #include "KerbalSimPit.h"
 
+// The built-in LED output pin
+const int ledPin = 13;
+
+// KerbalSimPit object
 KerbalSimPit mySimPit(115200);
 
+// tracking desired LED state
 bool state = false;
+
+// When an echo packet was last sent
 unsigned long lastSent = 0;
+// How often to send echo packets (in ms)
 unsigned int sendInterval = 1000;
 
 void setup() {
   Serial.begin(115200);
 
-  pinMode(13, OUTPUT);
-  digitalWrite(13, HIGH);
-  bool status = false;
-
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, HIGH);
   while (!mySimPit.init()) {
     delay(100);
   }
-  digitalWrite(13, LOW);
+  digitalWrite(ledPin, LOW);
   mySimPit.inboundHandler(packetHandler);
 }
 
@@ -47,9 +53,9 @@ void loop() {
 void packetHandler(byte packetType, byte *msg, byte msgSize) {
   if (packetType == ECHO_RESP_PACKET) {
     if (strcmp(msg, "low")) {
-      digitalWrite(13, LOW);
+      digitalWrite(ledPin, LOW);
     } else {
-      digitalWrite(13, HIGH);
+      digitalWrite(ledPin, HIGH);
     }
   }
 }

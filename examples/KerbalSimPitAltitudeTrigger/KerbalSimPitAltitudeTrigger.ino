@@ -7,21 +7,26 @@
 */
 #include "KerbalSimPit.h"
 
+// KerbalSimPit object
 KerbalSimPit mySimPit(115200);
 
+const int ledPin = 13;
+
+// This struct matches the format
+// altitude data is sent from the game.
 struct altitudeStruct {
   float alt;
   float surfalt;
 };
-
 altitudeStruct myAltitude;
 
 void setup() {
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, HIGH);
   while (!mySimPit.init()) {
     delay(100);
   }
+  digitalWrite(ledPin, LOW);
   mySimPit.inboundHandler(packetHandler);
   mySimPit.registerChannel(ALTITUDE_PACKET);
 }
