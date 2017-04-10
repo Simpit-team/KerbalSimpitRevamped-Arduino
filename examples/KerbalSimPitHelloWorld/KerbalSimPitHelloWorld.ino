@@ -20,12 +20,14 @@ void setup() {
   Serial.begin(115200);
 
   pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
+  digitalWrite(13, HIGH);
   bool status = false;
 
   while (!mySimPit.init()) {
     delay(100);
   }
+  digitalWrite(13, LOW);
+  mySimPit.inboundHandler(packetHandler);
 }
 
 void loop() {
