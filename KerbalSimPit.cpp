@@ -92,7 +92,9 @@ void KerbalSimPit::update()
       _receivedIndex++;
       if (_receivedIndex == _inboundSize) {
         _receiveState = WaitingFirstByte;
-        _packetHandler(_inboundType, _inboundBuffer, _inboundSize);
+        if (_packetHandler != NULL) {
+          _packetHandler(_inboundType, _inboundBuffer, _inboundSize);
+        }
       }
       break;
     default:
