@@ -41,6 +41,8 @@ class KerbalSimPit
 
   // Helper functions
   void stageEvent();
+  void activateCAG(byte *msg);
+  void deactivateCAG(byte *msg);
 
  private:
   byte _inboundType;
