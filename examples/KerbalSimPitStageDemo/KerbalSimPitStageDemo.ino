@@ -11,7 +11,7 @@
 #include "KerbalSimPit.h"
 
 // KerbalSimPit object
-KerbalSimPit mySimPit(115200);
+KerbalSimPit mySimPit(&Serial);
 
 // The pin the button is connected to
 const int buttonPin = 1;
@@ -29,6 +29,7 @@ long lastDebounceTime = 0;
 long debounceDelay = 50;
 
 void setup() {
+  Serial.begin(115200);
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);

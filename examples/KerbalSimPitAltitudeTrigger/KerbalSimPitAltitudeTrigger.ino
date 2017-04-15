@@ -8,7 +8,7 @@
 #include "KerbalSimPit.h"
 
 // KerbalSimPit object
-KerbalSimPit mySimPit(115200);
+KerbalSimPit mySimPit(&Serial);
 
 const int ledPin = 13;
 
@@ -21,6 +21,7 @@ struct altitudeStruct {
 altitudeStruct myAltitude;
 
 void setup() {
+  Serial.begin(115200);
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, HIGH);
   while (!mySimPit.init()) {
