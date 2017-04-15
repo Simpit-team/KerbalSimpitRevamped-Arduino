@@ -30,7 +30,7 @@ const byte CAGDEACTIVATE_PACKET = 0x07;
 class KerbalSimPit
 {
  public:
-  KerbalSimPit(int speed);
+  KerbalSimPit(Stream *serial);
   bool init();
   void inboundHandler(void (*packetHandler)(byte packetType,
                                             byte *msg, byte msgSize));
@@ -50,6 +50,7 @@ class KerbalSimPit
   byte _inboundBuffer[32];
   byte _outboundBuffer[32];
   byte _outboundSize;
+  Stream *_serial;
 
   enum ReceiveState_t
   {
