@@ -14,14 +14,16 @@
 KerbalSimPit mySimPit(&Serial);
 
 // The pin the button is connected to
-const int buttonPin = 1;
+const int buttonPin = 2;
 // The pin connected to an optional status LED
-const int ledPin = 8;
+const int ledPin = 13;
 
-// The current reading from the input pin
+// The variable we store the most recent button reading in
 int buttonState;
-// The previous reading from the input pin
-int lastButtonState = LOW;
+// This variable holds the last button state to compare against
+int lastButtonState = HIGH;
+// Whether or not we have told KSP to activate the next stage
+bool stageSent = false;
 
 // the last time the output pin was toggled
 long lastDebounceTime = 0;
@@ -50,13 +52,28 @@ void loop() {
     // If the current button state is low, and the
     // previous button state is high, then the button
     // has just been pressed. So send a stage event.
-    if (!buttonState && lastButtonState) {
-      mySimPit.stageEvent();
-    }
+    //if (!buttonState && lastButtonState) {
+    //  mySimPit.stageEvent();
+    //}
   }
 
-  digitalWrite(ledPin, buttonState);
-  lastButtonState = buttonState;
+  // We're using an internal pull-up, so
+  // we have to invert this logic.
+  if (buttonState) {
+    // Button is not pressed, so reset the
+    // stageSent trigger.
+    stageSent = false;
+    digitalWrite(ledPin, LOW);
+  } else {
+    // Button is pressed. Send a stage event
+    // if we haven't already.
+    if (!stageSent) {
+      mySimPit.stageEvent();
+      stageSent = true;
+    }
+    digitalWrite(ledPin, HIGH);
+  }
+  lastButtonState = reading;
 }
 
     
