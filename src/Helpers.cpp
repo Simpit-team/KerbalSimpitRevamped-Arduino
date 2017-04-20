@@ -1,6 +1,6 @@
 #include "KerbalSimPit.h"
 
-const byte stageFlip[] = {0x01, 0x02};
+const byte stageFlip[] = {0x01, 0x00};
 
 void KerbalSimPit::stageEvent()
 {
