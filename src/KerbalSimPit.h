@@ -26,6 +26,7 @@ const byte STAGE_PACKET = 0x05;
 // Custom action packets activate and deactivate custom action groups
 const byte CAGACTIVATE_PACKET = 0x06;
 const byte CAGDEACTIVATE_PACKET = 0x07;
+const byte CAGTOGGLE_PACKET = 0x08;
 
 class KerbalSimPit
 {
@@ -43,6 +44,7 @@ class KerbalSimPit
   void stageEvent();
   void activateCAG(byte *msg);
   void deactivateCAG(byte *msg);
+  void toggleCAG(byte *msg);
 
  private:
   byte _inboundType;

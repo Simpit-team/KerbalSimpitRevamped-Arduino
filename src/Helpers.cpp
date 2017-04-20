@@ -16,3 +16,9 @@ void KerbalSimPit::deactivateCAG(byte *msg)
 {
   send(CAGDEACTIVATE_PACKET, *msg, sizeof(msg));
 }
+
+void KerbalSimPit::toggleCAG(byte *msg)
+{
+  send(CAGTOGGLE_PACKET, *msg, sizeof(msg));
+}
+
