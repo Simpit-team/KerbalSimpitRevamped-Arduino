@@ -42,9 +42,9 @@ class KerbalSimPit
 
   // Helper functions
   void stageEvent();
-  void activateCAG(byte *msg);
-  void deactivateCAG(byte *msg);
-  void toggleCAG(byte *msg);
+  void activateCAG(byte actiongroup);
+  void deactivateCAG(byte actiongroup);
+  void toggleCAG(byte actiongroup);
 
  private:
   byte _inboundType;

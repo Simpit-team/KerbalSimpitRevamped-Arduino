@@ -7,18 +7,18 @@ void KerbalSimPit::stageEvent()
   send(STAGE_PACKET, stageFlip, 2);
 }
 
-void KerbalSimPit::activateCAG(byte *msg)
+void KerbalSimPit::activateCAG(byte actiongroup)
 {
-  send(CAGACTIVATE_PACKET, *msg, sizeof(msg));
+  send(CAGACTIVATE_PACKET, &actiongroup, 1);
 }
 
-void KerbalSimPit::deactivateCAG(byte *msg)
+void KerbalSimPit::deactivateCAG(byte actiongroup)
 {
-  send(CAGDEACTIVATE_PACKET, *msg, sizeof(msg));
+  send(CAGDEACTIVATE_PACKET, &actiongroup, 1);
 }
 
-void KerbalSimPit::toggleCAG(byte *msg)
+void KerbalSimPit::toggleCAG(byte actiongroup)
 {
-  send(CAGTOGGLE_PACKET, *msg, sizeof(msg));
+  send(CAGTOGGLE_PACKET, &actiongroup, 1);
 }
 
