@@ -1,7 +1,9 @@
 /* KerbalSimPitStageDemo
-   A simple staging button. This is intended to be a small
-   addition to the "Debounce" demo sketch included with the
-   Arduino IDE.
+   This sketch demonstrates sending action group commands,
+   by implementing a simple staging button.
+
+   This is done by making some very minor modifications to
+   the "Debounce" demo sketch included in the Arduino IDE.
 
    Hardware:
    * A momentary pushbutton connecting pin 1 to ground.
@@ -49,12 +51,6 @@ void loop() {
   }
   if ((millis() - lastDebounceTime) > debounceDelay) {
     buttonState = reading;
-    // If the current button state is low, and the
-    // previous button state is high, then the button
-    // has just been pressed. So send a stage event.
-    //if (!buttonState && lastButtonState) {
-    //  mySimPit.stageEvent();
-    //}
   }
 
   // We're using an internal pull-up, so
@@ -68,7 +64,7 @@ void loop() {
     // Button is pressed. Send a stage event
     // if we haven't already.
     if (!stageSent) {
-      mySimPit.stageEvent();
+      mySimPit.activateAction(STAGE_ACTION);
       stageSent = true;
     }
     digitalWrite(ledPin, HIGH);
