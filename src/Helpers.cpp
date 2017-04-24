@@ -1,12 +1,5 @@
 #include "KerbalSimPit.h"
 
-const byte stageFlip[] = {0x01, 0x00};
-
-void KerbalSimPit::stageEvent()
-{
-  send(STAGE_PACKET, stageFlip, 2);
-}
-
 void KerbalSimPit::activateCAG(byte actiongroup)
 {
   send(CAGACTIVATE_PACKET, &actiongroup, 1);
@@ -22,3 +15,17 @@ void KerbalSimPit::toggleCAG(byte actiongroup)
   send(CAGTOGGLE_PACKET, &actiongroup, 1);
 }
 
+void KerbalSimPit::activateAction(byte action)
+{
+  send(AGACTIVATE_PACKET, &action, 1);
+}
+
+void KerbalSimPit::deactivateAction(byte action)
+{
+  send(AGDEACTIVATE_PACKET, &action, 1);
+}
+
+void KerbalSimPit::toggleAction(byte action)
+{
+  send(AGTOGGLE_PACKET, &action, 1);
+}

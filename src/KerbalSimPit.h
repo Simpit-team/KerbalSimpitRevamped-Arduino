@@ -3,30 +3,7 @@
 
 #include <Arduino.h>
 
-// These are the recognised packet types
-// Sync packets are used for handshaking
-const byte SYNC_PACKET = 0x00;
-// Echo request packet. Either end can send this.
-const byte ECHO_REQ_PACKET = 0x01;
-// Echo response packet. Sent in reply to an echo request.
-const byte ECHO_RESP_PACKET = 0x02;
-
-// Scene change packets are sent by the game when
-// entering or leaving the flight scene.
-const byte SCENE_CHANGE_PACKET = 0x03;
-// Altitude packets indicate sea level and surface altitude
-const byte ALTITUDE_PACKET = 0x04;
-
-// Register and deregister packets are sent by a device to register
-// or deregister to event channels.
-const byte REGISTER_PACKET = 0x03;
-const byte DEREGISTER_PACKET = 0x04;
-// Stage packet activates the next stage.
-const byte STAGE_PACKET = 0x05;
-// Custom action packets activate and deactivate custom action groups
-const byte CAGACTIVATE_PACKET = 0x06;
-const byte CAGDEACTIVATE_PACKET = 0x07;
-const byte CAGTOGGLE_PACKET = 0x08;
+#include "KerbalSimPitPacketTypes.h"
 
 class KerbalSimPit
 {
@@ -41,10 +18,12 @@ class KerbalSimPit
   void update();
 
   // Helper functions
-  void stageEvent();
   void activateCAG(byte actiongroup);
   void deactivateCAG(byte actiongroup);
   void toggleCAG(byte actiongroup);
+  void activateAction(byte action);
+  void deactivateAction(byte action);
+  void toggleAction(byte action);
 
  private:
   byte _inboundType;
