@@ -66,37 +66,41 @@ void KerbalSimPit::send(byte PacketType, byte *msg, byte msgSize)
 void KerbalSimPit::update()
 {
   while (_serial->available()) {
-    byte nextByte = _serial->read();
+    _readBuffer = _serial->read();
     switch (_receiveState) {
     case WaitingFirstByte:
-      if (nextByte == 0xAA) {
+      if (_readBuffer == 0xAA) {
         _receiveState = WaitingSecondByte;
-        break;
+      } else {
+        _receiveState = WaitingFirstByte;
       }
+      break;
     case WaitingSecondByte:
-      if (nextByte == 0x50) {
+      if (_readBuffer == 0x50) {
         _receiveState = WaitingSize;
-        break;
+      } else {
+        _receiveState = WaitingFirstByte;
       }
+      break;
     case WaitingSize:
-      _inboundSize = nextByte;
+      _inboundSize = _readBuffer;
       _receiveState = WaitingType;
       break;
     case WaitingType:
-      _inboundType = nextByte;
+      _inboundType = _readBuffer;
       _receivedIndex = 0;
       _receiveState = WaitingData;
       break;
     case WaitingData:
-      _inboundBuffer[_receivedIndex] = nextByte;
-      _receivedIndex++;
-      if (_receivedIndex == _inboundSize) {
-        _receiveState = WaitingFirstByte;
+       _inboundBuffer[_receivedIndex] = _readBuffer;
+       _receivedIndex++;
+       if (_receivedIndex == _inboundSize) {
+         _receiveState = WaitingFirstByte;
         if (_packetHandler != NULL) {
           _packetHandler(_inboundType, _inboundBuffer, _inboundSize);
         }
-      }
-      break;
+       }
+       break;
     default:
       _receiveState = WaitingFirstByte;
     }

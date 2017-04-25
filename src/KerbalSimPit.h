@@ -26,6 +26,7 @@ class KerbalSimPit
   void toggleAction(byte action);
 
  private:
+  byte _readBuffer;
   byte _inboundType;
   byte _inboundSize;
   byte _inboundBuffer[32];
