@@ -48,7 +48,7 @@ void packetHandler(byte packetType, byte *msg, byte msgSize) {
 
 void altitudeHandler(byte *msg) {
   memcpy(&myAltitude, msg, sizeof(myAltitude));
-  if (myAltitude.alt > 5000) {
+  if (myAltitude.alt > 500) {
     digitalWrite(13, HIGH);
   } else {
     digitalWrite(13, LOW);
