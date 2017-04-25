@@ -13,7 +13,7 @@
 #include "KerbalSimPit.h"
 
 // KerbalSimPit object
-KerbalSimPit mySimPit(&Serial);
+KerbalSimPit mySimPit(Serial);
 
 // The pin the button is connected to
 const int buttonPin = 2;

@@ -14,7 +14,7 @@
 const int ledPin = 13;
 
 // KerbalSimPit object
-KerbalSimPit mySimPit(&Serial);
+KerbalSimPit mySimPit(Serial);
 
 // tracking desired LED state
 bool state = false;

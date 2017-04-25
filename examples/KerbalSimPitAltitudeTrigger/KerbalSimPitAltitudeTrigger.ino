@@ -8,7 +8,7 @@
 #include "KerbalSimPit.h"
 
 // KerbalSimPit object
-KerbalSimPit mySimPit(&Serial);
+KerbalSimPit mySimPit(Serial);
 
 const int ledPin = 13;
 
