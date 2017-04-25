@@ -1,8 +1,8 @@
 #include "KerbalSimPit.h"
 
-KerbalSimPit::KerbalSimPit(Stream *serial)
+KerbalSimPit::KerbalSimPit(Stream &serial)
 {
-  _serial = serial;
+  _serial = &serial;
 }
 
 bool KerbalSimPit::init()

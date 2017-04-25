@@ -8,7 +8,7 @@
 class KerbalSimPit
 {
  public:
-  KerbalSimPit(Stream *serial);
+  KerbalSimPit(Stream &serial);
   bool init();
   void inboundHandler(void (*packetHandler)(byte packetType,
                                             byte *msg, byte msgSize));
