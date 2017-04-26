@@ -4,6 +4,7 @@
 #include <Arduino.h>
 
 #include "KerbalSimPitPacketTypes.h"
+#include "PayloadStructs.h"
 
 class KerbalSimPit
 {

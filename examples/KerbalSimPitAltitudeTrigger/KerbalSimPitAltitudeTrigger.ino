@@ -12,14 +12,6 @@ KerbalSimPit mySimPit(Serial);
 
 const int ledPin = 13;
 
-// This struct matches the format
-// altitude data is sent from the game.
-struct altitudeStruct {
-  float alt;
-  float surfalt;
-};
-altitudeStruct myAltitude;
-
 void setup() {
   Serial.begin(115200);
   pinMode(ledPin, OUTPUT);
@@ -39,18 +31,13 @@ void loop() {
 void packetHandler(byte packetType, byte *msg, byte msgSize) {
   switch(packetType) {
   case ALTITUDE_PACKET:
-    if (msgSize == sizeof(myAltitude)) {
-      altitudeHandler(msg);
+    altitudeStruct myAltitude;
+    myAltitude = parseAltitude(msg);
+    if (myAltitude.altitude > 500) {
+      digitalWrite(13, HIGH);
+    } else {
+      digitalWrite(13, LOW);
     }
     break;
-  }
-}
-
-void altitudeHandler(byte *msg) {
-  memcpy(&myAltitude, msg, sizeof(myAltitude));
-  if (myAltitude.alt > 500) {
-    digitalWrite(13, HIGH);
-  } else {
-    digitalWrite(13, LOW);
   }
 }
