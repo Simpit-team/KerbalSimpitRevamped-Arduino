@@ -6,7 +6,7 @@
 struct altitudeStruct {
   float altitude;
   float surfaceAltitude;
-};
+} __attribute__((packed));
 
 altitudeStruct parseAltitude(byte msg[]);
 
