@@ -17,8 +17,6 @@ KerbalSimPit mySimPit(Serial);
 
 // The pin the button is connected to
 const int buttonPin = 2;
-// The pin connected to an optional status LED
-const int ledPin = 13;
 
 // The variable we store the most recent button reading in
 int buttonState;
@@ -35,12 +33,12 @@ long debounceDelay = 50;
 void setup() {
   Serial.begin(115200);
   pinMode(buttonPin, INPUT_PULLUP);
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, HIGH);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
   while (!mySimPit.init()) {
     delay(100);
   }
-  digitalWrite(ledPin, LOW);
+  digitalWrite(LED_BUILTIN, LOW);
 }
 
 void loop() {
@@ -59,7 +57,7 @@ void loop() {
     // Button is not pressed, so reset the
     // stageSent trigger.
     stageSent = false;
-    digitalWrite(ledPin, LOW);
+    digitalWrite(LED_BUILTIN, LOW);
   } else {
     // Button is pressed. Send a stage event
     // if we haven't already.
@@ -67,7 +65,7 @@ void loop() {
       mySimPit.activateAction(STAGE_ACTION);
       stageSent = true;
     }
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(LED_BUILTIN, HIGH);
   }
   lastButtonState = reading;
 }

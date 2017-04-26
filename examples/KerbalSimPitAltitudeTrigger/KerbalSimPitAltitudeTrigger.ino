@@ -1,7 +1,7 @@
 /* KerbalSimPitAltitudeTrigger
    A demonstration of subscribing to telemetry data from the game.
    Subscribes to the altitude channel, and turns the pin 13 LED
-   on when the sea level altitude > 5km.
+   on when the sea level altitude > 500m.
 
    Peter Hardy <peter@hardy.dropbear.id.au>
 */
@@ -10,16 +10,14 @@
 // KerbalSimPit object
 KerbalSimPit mySimPit(Serial);
 
-const int ledPin = 13;
-
 void setup() {
   Serial.begin(115200);
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, HIGH);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
   while (!mySimPit.init()) {
     delay(100);
   }
-  digitalWrite(ledPin, LOW);
+  digitalWrite(LED_BUILTIN, LOW);
   mySimPit.inboundHandler(packetHandler);
   mySimPit.registerChannel(ALTITUDE_PACKET);
 }
@@ -35,9 +33,9 @@ void packetHandler(byte packetType, byte msg[], byte msgSize) {
       altitudeStruct myAltitude;
       myAltitude = parseAltitude(msg);
       if (myAltitude.altitude > 500) {
-        digitalWrite(13, HIGH);
+        digitalWrite(LED_BUILTIN, HIGH);
       } else {
-        digitalWrite(13, LOW);
+        digitalWrite(LED_BUILTIN, LOW);
       }
     }
     break;

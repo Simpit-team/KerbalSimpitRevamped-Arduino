@@ -10,9 +10,6 @@
 */
 #include "KerbalSimPit.h"
 
-// The built-in LED output pin
-const int ledPin = 13;
-
 // KerbalSimPit object
 KerbalSimPit mySimPit(Serial);
 
@@ -27,12 +24,12 @@ unsigned int sendInterval = 1000;
 void setup() {
   Serial.begin(115200);
 
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, HIGH);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
   while (!mySimPit.init()) {
     delay(100);
   }
-  digitalWrite(ledPin, LOW);
+  digitalWrite(LED_BUILTIN, LOW);
   mySimPit.inboundHandler(packetHandler);
 }
 
@@ -53,9 +50,9 @@ void loop() {
 void packetHandler(byte packetType, byte msg[], byte msgSize) {
   if (packetType == ECHO_RESP_PACKET) {
     if (strcmp(msg, "low")) {
-      digitalWrite(ledPin, LOW);
+      digitalWrite(LED_BUILTIN, LOW);
     } else {
-      digitalWrite(ledPin, HIGH);
+      digitalWrite(LED_BUILTIN, HIGH);
     }
   }
 }
