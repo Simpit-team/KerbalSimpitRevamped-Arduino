@@ -1,5 +1,5 @@
-#ifndef KerbalSimPitPacketTypes_h
-#define KerbalSimPitPacketTypes_h
+#ifndef KerbalSimPitMessageTypes_h
+#define KerbalSimPitMessageTypes_h
 
 // These are the recognised packet types
 // Sync packets are used for handshaking

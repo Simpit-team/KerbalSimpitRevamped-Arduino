@@ -52,12 +52,12 @@ void KerbalSimPit::deregisterChannel(byte channelID)
   send(DEREGISTER_MESSAGE, &channelID, 1);
 }
 
-void KerbalSimPit::send(byte PacketType, byte msg[], byte msgSize)
+void KerbalSimPit::send(byte messageType, byte msg[], byte msgSize)
 {
   _serial->write(0xAA);
   _serial->write(0x50);
   _serial->write(msgSize);
-  _serial->write(PacketType);
+  _serial->write(messageType);
   for (int x=0; x<msgSize; x++) {
     _serial->write(*(msg+x));
   }

@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-#include "KerbalSimPitPacketTypes.h"
+#include "KerbalSimPitMessageTypes.h"
 #include "PayloadStructs.h"
 
 class KerbalSimPit
