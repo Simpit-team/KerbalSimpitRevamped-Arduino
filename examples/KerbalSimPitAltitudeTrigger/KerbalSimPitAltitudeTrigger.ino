@@ -32,7 +32,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
     if (msgSize == sizeof(altitudeMessage)) {
       altitudeMessage myAltitude;
       myAltitude = parseAltitude(msg);
-      if (myAltitude.altitude > 500) {
+      if (myAltitude.sealevel > 500) {
         digitalWrite(LED_BUILTIN, HIGH);
       } else {
         digitalWrite(LED_BUILTIN, LOW);

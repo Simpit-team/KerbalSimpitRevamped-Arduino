@@ -4,8 +4,8 @@
 #include <Arduino.h>
 
 struct altitudeMessage {
-  float altitude;
-  float surfaceAltitude;
+  float sealevel;
+  float surface;
 } __attribute__((packed));
 
 altitudeMessage parseAltitude(byte msg[]);
