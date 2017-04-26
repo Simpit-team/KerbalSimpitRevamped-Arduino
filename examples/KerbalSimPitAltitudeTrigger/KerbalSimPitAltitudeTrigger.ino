@@ -29,8 +29,8 @@ void loop() {
 void packetHandler(byte packetType, byte msg[], byte msgSize) {
   switch(packetType) {
   case ALTITUDE_PACKET:
-    if (msgSize == sizeof(altitudeStruct)) {
-      altitudeStruct myAltitude;
+    if (msgSize == sizeof(altitudeMessage)) {
+      altitudeMessage myAltitude;
       myAltitude = parseAltitude(msg);
       if (myAltitude.altitude > 500) {
         digitalWrite(LED_BUILTIN, HIGH);

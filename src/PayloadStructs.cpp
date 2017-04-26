@@ -1,7 +1,7 @@
 #include "PayloadStructs.h"
 
-altitudeStruct parseAltitude(byte msg[]) {
-  altitudeStruct* alt;
-  alt = (altitudeStruct *)msg;
+altitudeMessage parseAltitude(byte msg[]) {
+  altitudeMessage* alt;
+  alt = (altitudeMessage*)msg;
   return *alt;
 }

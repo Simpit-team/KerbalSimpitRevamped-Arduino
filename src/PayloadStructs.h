@@ -3,11 +3,11 @@
 
 #include <Arduino.h>
 
-struct altitudeStruct {
+struct altitudeMessage {
   float altitude;
   float surfaceAltitude;
 } __attribute__((packed));
 
-altitudeStruct parseAltitude(byte msg[]);
+altitudeMessage parseAltitude(byte msg[]);
 
 #endif
