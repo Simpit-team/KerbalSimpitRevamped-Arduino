@@ -28,15 +28,17 @@ void loop() {
   mySimPit.update();
 }
 
-void packetHandler(byte packetType, byte *msg, byte msgSize) {
+void packetHandler(byte packetType, byte msg[], byte msgSize) {
   switch(packetType) {
   case ALTITUDE_PACKET:
-    altitudeStruct myAltitude;
-    myAltitude = parseAltitude(msg);
-    if (myAltitude.altitude > 500) {
-      digitalWrite(13, HIGH);
-    } else {
-      digitalWrite(13, LOW);
+    if (msgSize == sizeof(altitudeStruct)) {
+      altitudeStruct myAltitude;
+      myAltitude = parseAltitude(msg);
+      if (myAltitude.altitude > 500) {
+        digitalWrite(13, HIGH);
+      } else {
+        digitalWrite(13, LOW);
+      }
     }
     break;
   }

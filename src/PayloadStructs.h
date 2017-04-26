@@ -8,6 +8,6 @@ struct altitudeStruct {
   float surfaceAltitude;
 };
 
-altitudeStruct parseAltitude(byte *msg);
+altitudeStruct parseAltitude(byte msg[]);
 
 #endif

@@ -50,7 +50,7 @@ void loop() {
   mySimPit.update();
 }
 
-void packetHandler(byte packetType, byte *msg, byte msgSize) {
+void packetHandler(byte packetType, byte msg[], byte msgSize) {
   if (packetType == ECHO_RESP_PACKET) {
     if (strcmp(msg, "low")) {
       digitalWrite(ledPin, LOW);

@@ -36,7 +36,7 @@ bool KerbalSimPit::init()
 }
 
 void KerbalSimPit::inboundHandler(void (*packetHandler)(byte packetType,
-                                                        byte *msg,
+                                                        byte msg[],
                                                         byte msgSize))
 {
   _packetHandler = packetHandler;
@@ -52,7 +52,7 @@ void KerbalSimPit::deregisterChannel(byte channelID)
   send(DEREGISTER_PACKET, &channelID, 1);
 }
 
-void KerbalSimPit::send(byte PacketType, byte *msg, byte msgSize)
+void KerbalSimPit::send(byte PacketType, byte msg[], byte msgSize)
 {
   _serial->write(0xAA);
   _serial->write(0x50);
