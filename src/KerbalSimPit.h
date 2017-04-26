@@ -11,11 +11,11 @@ class KerbalSimPit
  public:
   KerbalSimPit(Stream &serial);
   bool init();
-  void inboundHandler(void (*packetHandler)(byte packetType,
+  void inboundHandler(void (*messageHandler)(byte messageType,
                                             byte msg[], byte msgSize));
   void registerChannel(byte channelID);
   void deregisterChannel(byte channelID);
-  void send(byte packetType, byte msg[], byte msgSize);
+  void send(byte messageType, byte msg[], byte msgSize);
   void update();
 
   // Helper functions
@@ -46,7 +46,7 @@ class KerbalSimPit
   ReceiveState_t _receiveState;
   byte _receivedIndex;
 
-  void (*_packetHandler)(byte packetType, byte msg[], byte msgSize);
+  void (*_messageHandler)(byte messageType, byte msg[], byte msgSize);
 };
 
 #endif

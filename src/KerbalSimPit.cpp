@@ -35,21 +35,21 @@ bool KerbalSimPit::init()
   return false;
 }
 
-void KerbalSimPit::inboundHandler(void (*packetHandler)(byte packetType,
+void KerbalSimPit::inboundHandler(void (*messageHandler)(byte messageType,
                                                         byte msg[],
                                                         byte msgSize))
 {
-  _packetHandler = packetHandler;
+  _messageHandler = messageHandler;
 }
 
 void KerbalSimPit::registerChannel(byte channelID)
 {
-  send(REGISTER_PACKET, &channelID, 1);
+  send(REGISTER_MESSAGE, &channelID, 1);
 }
 
 void KerbalSimPit::deregisterChannel(byte channelID)
 {
-  send(DEREGISTER_PACKET, &channelID, 1);
+  send(DEREGISTER_MESSAGE, &channelID, 1);
 }
 
 void KerbalSimPit::send(byte PacketType, byte msg[], byte msgSize)
@@ -96,8 +96,8 @@ void KerbalSimPit::update()
        _receivedIndex++;
        if (_receivedIndex == _inboundSize) {
          _receiveState = WaitingFirstByte;
-        if (_packetHandler != NULL) {
-          _packetHandler(_inboundType, _inboundBuffer, _inboundSize);
+        if (_messageHandler != NULL) {
+          _messageHandler(_inboundType, _inboundBuffer, _inboundSize);
         }
        }
        break;

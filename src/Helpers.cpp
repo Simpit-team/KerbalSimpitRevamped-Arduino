@@ -2,30 +2,30 @@
 
 void KerbalSimPit::activateCAG(byte actiongroup)
 {
-  send(CAGACTIVATE_PACKET, &actiongroup, 1);
+  send(CAGACTIVATE_MESSAGE, &actiongroup, 1);
 }
 
 void KerbalSimPit::deactivateCAG(byte actiongroup)
 {
-  send(CAGDEACTIVATE_PACKET, &actiongroup, 1);
+  send(CAGDEACTIVATE_MESSAGE, &actiongroup, 1);
 }
 
 void KerbalSimPit::toggleCAG(byte actiongroup)
 {
-  send(CAGTOGGLE_PACKET, &actiongroup, 1);
+  send(CAGTOGGLE_MESSAGE, &actiongroup, 1);
 }
 
 void KerbalSimPit::activateAction(byte action)
 {
-  send(AGACTIVATE_PACKET, &action, 1);
+  send(AGACTIVATE_MESSAGE, &action, 1);
 }
 
 void KerbalSimPit::deactivateAction(byte action)
 {
-  send(AGDEACTIVATE_PACKET, &action, 1);
+  send(AGDEACTIVATE_MESSAGE, &action, 1);
 }
 
 void KerbalSimPit::toggleAction(byte action)
 {
-  send(AGTOGGLE_PACKET, &action, 1);
+  send(AGTOGGLE_MESSAGE, &action, 1);
 }

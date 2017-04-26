@@ -30,16 +30,16 @@ void setup() {
     delay(100);
   }
   digitalWrite(LED_BUILTIN, LOW);
-  mySimPit.inboundHandler(packetHandler);
+  mySimPit.inboundHandler(messageHandler);
 }
 
 void loop() {
   unsigned long now = millis();
   if (now - lastSent >= sendInterval) {
     if (state) {
-      mySimPit.send(ECHO_REQ_PACKET, "low", 4);
+      mySimPit.send(ECHO_REQ_MESSAGE, "low", 4);
     } else {
-      mySimPit.send(ECHO_REQ_PACKET, "high", 5);
+      mySimPit.send(ECHO_REQ_MESSAGE, "high", 5);
     }
     lastSent = now;
     state = !state;
@@ -47,8 +47,8 @@ void loop() {
   mySimPit.update();
 }
 
-void packetHandler(byte packetType, byte msg[], byte msgSize) {
-  if (packetType == ECHO_RESP_PACKET) {
+void messageHandler(byte messageType, byte msg[], byte msgSize) {
+  if (messageType == ECHO_RESP_MESSAGE) {
     if (strcmp(msg, "low")) {
       digitalWrite(LED_BUILTIN, LOW);
     } else {

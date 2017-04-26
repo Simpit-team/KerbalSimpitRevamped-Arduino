@@ -18,17 +18,17 @@ void setup() {
     delay(100);
   }
   digitalWrite(LED_BUILTIN, LOW);
-  mySimPit.inboundHandler(packetHandler);
-  mySimPit.registerChannel(ALTITUDE_PACKET);
+  mySimPit.inboundHandler(messageHandler);
+  mySimPit.registerChannel(ALTITUDE_MESSAGE);
 }
 
 void loop() {
   mySimPit.update();
 }
 
-void packetHandler(byte packetType, byte msg[], byte msgSize) {
-  switch(packetType) {
-  case ALTITUDE_PACKET:
+void messageHandler(byte messageType, byte msg[], byte msgSize) {
+  switch(messageType) {
+  case ALTITUDE_MESSAGE:
     if (msgSize == sizeof(altitudeMessage)) {
       altitudeMessage myAltitude;
       myAltitude = parseAltitude(msg);
