@@ -14,6 +14,8 @@ const byte ECHO_RESP_MESSAGE = 2;
 const byte SCENE_CHANGE_MESSAGE = 3;
 // Altitude packets indicate sea level and surface altitude
 const byte ALTITUDE_MESSAGE = 4;
+// Apsides packets indicate apoapsis and periapsis
+const byte APSIDES_MESSAGE = 5;
 
 // Register and deregister packets are sent by a device to register
 // or deregister to event channels.

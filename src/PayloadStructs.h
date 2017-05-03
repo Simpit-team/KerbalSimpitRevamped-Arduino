@@ -8,6 +8,12 @@ struct altitudeMessage {
   float surface;
 } __attribute__((packed));
 
+struct apsidesMessage {
+  float periapsis;
+  float apoapsis;
+} __attribute__((packed));
+
 altitudeMessage parseAltitude(byte msg[]);
+apsidesMessage parseApsides(byte msg[]);
 
 #endif

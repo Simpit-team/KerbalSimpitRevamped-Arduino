@@ -5,3 +5,9 @@ altitudeMessage parseAltitude(byte msg[]) {
   alt = (altitudeMessage*)msg;
   return *alt;
 }
+
+apsidesMessage parseApsides(byte msg[]) {
+  apsidesMessage* apsides;
+  apsides = (apsidesMessage*)msg;
+  return *apsides;
+}
