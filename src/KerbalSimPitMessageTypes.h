@@ -19,16 +19,16 @@ const byte APSIDES_MESSAGE = 9;
 
 // Register and deregister packets are sent by a device to register
 // or deregister to event channels.
-const byte REGISTER_MESSAGE = 3;
-const byte DEREGISTER_MESSAGE = 4;
+const byte REGISTER_MESSAGE = 8;
+const byte DEREGISTER_MESSAGE = 9;
 // Custom action packets activate and deactivate custom action groups
-const byte CAGACTIVATE_MESSAGE = 6;
-const byte CAGDEACTIVATE_MESSAGE = 7;
-const byte CAGTOGGLE_MESSAGE = 8;
+const byte CAGACTIVATE_MESSAGE = 10;
+const byte CAGDEACTIVATE_MESSAGE = 11;
+const byte CAGTOGGLE_MESSAGE = 12;
 // Action group packets activate and deactivate standard action groups
-const byte AGACTIVATE_MESSAGE = 9;
-const byte AGDEACTIVATE_MESSAGE = 10;
-const byte AGTOGGLE_MESSAGE = 11;
+const byte AGACTIVATE_MESSAGE = 13;
+const byte AGDEACTIVATE_MESSAGE = 14;
+const byte AGTOGGLE_MESSAGE = 15;
 
 // These bytes are payloads for the different types of actions
 const byte STAGE_ACTION = 1;
