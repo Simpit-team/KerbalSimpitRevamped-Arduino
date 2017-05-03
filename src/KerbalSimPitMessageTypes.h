@@ -13,9 +13,9 @@ const byte ECHO_RESP_MESSAGE = 2;
 // entering or leaving the flight scene.
 const byte SCENE_CHANGE_MESSAGE = 3;
 // Altitude packets indicate sea level and surface altitude
-const byte ALTITUDE_MESSAGE = 4;
+const byte ALTITUDE_MESSAGE = 8;
 // Apsides packets indicate apoapsis and periapsis
-const byte APSIDES_MESSAGE = 5;
+const byte APSIDES_MESSAGE = 9;
 
 // Register and deregister packets are sent by a device to register
 // or deregister to event channels.
