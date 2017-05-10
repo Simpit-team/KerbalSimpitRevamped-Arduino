@@ -11,9 +11,12 @@ bool KerbalSimPit::init()
     return false;
   }
   _outboundBuffer[0] = 0x00;
-  _outboundBuffer[1] = 0x37;
+  memcpy(_outboundBuffer[1], &KERBALSIMPIT_VERSION,
+         min(sizeof(KERBALSIMPIT_VERSION), MAX_PAYLOAD_SIZE-1));
+  _outboundBuffer[MAX_PAYLOAD_SIZE-1] = '\0'; // ensure 
   _receiveState = WaitingFirstByte;
-  send(0x00, _outboundBuffer, 2); // Send SYN
+  send(0x00, _outboundBuffer, min((sizeof(KERBALSIMPIT_VERSION)+1),
+                                  MAX_PAYLOAD_SIZE)); // Send SYN
   while (!_serial->available());
   if (_serial->read() == 0xAA) { // First byte of header
     while (!_serial->available());
@@ -26,7 +29,8 @@ bool KerbalSimPit::init()
         if (_serial->read() == 0x01) { // first byte of payload, we got a SYNACK
           // TODO: Do we care about tracking handshake state?
           _outboundBuffer[0] = 0x02;
-          send(0x00, _outboundBuffer, 2); // Send ACK
+          send(0x00, _outboundBuffer, min((sizeof(KERBALSIMPIT_VERSION)+1),
+                                          MAX_PAYLOAD_SIZE)); // Send ACK
           return true;
         }
       }

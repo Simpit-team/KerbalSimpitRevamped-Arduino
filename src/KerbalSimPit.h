@@ -6,6 +6,9 @@
 #include "KerbalSimPitMessageTypes.h"
 #include "PayloadStructs.h"
 
+const char KERBALSIMPIT_VERSION[] = "0.8";
+const byte MAX_PAYLOAD_SIZE = 32;
+
 class KerbalSimPit
 {
  public:
@@ -30,8 +33,8 @@ class KerbalSimPit
   byte _readBuffer;
   byte _inboundType;
   byte _inboundSize;
-  byte _inboundBuffer[32];
-  byte _outboundBuffer[32];
+  byte _inboundBuffer[MAX_PAYLOAD_SIZE];
+  byte _outboundBuffer[MAX_PAYLOAD_SIZE];
   byte _outboundSize;
   Stream *_serial;
 
