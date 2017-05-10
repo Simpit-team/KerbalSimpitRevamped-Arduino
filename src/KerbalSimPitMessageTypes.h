@@ -16,6 +16,27 @@ const byte SCENE_CHANGE_MESSAGE = 3;
 const byte ALTITUDE_MESSAGE = 8;
 // Apsides packets indicate apoapsis and periapsis
 const byte APSIDES_MESSAGE = 9;
+// Resources:
+// Total and stage liquid fuel
+const byte LF_MESSAGE = 10;
+const byte LF_STAGE_MESSAGE = 11;
+// Total and stage oxidizer
+const byte OX_MESSAGE = 12;
+const byte OX_STAGE_MESSAGE = 13;
+// Total and stage solid fuel
+const byte SF_MESSAGE = 14;
+const byte SF_STAGE_MESSAGE = 15;
+// Total monopropellant
+const byte MONO_MESSAGE = 16;
+// Total electric charge
+const byte ELECTRIC_MESSAGE = 17;
+// Total Eva propellant
+const byte EVA_MESSAGE = 18;
+// Total Ore
+const byte ORE_MESSAGE = 19;
+// Total and stage ablator
+const byte AB_MESSAGE = 20;
+const byte AB_STAGE_MESSAGE = 21;
 
 // Register and deregister packets are sent by a device to register
 // or deregister to event channels.

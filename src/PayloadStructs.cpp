@@ -11,3 +11,9 @@ apsidesMessage parseApsides(byte msg[]) {
   apsides = (apsidesMessage*)msg;
   return *apsides;
 }
+
+resourceMessage parseResource(byte msg[]) {
+  resourceMessage* resource;
+  resource = (resourceMessage*)msg;
+  return *resource;
+}
