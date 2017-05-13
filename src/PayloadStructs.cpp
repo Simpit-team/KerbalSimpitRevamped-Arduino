@@ -17,3 +17,9 @@ resourceMessage parseResource(byte msg[]) {
   resource = (resourceMessage*)msg;
   return *resource;
 }
+
+velocityMessage parseVelocity(byte msg[]) {
+  velocityMessage* velocity;
+  velocity = (velocityMessage*)msg;
+  return *velocity;
+}

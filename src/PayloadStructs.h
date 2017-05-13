@@ -18,7 +18,14 @@ struct resourceMessage {
   float available;
 } __attribute__((packed));
 
+struct velocityMessage {
+  float orbital;
+  float surface;
+  float vertical;
+} __attribute__((packet));
+
 altitudeMessage parseAltitude(byte msg[]);
 apsidesMessage parseApsides(byte msg[]);
 resourceMessage parseResource(byte msg[]);
+velocityMessage parseVelocity(byte msg[]);
 #endif

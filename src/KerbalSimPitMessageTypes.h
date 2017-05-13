@@ -37,6 +37,8 @@ const byte ORE_MESSAGE = 19;
 // Total and stage ablator
 const byte AB_MESSAGE = 20;
 const byte AB_STAGE_MESSAGE = 21;
+// Velocity packets include orbital, surface, vertical vel.
+const byte VELOCITY_MESSAGE = 22;
 
 // Register and deregister packets are sent by a device to register
 // or deregister to event channels.
