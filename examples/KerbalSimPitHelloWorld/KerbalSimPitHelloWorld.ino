@@ -10,45 +10,63 @@
 */
 #include "KerbalSimPit.h"
 
-// KerbalSimPit object
+// Declare a KerbalSimPit object that will
+// communicate using the "Serial" device.
 KerbalSimPit mySimPit(Serial);
 
-// tracking desired LED state
+// This boolean tracks the desired LED state.
 bool state = false;
 
-// When an echo packet was last sent
+// A timestamp of the last time we sent an echo packet.
 unsigned long lastSent = 0;
 // How often to send echo packets (in ms)
 unsigned int sendInterval = 1000;
 
 void setup() {
+  // Open the serial connection.
   Serial.begin(115200);
 
+  // Set up the built in LED, and turn it on.
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
+  // This loop continually attempts to handshake with the plugin.
+  // It will keep retrying until it gets a successful handshake.
   while (!mySimPit.init()) {
     delay(100);
   }
+  // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
+  // Sets our callback function. The KerbalSimPit library will
+  // call this function every time a packet is received.
   mySimPit.inboundHandler(messageHandler);
 }
 
 void loop() {
   unsigned long now = millis();
+  // If we've waited long enough since the last message, send a new one.
   if (now - lastSent >= sendInterval) {
+    // If the last message was "high", send "low"
+    // and vice-versa.
     if (state) {
       mySimPit.send(ECHO_REQ_MESSAGE, "low", 4);
     } else {
       mySimPit.send(ECHO_REQ_MESSAGE, "high", 5);
     }
+    // Update when we last sent a message.
     lastSent = now;
+    // Update the state variable to match the message we just sent.
     state = !state;
   }
+  // Call the library update() function to check for new messages.
   mySimPit.update();
 }
 
 void messageHandler(byte messageType, byte msg[], byte msgSize) {
+  // We are only interested in echo response packets.
   if (messageType == ECHO_RESP_MESSAGE) {
+    // The message payload will be either "low" or "high".
+    // We use the strcmp function to check what the string payload
+    // is, and set the LED status accordingly.
     if (strcmp(msg, "low")) {
       digitalWrite(LED_BUILTIN, LOW);
     } else {
