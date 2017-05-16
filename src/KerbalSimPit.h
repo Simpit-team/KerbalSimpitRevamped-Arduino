@@ -1,3 +1,6 @@
+/** @file KerbalSimPit.h
+    The KerbalSimPit library.
+*/
 #ifndef KerbalSimPit_h
 #define KerbalSimPit_h
 
@@ -65,11 +68,38 @@ class KerbalSimPit
   void update();
 
   // Helper functions
+  /** Activate Custom Action Group.
+      Sends a message to activate the given Custom Action Group.
+      @param actiongroup The ID of the Custom Action Group to activate.
+  */
   void activateCAG(byte actiongroup);
+  /** Deactivate Custom Action Group.
+      Sends a message to deactivate the given Custom Action Group.
+      @param actiongroup The ID of the Custom Action Group to deactivate.
+  */
   void deactivateCAG(byte actiongroup);
+  /** Toggle Custom Action Group.
+      Sends a message to toggle the state of the given Custom Action Group.
+      @param actiongroup The ID of the Custom Action Group to toggle.
+  */
   void toggleCAG(byte actiongroup);
+  /** Activate Action Group.
+      Sends a message to activate the given standard Action Group(s).
+      @param action A bitfield representing one or more Action Groups
+      to activate.
+  */
   void activateAction(byte action);
+  /** Deactivate Action Group.
+      Sends a message to deactivate the given standard Action Group(s).
+      @param action A bitfield representing one or more Action Groups
+      to deactivate.
+  */
   void deactivateAction(byte action);
+  /** Toggle Action Group.
+      Sends a message to toggle the state of the given standard Action Group(s).
+      @param action A bitfield representing one or more Action Groups
+      to toggle.
+  */
   void toggleAction(byte action);
 
  private:

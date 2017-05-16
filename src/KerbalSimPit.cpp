@@ -1,3 +1,6 @@
+/** @file KerbalSimPit.cpp
+    Core library functions.
+*/
 #include "KerbalSimPit.h"
 
 KerbalSimPit::KerbalSimPit(Stream &serial)

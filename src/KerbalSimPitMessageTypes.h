@@ -1,3 +1,6 @@
+/** @file KerbalSimPitMessageTypes.h
+    Constants for inbound and outbound message IDs.
+*/
 #ifndef KerbalSimPitMessageTypes_h
 #define KerbalSimPitMessageTypes_h
 

@@ -1,3 +1,6 @@
+/** @file PayloadStructs.cpp
+    Functions to parse messages in to payload structs.
+*/
 #include "PayloadStructs.h"
 
 altitudeMessage parseAltitude(byte msg[]) {

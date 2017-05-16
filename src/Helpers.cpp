@@ -1,3 +1,6 @@
+/** @file Helpers.cpp
+    Helper functions to send outgoing messages.
+*/
 #include "KerbalSimPit.h"
 
 void KerbalSimPit::activateCAG(byte actiongroup)
