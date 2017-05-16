@@ -31,24 +31,25 @@ unsigned long lastDebounceTime = 0;  // the last time the output pin
 unsigned long debounceDelay = 50;    // the debounce time; increase
                                      // if the output flickers
 
-// Create a KerbalSimPit object.
+// Declare a KerbalSimPit object that will
+// communicate using the "Serial" device.
 KerbalSimPit mySimPit(Serial);
 
 void setup() {
-  // Start the serial connection.
+  // Open the serial connection.
   Serial.begin(115200);
 
+  // Set initial pin states, and turn on the LED
   pinMode(buttonPin, INPUT);
   pinMode(LED_BUILTIN, OUTPUT);
-
-  // Set initial LED state.
   digitalWrite(ledPin, HIGH);
-  // Attempt to establish a connection with the game plugin.
-  // We continually retry this until we get a successful handshake.
+
+  // This loop continually attempts to handshake with the plugin.
+  // It will keep retrying until it gets a successful handshake.
   while (!mySimPit.init()) {
     delay(100);
   }
-  // Turn the LED off to indicate successful handshake.
+  // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
 }
 
@@ -74,14 +75,18 @@ void loop() {
     if (reading != buttonState) {
       buttonState = reading;
 
-      // only send a stage command if the new button state is HIGH
+      // If the new button state is HIGH, that means the button
+      // has just been pressed.
       if (buttonState == HIGH) {
+        // Send a message to the plugin activating the Stage
+        // action group. The plugin will then activate the
+        // next stage.
         mySimPit.activateAction(STAGE_ACTION);
       }
     }
   }
 
-  // set the LED:
+  // Set the LED to match the state of the button.
   digitalWrite(ledPin, buttonState);
 
   // save the reading.  Next time through the loop,
