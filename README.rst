@@ -17,5 +17,5 @@ will respond with EchoResponse packets, which the sketch uses to blink
 the LED on pin 13.
 
 .. _Arduino: https://www.arduino.cc/
-.. _`Kerbal Space Program`: https://kerbalspaceprogram.com/
-.. _`Kerbal Sim Pit`: https://bitbucket.org/pjhardy/kerbalsimpit
+.. _Kerbal Space Program: https://kerbalspaceprogram.com/
+.. _Kerbal Sim Pit: https://bitbucket.org/pjhardy/kerbalsimpit
