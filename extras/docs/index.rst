@@ -1,15 +1,12 @@
+Kerbal Sim Pit Arduino Library
+==============================
+
 .. toctree::
    :maxdepth: 2
 
-.. include:: ../../README.rst
-   :end-before: ----
-
-Class Documentation
-===================
-
-.. doxygenclass:: KerbalSimPit
-   :project: KerbalSimPit
-   :members:
+   kerbalsimpit
+   messagetypes
+   payloadstructs
 
 ----
 
