@@ -92,6 +92,16 @@ class KerbalSimPit
   ReceiveState_t _receiveState;
   byte _receivedIndex;
 
+  /** Callback function to handle messages from the plugin.
+      This function is called by the library when full, correct
+      messages are received from the plugin.
+      @param messageType The ID of the message channel.
+      @param msg A byte array representing the message contents. Note that
+      the library does not attempt to transform this byte stream at all,
+      and it is up to the user to convert it to the message-specific
+      format.
+      @param msgSize The size of the msg array.
+  */
   void (*_messageHandler)(byte messageType, byte msg[], byte msgSize);
 };
 
