@@ -14,23 +14,55 @@ const byte ECHO_RESP_MESSAGE = 2;
 /// Scene change packets are sent by the plugin when
 /// entering or leaving the flight scene.
 const byte SCENE_CHANGE_MESSAGE = 3;
-const byte ALTITUDE_MESSAGE = 8; /**< Sea level and surface altitude. */
-const byte APSIDES_MESSAGE = 9; /**< Apoapsis and periapsis. */
+/** Sea level and surface altitude.
+    Messages on this channel contain an altitudeStruct.
+*/
+const byte ALTITUDE_MESSAGE = 8;
+/** Apoapsis and periapsis.
+    Messages on this channel contain an apsidesStruct.
+*/
+const byte APSIDES_MESSAGE = 9;
 
 // Resources:
-const byte LF_MESSAGE = 10; /**< Max and current liquid fuel in the vessel. */
-const byte LF_STAGE_MESSAGE = 11; /**< Max and current liquid fuel in the last stage. */
-const byte OX_MESSAGE = 12; /**< Max and current oxidizer in the vessel. */
-const byte OX_STAGE_MESSAGE = 13; /**< Max and current oxidizer in the last stage. */
-const byte SF_MESSAGE = 14; /**< Max and current solid fuel in the vessel. */
-const byte SF_STAGE_MESSAGE = 15; /**< Max and current solid fuel in the last stage. */
-const byte MONO_MESSAGE = 16; /**< Max and current monopropellant in the vessel. */
-const byte ELECTRIC_MESSAGE = 17; /**< Max and current electric charge in the vessel. */
-const byte EVA_MESSAGE = 18; /**< Max and current EVA propellant. Only available for Kerbals on EVA. */
-const byte ORE_MESSAGE = 19; /**< Max and current ore in the vessel. */
-const byte AB_MESSAGE = 20; /**< Max and current ablator in the vessel. */
-const byte AB_STAGE_MESSAGE = 21; /**< Max and current ablator in the last stage. */
-const byte VELOCITY_MESSAGE = 22; /**< Orbital, surface and vertical velocity. */
+/** Liquid fuel in the vessel.
+    Messages on this channel contain a resourceStruct. */
+const byte LF_MESSAGE = 10;
+/** Liquid fuel in the current stage.
+    Messages on this channel contain a resourceStruct. */
+const byte LF_STAGE_MESSAGE = 11;
+/** Oxidizer in the vessel.
+    Messages on this channel contain a resourceStruct. */
+const byte OX_MESSAGE = 12;
+/** Oxidizer in the current stage.
+    Messages on this channel contain a resourceStruct. */
+const byte OX_STAGE_MESSAGE = 13;
+/** Solid fuel in the vessel.
+    Messages on this channel contain a resourceStruct. */
+const byte SF_MESSAGE = 14;
+/** Solid fuel in the current stage.
+    Messages on this channel contain a resourceStruct. */
+const byte SF_STAGE_MESSAGE = 15;
+/** Monoprollent in the vessel.
+    Messages on this channel contain a resourceStruct. */
+const byte MONO_MESSAGE = 16;
+/** Electic Charge in the vessel.
+    Messages on this channel contain a resourceStruct. */
+const byte ELECTRIC_MESSAGE = 17;
+/** EVA propellant. Only available for Kerbals on EVA.
+    Messages on this channel contain a resourceStruct. */
+const byte EVA_MESSAGE = 18;
+/** Ore in the vessel.
+    Messages on this channel contain a resourceStruct. */
+const byte ORE_MESSAGE = 19;
+/** Ablator in the vessel.
+    Messages on this channel contain a resourceStruct. */
+const byte AB_MESSAGE = 20;
+/** Ablator in the current stage.
+    Messages on this channel contain a resourceStruct. */
+const byte AB_STAGE_MESSAGE = 21;
+/** Vessel velocity.
+    Messages on this channel contain a velocityStruct. */
+const byte VELOCITY_MESSAGE = 22;
 
 /** Register to receive messages on a given channel. */
 const byte REGISTER_MESSAGE = 8;
