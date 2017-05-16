@@ -15,53 +15,53 @@ const byte ECHO_RESP_MESSAGE = 2;
 /// entering or leaving the flight scene.
 const byte SCENE_CHANGE_MESSAGE = 3;
 /** Sea level and surface altitude.
-    Messages on this channel contain an altitudeStruct.
+    Messages on this channel contain an altitudeMessage.
 */
 const byte ALTITUDE_MESSAGE = 8;
 /** Apoapsis and periapsis.
-    Messages on this channel contain an apsidesStruct.
+    Messages on this channel contain an apsidesMessage.
 */
 const byte APSIDES_MESSAGE = 9;
 
 // Resources:
 /** Liquid fuel in the vessel.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte LF_MESSAGE = 10;
 /** Liquid fuel in the current stage.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte LF_STAGE_MESSAGE = 11;
 /** Oxidizer in the vessel.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte OX_MESSAGE = 12;
 /** Oxidizer in the current stage.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte OX_STAGE_MESSAGE = 13;
 /** Solid fuel in the vessel.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte SF_MESSAGE = 14;
 /** Solid fuel in the current stage.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte SF_STAGE_MESSAGE = 15;
 /** Monoprollent in the vessel.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte MONO_MESSAGE = 16;
 /** Electic Charge in the vessel.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte ELECTRIC_MESSAGE = 17;
 /** EVA propellant. Only available for Kerbals on EVA.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte EVA_MESSAGE = 18;
 /** Ore in the vessel.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte ORE_MESSAGE = 19;
 /** Ablator in the vessel.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte AB_MESSAGE = 20;
 /** Ablator in the current stage.
-    Messages on this channel contain a resourceStruct. */
+    Messages on this channel contain a resourceMessage. */
 const byte AB_STAGE_MESSAGE = 21;
 /** Vessel velocity.
-    Messages on this channel contain a velocityStruct. */
+    Messages on this channel contain a velocityMessage. */
 const byte VELOCITY_MESSAGE = 22;
 
 /** Register to receive messages on a given channel. */
