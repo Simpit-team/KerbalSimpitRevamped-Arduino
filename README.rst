@@ -5,6 +5,8 @@ This is an Arduino_ library and example sketches for building hardware
 intended to interface with `Kerbal Space Program`_ via the `Kerbal
 Sim Pit`_ plugin.
 
+-----
+
 Getting Started
 ---------------
 
