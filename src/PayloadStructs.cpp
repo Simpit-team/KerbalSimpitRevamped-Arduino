@@ -32,3 +32,9 @@ velocityMessage parseVelocity(byte msg[]) {
   velocity = (velocityMessage*)msg;
   return *velocity;
 }
+
+targetMessage parseTarget(byte msg[]) {
+  targetMessage* target;
+  target = (targetMessage*)msg;
+  return *target;
+}

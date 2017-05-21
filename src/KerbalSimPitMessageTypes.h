@@ -82,6 +82,12 @@ const byte ACTIONSTATUS_MESSAGE = 23;
     Messages on this channel contain an apsidesTimeMessage. */
 const byte APSIDESTIME_MESSAGE = 24;
 
+/** Information about targetted object.
+    This channel delivers messages about the object targetted by the
+    active vessel. Messages on this channel contain a targetInfoMessage. */
+const byte TARGETINFO_MESSAGE = 25;
+
+
 /** Register to receive messages on a given channel. */
 const byte REGISTER_MESSAGE = 8;
 /** Deregister, indicate that no further messages

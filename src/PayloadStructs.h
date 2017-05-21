@@ -38,6 +38,15 @@ struct velocityMessage {
   float vertical; /**< Vertical velocity. */
 } __attribute__((packed));
 
+/** A Target information message. */
+struct targetMessage {
+  float distance; /**< Distance to target. */
+  float velocity; /**< Velocity relative to target. */
+} __attribute__((packed));
+
+
+// Message parsing functions
+
 /** Parse a message containing Altitude data.
     @param msg The byte array of the message body.
     @returns altitudeMessage A formatted altitudeMessage struct.
@@ -61,4 +70,7 @@ resourceMessage parseResource(byte msg[]);
     @returns velocityMessage A formatted velocityMessage struct.
 */
 velocityMessage parseVelocity(byte msg[]);
+/** Parse a message containing Target data.
+    @returns targetMessage A formatted targetMessage struct.
+*/
 #endif
