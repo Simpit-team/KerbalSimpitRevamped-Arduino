@@ -18,6 +18,12 @@ struct apsidesMessage {
   float apoapsis; /**< Current vessel's orbital apoapsis. */
 } __attribute__((packed));
 
+/** An Apsides Time message. */
+struct apsidesTimeMessage {
+  int periapsis; /** Time until the current vessel's orbital periapsis, in seconds. */
+  int apoapsis; /** Time until the current vessel's orbital apoapsis, in seconds. */
+} __attribute__((packed));
+
 /** A Resource message.
     All resource messages use this struct for sending data. */
 struct resourceMessage {
@@ -41,6 +47,12 @@ altitudeMessage parseAltitude(byte msg[]);
     @returns apsidesMessage A formatted apsidesMessage struct.
 */
 apsidesMessage parseApsides(byte msg[]);
+
+/** Parse a message containing Apsides Time data.
+    @returns apsidesTimeMessage A formatted apsidesTimeMessage struct.
+*/
+apsidesTimeMessage parseApsidesTime(byte msg[]);
+
 /** Parse a message countaining Resource data.
     @returns resourceMessage A formatted resourceMessage struct.
 */

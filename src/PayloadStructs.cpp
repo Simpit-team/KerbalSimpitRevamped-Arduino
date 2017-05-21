@@ -15,6 +15,12 @@ apsidesMessage parseApsides(byte msg[]) {
   return *apsides;
 }
 
+apsidesTimeMessage parseApsidesTime(byte msg[]) {
+  apsidesTimeMessage* apsidesTime;
+  apsidesTime = (apsidesTimeMessage*)msg;
+  return *apsidesTime;
+}
+
 resourceMessage parseResource(byte msg[]) {
   resourceMessage* resource;
   resource = (resourceMessage*)msg;

@@ -78,6 +78,10 @@ const byte VELOCITY_MESSAGE = 22;
 */
 const byte ACTIONSTATUS_MESSAGE = 23;
 
+/** Time to the next apoapsis and periapsis.
+    Messages on this channel contain an apsidesTimeMessage. */
+const byte APSIDESTIME_MESSAGE = 24;
+
 /** Register to receive messages on a given channel. */
 const byte REGISTER_MESSAGE = 8;
 /** Deregister, indicate that no further messages
