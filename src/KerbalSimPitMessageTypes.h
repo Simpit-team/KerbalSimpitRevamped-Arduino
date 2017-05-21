@@ -64,6 +64,20 @@ const byte AB_STAGE_MESSAGE = 21;
     Messages on this channel contain a velocityMessage. */
 const byte VELOCITY_MESSAGE = 22;
 
+/** Action groups.
+    Messages on this channel contain a single byte representing the
+    currently active action groups. This could be one or more of
+
+    * STAGE_ACTION
+    * GEAR_ACTION
+    * LIGHT_ACTION
+    * RCS_ACTION
+    * SAS_ACTION
+    * BRAKES_ACTION
+    * ABORT_ACTION
+*/
+const byte ACTIONSTATUS_MESSAGE = 23;
+
 /** Register to receive messages on a given channel. */
 const byte REGISTER_MESSAGE = 8;
 /** Deregister, indicate that no further messages
