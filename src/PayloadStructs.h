@@ -73,4 +73,5 @@ velocityMessage parseVelocity(byte msg[]);
 /** Parse a message containing Target data.
     @returns targetMessage A formatted targetMessage struct.
 */
+targetMessage parseTarget(byte msg[]);
 #endif
