@@ -1,8 +1,8 @@
-Kerbal Sim Pit Compound Messages
+Kerbal Simpit Compound Messages
 ================================
 
 .. doxygenfile:: PayloadStructs.h
-   :project: KerbalSimPit
+   :project: KerbalSimpit
 
 ----
 

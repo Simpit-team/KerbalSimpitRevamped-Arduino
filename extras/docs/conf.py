@@ -9,12 +9,12 @@ if read_the_docs_build:
     subprocess.call('doxygen', shell=True)
 
 extensions = ['breathe']
-breathe_projects = { 'KerbalSimPit': 'xml' }
-breathe_default_project = "KerbalSimPit"
+breathe_projects = { 'KerbalSimpit': 'xml' }
+breathe_default_project = "KerbalSimpit"
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
-project = u'Kerbal Sim Pit'
+project = u'Kerbal Simpit'
 copyright = u'2017, Peter Hardy'
 author = u'Peter Hardy'
 version = '1.0'
@@ -24,10 +24,10 @@ exclude_patterns = ['_build']
 pygments_style = 'sphinx'
 todo_include_todos = False
 html_static_path = ['_static']
-htmlhelp_basename = 'KerbalSimPitdoc'
+htmlhelp_basename = 'KerbalSimpitdoc'
 latex_elements = {
 }
 latex_documents = [
-  (master_doc, 'KerbalSimPit.tex', u'KerbalSimPit Documentation',
-   u'KerbalSimPit', 'manual'),
+  (master_doc, 'KerbalSimpit.tex', u'KerbalSimpit Documentation',
+   u'KerbalSimpit', 'manual'),
 ]

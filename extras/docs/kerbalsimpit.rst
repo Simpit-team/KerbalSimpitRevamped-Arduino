@@ -1,8 +1,8 @@
-KerbalSimPit Class Documentation
+KerbalSimpit Class Documentation
 ================================
 
-.. doxygenclass:: KerbalSimPit
-   :project: KerbalSimPit
+.. doxygenclass:: KerbalSimpit
+   :project: KerbalSimpit
    :members:
 
 ----

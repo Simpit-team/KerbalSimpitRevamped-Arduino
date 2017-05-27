@@ -1,8 +1,8 @@
-Kerbal Sim Pit Message Types
+Kerbal Simpit Message Types
 ============================
 
-.. doxygenfile:: KerbalSimPitMessageTypes.h
-   :project: KerbalSimPit
+.. doxygenfile:: KerbalSimpitMessageTypes.h
+   :project: KerbalSimpit
 
 ----
 
