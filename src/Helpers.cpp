@@ -1,34 +1,34 @@
 /** @file Helpers.cpp
     Helper functions to send outgoing messages.
 */
-#include "KerbalSimPit.h"
+#include "KerbalSimpit.h"
 
-void KerbalSimPit::activateCAG(byte actiongroup)
+void KerbalSimpit::activateCAG(byte actiongroup)
 {
   send(CAGACTIVATE_MESSAGE, &actiongroup, 1);
 }
 
-void KerbalSimPit::deactivateCAG(byte actiongroup)
+void KerbalSimpit::deactivateCAG(byte actiongroup)
 {
   send(CAGDEACTIVATE_MESSAGE, &actiongroup, 1);
 }
 
-void KerbalSimPit::toggleCAG(byte actiongroup)
+void KerbalSimpit::toggleCAG(byte actiongroup)
 {
   send(CAGTOGGLE_MESSAGE, &actiongroup, 1);
 }
 
-void KerbalSimPit::activateAction(byte action)
+void KerbalSimpit::activateAction(byte action)
 {
   send(AGACTIVATE_MESSAGE, &action, 1);
 }
 
-void KerbalSimPit::deactivateAction(byte action)
+void KerbalSimpit::deactivateAction(byte action)
 {
   send(AGDEACTIVATE_MESSAGE, &action, 1);
 }
 
-void KerbalSimPit::toggleAction(byte action)
+void KerbalSimpit::toggleAction(byte action)
 {
   send(AGTOGGLE_MESSAGE, &action, 1);
 }

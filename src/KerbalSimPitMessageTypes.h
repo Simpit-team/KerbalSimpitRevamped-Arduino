@@ -1,8 +1,8 @@
-/** @file KerbalSimPitMessageTypes.h
+/** @file KerbalSimpitMessageTypes.h
     Constants for inbound and outbound message IDs.
 */
-#ifndef KerbalSimPitMessageTypes_h
-#define KerbalSimPitMessageTypes_h
+#ifndef KerbalSimpitMessageTypes_h
+#define KerbalSimpitMessageTypes_h
 
 /// Sync message. Used for handshaking.
 const byte SYNC_MESSAGE = 0;

@@ -1,14 +1,14 @@
-/** @file KerbalSimPit.cpp
+/** @file KerbalSimpit.cpp
     Core library functions.
 */
-#include "KerbalSimPit.h"
+#include "KerbalSimpit.h"
 
-KerbalSimPit::KerbalSimPit(Stream &serial)
+KerbalSimpit::KerbalSimpit(Stream &serial)
 {
   _serial = &serial;
 }
 
-bool KerbalSimPit::init()
+bool KerbalSimpit::init()
 {
   if (_serial == NULL) {
     return false;
@@ -42,24 +42,24 @@ bool KerbalSimPit::init()
   return false;
 }
 
-void KerbalSimPit::inboundHandler(void (*messageHandler)(byte messageType,
+void KerbalSimpit::inboundHandler(void (*messageHandler)(byte messageType,
                                                         byte msg[],
                                                         byte msgSize))
 {
   _messageHandler = messageHandler;
 }
 
-void KerbalSimPit::registerChannel(byte channelID)
+void KerbalSimpit::registerChannel(byte channelID)
 {
   send(REGISTER_MESSAGE, &channelID, 1);
 }
 
-void KerbalSimPit::deregisterChannel(byte channelID)
+void KerbalSimpit::deregisterChannel(byte channelID)
 {
   send(DEREGISTER_MESSAGE, &channelID, 1);
 }
 
-void KerbalSimPit::send(byte messageType, byte msg[], byte msgSize)
+void KerbalSimpit::send(byte messageType, byte msg[], byte msgSize)
 {
   _serial->write(0xAA);
   _serial->write(0x50);
@@ -70,7 +70,7 @@ void KerbalSimPit::send(byte messageType, byte msg[], byte msgSize)
   }
 }
 
-void KerbalSimPit::update()
+void KerbalSimpit::update()
 {
   while (_serial->available()) {
     _readBuffer = _serial->read();

@@ -1,30 +1,30 @@
-/** @file KerbalSimPit.h
-    The KerbalSimPit library.
+/** @file KerbalSimpit.h
+    The KerbalSimpit library.
 */
-#ifndef KerbalSimPit_h
-#define KerbalSimPit_h
+#ifndef KerbalSimpit_h
+#define KerbalSimpit_h
 
 #include <Arduino.h>
 
-#include "KerbalSimPitMessageTypes.h"
+#include "KerbalSimpitMessageTypes.h"
 #include "PayloadStructs.h"
 
 const char KERBALSIMPIT_VERSION[] = "0.8"; /**< Library version sent to the plugin for compatibility checking. */
 const byte MAX_PAYLOAD_SIZE = 32; /**< Maximum payload size does not include header. */
 
-/** The KerbalSimPit class manages a serial connection to KSP.
+/** The KerbalSimpit class manages a serial connection to KSP.
     It automates the handshaking process, and provides utility
     functions to encapsulate most message types in and out of
     the game.
  */
-class KerbalSimPit
+class KerbalSimpit
 {
  public:
   /** Default constructor.
       @param serial The serial instance this instance will use to communicate
       with the plugin. Usually "Serial".
   */
-  KerbalSimPit(Stream &serial);
+  KerbalSimpit(Stream &serial);
   /** Initialise the serial connection.
       Performs handshaking with the plugin. Note that the KSPit library
       *does not* call the `begin()` method on the serial object. You'll need

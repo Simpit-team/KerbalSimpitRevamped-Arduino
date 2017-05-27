@@ -1,4 +1,4 @@
-KerbalSimPit		KEYWORD1
+KerbalSimpit		KEYWORD1
 
 init				KEYWORD2
 inboundHandler		KEYWORD2
