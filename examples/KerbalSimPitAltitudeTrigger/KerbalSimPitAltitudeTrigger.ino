@@ -1,15 +1,15 @@
-/* KerbalSimPitAltitudeTrigger
+/* KerbalSimpitAltitudeTrigger
    A demonstration of subscribing to telemetry data from the game.
    Subscribes to the altitude channel, and turns the pin 13 LED
    on when the sea level altitude > 500m.
 
    Peter Hardy <peter@hardy.dropbear.id.au>
 */
-#include "KerbalSimPit.h"
+#include "KerbalSimpit.h"
 
-// Declare a KerbalSimPit object that will
+// Declare a KerbalSimpit object that will
 // communicate using the "Serial" device.
-KerbalSimPit mySimPit(Serial);
+KerbalSimpit mySimPit(Serial);
 
 void setup() {
   // Open the serial connection.
@@ -25,7 +25,7 @@ void setup() {
   }
   // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
-  // Sets our callback function. The KerbalSimPit library will
+  // Sets our callback function. The KerbalSimpit library will
   // call this function every time a packet is received.
   mySimPit.inboundHandler(messageHandler);
   // Send a message to the plugin registering for the Altitude channel.

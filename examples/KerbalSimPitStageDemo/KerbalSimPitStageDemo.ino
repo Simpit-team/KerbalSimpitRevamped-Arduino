@@ -1,4 +1,4 @@
-/* KerbalSimPitStageDemo
+/* KerbalSimpitStageDemo
 
    This sketch enhances the "Debounce" Arduino demo sketch
    to implement a simple staging button.
@@ -11,7 +11,7 @@
    light the LED while the button is pressed.
 
 */
-#include "KerbalSimPit.h"
+#include "KerbalSimpit.h"
 
 // constants won't change. They're used here to
 // set pin numbers:
@@ -31,9 +31,9 @@ unsigned long lastDebounceTime = 0;  // the last time the output pin
 unsigned long debounceDelay = 50;    // the debounce time; increase
                                      // if the output flickers
 
-// Declare a KerbalSimPit object that will
+// Declare a KerbalSimpit object that will
 // communicate using the "Serial" device.
-KerbalSimPit mySimPit(Serial);
+KerbalSimpit mySimPit(Serial);
 
 void setup() {
   // Open the serial connection.

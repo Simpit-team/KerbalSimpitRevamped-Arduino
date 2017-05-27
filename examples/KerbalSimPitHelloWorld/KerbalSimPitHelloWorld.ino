@@ -1,4 +1,4 @@
-/* KerbalSimPitHelloWorld
+/* KerbalSimpitHelloWorld
    A very barebones Hello World sketch, that doesn't require
    any extra hardware. It periodically sends EchoRequest packets
    to the game, and uses the EchoReply packets to switch the
@@ -8,11 +8,11 @@
 
    Peter Hardy <peter@hardy.dropbear.id.au>
 */
-#include "KerbalSimPit.h"
+#include "KerbalSimpit.h"
 
-// Declare a KerbalSimPit object that will
+// Declare a KerbalSimpit object that will
 // communicate using the "Serial" device.
-KerbalSimPit mySimPit(Serial);
+KerbalSimpit mySimPit(Serial);
 
 // This boolean tracks the desired LED state.
 bool state = false;
@@ -36,7 +36,7 @@ void setup() {
   }
   // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
-  // Sets our callback function. The KerbalSimPit library will
+  // Sets our callback function. The KerbalSimpit library will
   // call this function every time a packet is received.
   mySimPit.inboundHandler(messageHandler);
 }
