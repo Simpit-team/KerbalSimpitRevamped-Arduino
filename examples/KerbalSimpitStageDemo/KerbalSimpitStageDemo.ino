@@ -33,7 +33,7 @@ unsigned long debounceDelay = 50;    // the debounce time; increase
 
 // Declare a KerbalSimpit object that will
 // communicate using the "Serial" device.
-KerbalSimpit mySimPit(Serial);
+KerbalSimpit mySimpit(Serial);
 
 void setup() {
   // Open the serial connection.
@@ -46,7 +46,7 @@ void setup() {
 
   // This loop continually attempts to handshake with the plugin.
   // It will keep retrying until it gets a successful handshake.
-  while (!mySimPit.init()) {
+  while (!mySimpit.init()) {
     delay(100);
   }
   // Turn off the built-in LED to indicate handshaking is complete.
@@ -81,7 +81,7 @@ void loop() {
         // Send a message to the plugin activating the Stage
         // action group. The plugin will then activate the
         // next stage.
-        mySimPit.activateAction(STAGE_ACTION);
+        mySimpit.activateAction(STAGE_ACTION);
       }
     }
   }

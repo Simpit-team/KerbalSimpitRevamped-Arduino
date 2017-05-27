@@ -9,7 +9,7 @@
 
 // Declare a KerbalSimpit object that will
 // communicate using the "Serial" device.
-KerbalSimpit mySimPit(Serial);
+KerbalSimpit mySimpit(Serial);
 
 void setup() {
   // Open the serial connection.
@@ -20,23 +20,23 @@ void setup() {
   digitalWrite(LED_BUILTIN, HIGH);
   // This loop continually attempts to handshake with the plugin.
   // It will keep retrying until it gets a successful handshake.
-  while (!mySimPit.init()) {
+  while (!mySimpit.init()) {
     delay(100);
   }
   // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
   // Sets our callback function. The KerbalSimpit library will
   // call this function every time a packet is received.
-  mySimPit.inboundHandler(messageHandler);
+  mySimpit.inboundHandler(messageHandler);
   // Send a message to the plugin registering for the Altitude channel.
   // The plugin will now regularly send Altitude messages while the
   // flight scene is active in-game.
-  mySimPit.registerChannel(ALTITUDE_MESSAGE);
+  mySimpit.registerChannel(ALTITUDE_MESSAGE);
 }
 
 void loop() {
   // Check for new serial messages.
-  mySimPit.update();
+  mySimpit.update();
 }
 
 void messageHandler(byte messageType, byte msg[], byte msgSize) {

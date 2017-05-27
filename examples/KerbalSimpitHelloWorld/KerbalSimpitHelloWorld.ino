@@ -12,7 +12,7 @@
 
 // Declare a KerbalSimpit object that will
 // communicate using the "Serial" device.
-KerbalSimpit mySimPit(Serial);
+KerbalSimpit mySimpit(Serial);
 
 // This boolean tracks the desired LED state.
 bool state = false;
@@ -31,14 +31,14 @@ void setup() {
   digitalWrite(LED_BUILTIN, HIGH);
   // This loop continually attempts to handshake with the plugin.
   // It will keep retrying until it gets a successful handshake.
-  while (!mySimPit.init()) {
+  while (!mySimpit.init()) {
     delay(100);
   }
   // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
   // Sets our callback function. The KerbalSimpit library will
   // call this function every time a packet is received.
-  mySimPit.inboundHandler(messageHandler);
+  mySimpit.inboundHandler(messageHandler);
 }
 
 void loop() {
@@ -48,9 +48,9 @@ void loop() {
     // If the last message was "high", send "low"
     // and vice-versa.
     if (state) {
-      mySimPit.send(ECHO_REQ_MESSAGE, "low", 4);
+      mySimpit.send(ECHO_REQ_MESSAGE, "low", 4);
     } else {
-      mySimPit.send(ECHO_REQ_MESSAGE, "high", 5);
+      mySimpit.send(ECHO_REQ_MESSAGE, "high", 5);
     }
     // Update when we last sent a message.
     lastSent = now;
@@ -58,7 +58,7 @@ void loop() {
     state = !state;
   }
   // Call the library update() function to check for new messages.
-  mySimPit.update();
+  mySimpit.update();
 }
 
 void messageHandler(byte messageType, byte msg[], byte msgSize) {
