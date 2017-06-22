@@ -88,8 +88,9 @@ const byte APSIDESTIME_MESSAGE = 24;
 const byte TARGETINFO_MESSAGE = 25;
 
 /** Name of current Sphere of Influence.
-    This channel delivers an ASCII string containing the name of the
-    body the active vessel is currently orbiting. */
+    This channel delivers an ASCII string containing the name of the body
+    the active vessel is currently orbiting. Note that this is always the
+    English name, regardless of the language the game is currently set to. */
 const byte SOI_MESSAGE = 26;
 
 /** Register to receive messages on a given channel. */
