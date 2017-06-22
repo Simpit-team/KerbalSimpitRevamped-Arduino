@@ -66,15 +66,26 @@ const byte VELOCITY_MESSAGE = 22;
 
 /** Action groups.
     Messages on this channel contain a single byte representing the
-    currently active action groups. This could be one or more of
+    currently active action groups. A given action group can be checked
+    by performing a
+    <a href="http://playground.arduino.cc/Code/BitMath#bitwise_and">bitwise AND</a>
+    with the message. For example:
 
-    * STAGE_ACTION
-    * GEAR_ACTION
-    * LIGHT_ACTION
-    * RCS_ACTION
-    * SAS_ACTION
-    * BRAKES_ACTION
-    * ABORT_ACTION
+    \code
+    if (msg & SAS_ACTION) {
+      // code to execute if SAS is active
+    }
+    \endcode
+
+    Possible action groups are:
+
+    - STAGE_ACTION
+    - GEAR_ACTION
+    - LIGHT_ACTION
+    - RCS_ACTION
+    - SAS_ACTION
+    - BRAKES_ACTION
+    - ABORT_ACTION 
 */
 const byte ACTIONSTATUS_MESSAGE = 23;
 
