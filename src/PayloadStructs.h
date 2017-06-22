@@ -44,6 +44,11 @@ struct targetMessage {
   float velocity; /**< Velocity relative to target. */
 } __attribute__((packed));
 
+/** An Airspeed information message. */
+struct airspeedMessage {
+  float IAS; /**< Indicated airspeed. */
+  float mach; /**< Mach number. */
+} __attribute__((packed));
 
 // Message parsing functions
 
@@ -74,4 +79,9 @@ velocityMessage parseVelocity(byte msg[]);
     @returns targetMessage A formatted targetMessage struct.
 */
 targetMessage parseTarget(byte msg[]);
+/** Parse a message containing Airspeed data.
+    @returns airspeedMessage a formatted airspeedMessage struct.
+*/
+airspeedMessage parseAirspeed(byte msg[]);
+
 #endif

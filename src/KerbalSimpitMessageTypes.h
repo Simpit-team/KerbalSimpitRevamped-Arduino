@@ -93,6 +93,11 @@ const byte TARGETINFO_MESSAGE = 25;
     English name, regardless of the language the game is currently set to. */
 const byte SOI_MESSAGE = 26;
 
+/** Information about airspeed.
+    This channel delivers messages containing indicated airspeed and
+    mach number for the active vessel. */
+const byte AIRSPEED_MESSAGE = 27;
+
 /** Register to receive messages on a given channel. */
 const byte REGISTER_MESSAGE = 8;
 /** Deregister, indicate that no further messages
@@ -106,7 +111,6 @@ const byte CAGDEACTIVATE_MESSAGE = 11;
 /** Toggle the given Custom Action Group(s) (Active CAGs will
     deactivate, inactive CAGs will activate). */
 const byte CAGTOGGLE_MESSAGE = 12;
-// Action group packets activate and deactivate standard action groups
 /** Activate the given standard Action Group(s).
     Note that *every request* to activate the Stage action group will
     result in the next stage being activated.

@@ -38,3 +38,9 @@ targetMessage parseTarget(byte msg[]) {
   target = (targetMessage*)msg;
   return *target;
 }
+
+airspeedMessage parseAirspeed(byte msg[]) {
+  airspeedMessage* airspeed;
+  airspeed = (airspeedMessage*)msg;
+  return *airspeed;
+}
