@@ -147,6 +147,14 @@ enum InboundPackets {
   AGDEACTIVATE_MESSAGE = 14,
   /** Toggle the given standard Action Group(s). */
   AGTOGGLE_MESSAGE = 15,
+  /** Send vessel rotation commands. */
+  ROTATION_MESSAGE = 16,
+  /** Send vessel translation commands. */
+  TRANSLATION_MESSAGE = 17,
+  /** Send wheel steering/throttle commands. */
+  WHEEL_MESSAGE = 18,
+  /** Send vessel throttle commands. */
+  THROTTLE_MESSAGE = 19
 };
 
 /** Action Group Indexes

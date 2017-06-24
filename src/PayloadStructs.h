@@ -50,6 +50,52 @@ struct airspeedMessage {
   float mach; /**< Mach number. */
 } __attribute__((packed));
 
+/** A vessel rotation message.
+    This struct contains information about vessel rotation commands. */
+struct rotationMessage {
+  int16_t pitch; /**< Vessel pitch. */
+  int16_t roll; /**< Vessel roll. */
+  int16_t yaw; /**< Vessel yaw. */
+  /** The mask indicates which elements are intentionally set. Unset elements
+      should be ignored. It should be one or more of:
+
+      - 1: pitch
+      - 2: roll
+      - 4: yaw
+  */
+  byte mask;
+} __attribute__((packed));
+
+/** A vessel translation message.
+    This struct contains information about vessel translation commands. */
+struct translationMessage {
+  int16_t X; /**< Translation along the X axis. */
+  int16_t Y; /**< Translation along the Y axis. */
+  int16_t Z; /**< Translation along the Z axis. */
+  /** The mask indicates which elements are intentionally set. Unset elements
+      should be ignored. It should be one or more of:
+
+      - 1: X
+      - 2: Y
+      - 4: Z
+  */
+  byte mask;
+} __attribute__((packed));
+
+/** A wheel control message.
+    This sturct contains information about wheel steering and throttle. */
+struct wheelMessage {
+  int16_t steer; /**< Wheel steer. */
+  int16_t throttle; /**< Wheel throttle. */
+  /** The mask indicates which elements are intentionally set. Unset elements
+      should be ignored. It should be one or more of:
+
+      - 1: steer
+      - 2: throttle
+  */
+  byte mask;
+} __attribute__((packed));
+
 // Message parsing functions
 
 /** Parse a message containing Altitude data.
