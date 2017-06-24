@@ -52,11 +52,21 @@ class KerbalSimpit
       @param channelID The ID of the channel to unsubscribe from.
   */
   void deregisterChannel(byte channelID);
+  // This template based on Nick Gammon's I2C_Anything lib:
+  // http://www.gammon.com.au/forum/?id=10896&reply=8#reply8
   /** Send a formatted KSPit packet.
       Sends the given message as payload of a KSPit message.
       @param messageType The ID of the message channel.
-      @param msg A byte array representing the message contents. Details of
-      what this should consist of are specific to the message type.
+      @param msg Any object to be sent. The expected object depends on
+      the message type. No type checking is done by this library.
+  */
+  template <typename T> void send(byte messageType, T& msg) {
+    send(messageType, (byte *) &msg, sizeof(msg));
+  }
+  /** Send a formatted KSPit packet.
+      Sends the given message as payload of a KSPit message.
+      @param messageType The ID of the message channel.
+      @param msg A byte array representing the message contents.
       @param msgSize The size of msg.
   */
   void send(byte messageType, byte msg[], byte msgSize);
