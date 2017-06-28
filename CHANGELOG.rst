@@ -1,6 +1,14 @@
 Kerbal Simpit Changelog
 =======================
 
+* **1.1.2**: 2017-06-28
+
+Fixes to keywords.txt for apsides keywords. Thanks Benji!
+
+* **1.1.1**: 2017-06-26
+
+Pushing a new release as 1.1.0 was incorrectly tagged.
+
 * **1.1.0**: 2017-06-24
 
   Adds support for these new channels:
