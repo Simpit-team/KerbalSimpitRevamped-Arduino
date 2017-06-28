@@ -20,8 +20,8 @@ struct apsidesMessage {
 
 /** An Apsides Time message. */
 struct apsidesTimeMessage {
-  int periapsis; /** Time until the current vessel's orbital periapsis, in seconds. */
-  int apoapsis; /** Time until the current vessel's orbital apoapsis, in seconds. */
+  int32_t periapsis; /** Time until the current vessel's orbital periapsis, in seconds. */
+  int32_t apoapsis; /** Time until the current vessel's orbital apoapsis, in seconds. */
 } __attribute__((packed));
 
 /** A Resource message.
