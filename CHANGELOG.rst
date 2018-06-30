@@ -1,6 +1,11 @@
 Kerbal Simpit Changelog
 =======================
 
+* **1.1.5**: 2018-06-30
+
+  * Better bounds checking on packets read from the game.
+  * Use the right type for peri and apo.
+
 * **1.1.2**: 2017-06-28
 
 Fixes to keywords.txt for apsides keywords. Thanks Benji!
