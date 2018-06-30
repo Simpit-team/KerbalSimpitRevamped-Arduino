@@ -90,8 +90,12 @@ void KerbalSimpit::update()
       }
       break;
     case WaitingSize:
-      _inboundSize = _readBuffer;
-      _receiveState = WaitingType;
+      if (_readBuffer > MAX_PAYLOAD_SIZE) {
+	_receiveState = WaitingFirstByte;
+      } else {
+	_inboundSize = _readBuffer;
+	_receiveState = WaitingType;
+      }
       break;
     case WaitingType:
       _inboundType = _readBuffer;
@@ -103,7 +107,7 @@ void KerbalSimpit::update()
        _receivedIndex++;
        if (_receivedIndex == _inboundSize) {
          _receiveState = WaitingFirstByte;
-        if (_messageHandler != NULL) {
+	 if (_messageHandler != NULL) {
           _messageHandler(_inboundType, _inboundBuffer, _inboundSize);
         }
        }
