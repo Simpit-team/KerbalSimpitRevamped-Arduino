@@ -1,6 +1,10 @@
 Kerbal Simpit Changelog
 =======================
 
+* **1.2.1**: 2018-12-16
+
+  * Dumb typo in an enum
+
 * **1.2.0**: 2018-12-16
 
   * Adds command channel for setting SAS mode.
