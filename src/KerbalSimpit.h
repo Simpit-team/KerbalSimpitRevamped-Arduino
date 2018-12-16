@@ -111,6 +111,12 @@ class KerbalSimpit
       to toggle.
   */
   void toggleAction(byte action);
+  /** Set SAS mode
+      Send a message to set the desired Autopilot (SAS) mode.
+      @param mode The mode to set. Possible modes are listed in the
+      AutopilotMode enum.
+  */
+  void setSASMode(byte mode);
 
  private:
   byte _readBuffer;

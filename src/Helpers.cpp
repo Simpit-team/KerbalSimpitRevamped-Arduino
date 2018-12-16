@@ -32,3 +32,8 @@ void KerbalSimpit::toggleAction(byte action)
 {
   send(AGTOGGLE_MESSAGE, &action, 1);
 }
+
+void KerbalSimpit::setSASMode(byte mode)
+{
+  send(SAS_MODE_MESSAGE, &mode, 1);
+}
