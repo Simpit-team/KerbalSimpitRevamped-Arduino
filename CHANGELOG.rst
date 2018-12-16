@@ -1,6 +1,11 @@
 Kerbal Simpit Changelog
 =======================
 
+* **1.2.0**: 2018-12-16
+
+  * Adds command channel for setting SAS mode.
+  * Adds enums for rotation and translation masks.
+
 * **1.1.5**: 2018-06-30
 
   * Better bounds checking on packets read from the game.
