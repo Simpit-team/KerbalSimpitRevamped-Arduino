@@ -154,7 +154,11 @@ enum InboundPackets {
   /** Send wheel steering/throttle commands. */
   WHEEL_MESSAGE = 18,
   /** Send vessel throttle commands. */
-  THROTTLE_MESSAGE = 19
+  THROTTLE_MESSAGE = 19,
+  /** Send SAS mode commands.
+       The payload should be a single byte, possible SAS modes are listed
+       in the AutopilotMode enum. */
+  SAS_MODE_MESSAGE = 20
 };
 
 /** Action Group Indexes
@@ -175,4 +179,37 @@ enum ActionGroupIndexes {
   /** Bitmask for the Abort action group. */
   ABORT_ACTION = 64
 };
+
+/** Rotation Axes
+    These are used to indicate which axes in a ROTATION_MESSAGE are active. */
+enum RotationAxes {
+  PITCH_ROT = 1, /**< Bitmask for the pitch axis. */
+  ROLL_ROT = 2, /**< Bitmask for the roll axis. */
+  YAW_ROT = 4, /**< Bitmask for thw yaw axis. */
+};
+
+/** Translation Axes
+    These are used to indicate which axes in a TRANSLATION_MESSAGE are active. */
+enum TranslationAxes {
+  X_TRANS = 1, /**< Bitmask for the X axis. */
+  Y_TRANS = 2, /**< Bitmask for the Y axis. */
+  Z_TRANS = 4 /**< Bitmask for the Z axis. */
+};
+
+/** Autopilot Mode
+    The possible Autopilot (SAS) modes. This enum corresponds with
+    VesselPilot.AutopilotMode in the KSP API. */
+enum AutopilotMode {
+  AP_STABILITYASSIST = 1,
+  AP_PROGRADE = 2,
+  AP_RETROGRADE = 3,
+  AP_NORMAL = 4,
+  AP_ANTINORMAL = 5,
+  AP_RADIALIN = 6,
+  AP_RADIALOUT = 7,
+  AP_TARGET = 8,
+  AP_ANTITARGET = 9,
+  AP_MANEUVER = 10
+};
+
 #endif
