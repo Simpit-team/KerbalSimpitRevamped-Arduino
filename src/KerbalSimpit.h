@@ -9,7 +9,7 @@
 #include "KerbalSimpitMessageTypes.h"
 #include "PayloadStructs.h"
 
-const char KERBALSIMPIT_VERSION[] = "1.1.5"; /**< Library version sent to the plugin for compatibility checking. */
+const char KERBALSIMPIT_VERSION[] = "1.2.2"; /**< Library version sent to the plugin for compatibility checking. */
 const byte MAX_PAYLOAD_SIZE = 32; /**< Maximum payload size does not include header. */
 
 /** The KerbalSimpit class manages a serial connection to KSP.

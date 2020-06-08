@@ -1,6 +1,10 @@
 Kerbal Simpit Changelog
 =======================
 
+* **1.2.2**: 2020-06-08
+
+  * Bumping version number for Arduino Library Manager.
+
 * **1.2.1**: 2018-12-16
 
   * Dumb typo in an enum
