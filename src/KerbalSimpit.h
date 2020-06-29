@@ -61,7 +61,7 @@ class KerbalSimpit
       the message type. No type checking is done by this library.
   */
   template <typename T> void send(byte messageType, T& msg) {
-    send(messageType, (byte *) &msg, sizeof(msg));
+    _send(messageType, (byte *) &msg, sizeof(msg));
   }
   /** Send a formatted KSPit packet.
       Sends the given message as payload of a KSPit message.
@@ -69,7 +69,10 @@ class KerbalSimpit
       @param msg A byte array representing the message contents.
       @param msgSize The size of msg.
   */
-  void send(byte messageType, byte msg[], byte msgSize);
+  template <typename T> void send(byte messageType, T& msg, byte msgSize) {
+    _send(messageType, (byte *) &msg, msgSize);
+  }
+
   /** Regular library update function.
       This function polls the serial device for new data, and performs other
       tasks that must be done regularly. The function should be called from
@@ -149,6 +152,13 @@ class KerbalSimpit
       @param msgSize The size of the msg array.
   */
   void (*_messageHandler)(byte messageType, byte msg[], byte msgSize);
+
+  /** Backend send function.
+      @param messageType The ID of the message channel.
+      @param msg A byte array representing the message contents.
+      @param msgSize The size of msg.
+  */
+  void _send(byte messageType, byte msg[], byte msgSize);
 };
 
 #endif

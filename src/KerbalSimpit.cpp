@@ -20,7 +20,7 @@ bool KerbalSimpit::init()
   }
   i = i + 1;
   _receiveState = WaitingFirstByte;
-  send(0x00, _outboundBuffer, i); // Send SYN
+  _send(0x00, _outboundBuffer, i); // Send SYN
   while (!_serial->available());
   if (_serial->read() == 0xAA) { // First byte of header
     while (!_serial->available());
@@ -33,7 +33,7 @@ bool KerbalSimpit::init()
         if (_serial->read() == 0x01) { // first byte of payload, we got a SYNACK
           // TODO: Do we care about tracking handshake state?
           _outboundBuffer[0] = 0x02;
-          send(0x00, _outboundBuffer, i); // Send ACK
+          _send(0x00, _outboundBuffer, i); // Send ACK
           return true;
         }
       }
@@ -51,15 +51,15 @@ void KerbalSimpit::inboundHandler(void (*messageHandler)(byte messageType,
 
 void KerbalSimpit::registerChannel(byte channelID)
 {
-  send(REGISTER_MESSAGE, &channelID, 1);
+  _send(REGISTER_MESSAGE, &channelID, 1);
 }
 
 void KerbalSimpit::deregisterChannel(byte channelID)
 {
-  send(DEREGISTER_MESSAGE, &channelID, 1);
+  _send(DEREGISTER_MESSAGE, &channelID, 1);
 }
 
-void KerbalSimpit::send(byte messageType, byte msg[], byte msgSize)
+void KerbalSimpit::_send(byte messageType, byte msg[], byte msgSize)
 {
   _serial->write(0xAA);
   _serial->write(0x50);
