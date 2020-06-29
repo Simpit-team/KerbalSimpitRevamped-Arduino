@@ -10,4 +10,3 @@ To release a new version of this library:
   Make sure the version number in the tag is "MAJOR.MINOR.PATCH" -
   numbers separated by periods only. Check the other most recent tags.
 * Push commits and then tags.
-

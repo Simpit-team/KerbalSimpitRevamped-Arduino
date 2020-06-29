@@ -1,6 +1,10 @@
 Kerbal Simpit Changelog
 =======================
 
+* **1.3.0**: 2020-06-29
+
+  * Fix build errors on recent Arduino toolchains.
+
 * **1.2.2**: 2020-06-08
 
   * Bumping version number for Arduino Library Manager.
