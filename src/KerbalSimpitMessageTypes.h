@@ -20,103 +20,128 @@ enum CommonPackets {
     IDs for packets that go from the game to devices.
 */
 enum OutboundPackets {
-  /// Scene change packets are sent by the plugin when
-  /// entering or leaving the flight scene.
-  SCENE_CHANGE_MESSAGE = 3,
-  /** Sea level and surface altitude.
-      Messages on this channel contain an altitudeMessage.
-  */
-  ALTITUDE_MESSAGE = 8,
-  /** Apoapsis and periapsis.
-      Messages on this channel contain an apsidesMessage.
-  */
-  APSIDES_MESSAGE = 9,
 
-  // Resources:
-  /** Liquid fuel in the vessel.
-      Messages on this channel contain a resourceMessage. */
-  LF_MESSAGE = 10,
-  /** Liquid fuel in the current stage.
-      Messages on this channel contain a resourceMessage. */
-  LF_STAGE_MESSAGE = 11,
-  /** Oxidizer in the vessel.
-      Messages on this channel contain a resourceMessage. */
-  OX_MESSAGE = 12,
-  /** Oxidizer in the current stage.
-      Messages on this channel contain a resourceMessage. */
-  OX_STAGE_MESSAGE = 13,
-  /** Solid fuel in the vessel.
-      Messages on this channel contain a resourceMessage. */
-  SF_MESSAGE = 14,
-  /** Solid fuel in the current stage.
-      Messages on this channel contain a resourceMessage. */
-  SF_STAGE_MESSAGE = 15,
-  /** Monoprollent in the vessel.
-      Messages on this channel contain a resourceMessage. */
-  MONO_MESSAGE = 16,
-  /** Electic Charge in the vessel.
-      Messages on this channel contain a resourceMessage. */
-  ELECTRIC_MESSAGE = 17,
-  /** EVA propellant. Only available for Kerbals on EVA.
-      Messages on this channel contain a resourceMessage. */
-  EVA_MESSAGE = 18,
-  /** Ore in the vessel.
-      Messages on this channel contain a resourceMessage. */
-  ORE_MESSAGE = 19,
-  /** Ablator in the vessel.
-      Messages on this channel contain a resourceMessage. */
-  AB_MESSAGE = 20,
-  /** Ablator in the current stage.
-      Messages on this channel contain a resourceMessage. */
-  AB_STAGE_MESSAGE = 21,
-  /** Vessel velocity.
-      Messages on this channel contain a velocityMessage. */
-  VELOCITY_MESSAGE = 22,
+    // |----------------------|
+    // | Propulsion Resources |
+    // |----------------------|
 
-  /** Action groups.
-      Messages on this channel contain a single byte representing the
-      currently active action groups. A given action group can be checked
-      by performing a
-      <a href="http://playground.arduino.cc/Code/BitMath#bitwise_and">bitwise AND</a>
-      with the message. For example:
+    /** Liquid fuel in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    LF_MESSAGE = 1,
+    /** Liquid fuel in the current stage.
+         Messages on this channel contain a resourceMessage. */
+    LF_STAGE_MESSAGE = 2,
+    /** Oxidizer in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    OX_MESSAGE = 3,
+    /** Oxidizer in the current stage.
+         Messages on this channel contain a resourceMessage. */
+    OX_STAGE_MESSAGE = 4,
+    /** Solid fuel in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    SF_MESSAGE = 5,
+    /** Solid fuel in the current stage.
+         Messages on this channel contain a resourceMessage. */
+    SF_STAGE_MESSAGE = 6,
+    /** Xenon gas in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    XENON_GAS_MESSAGE = 7,
+    /** Xenon Gas in the current stage.
+         Messages on this channel contain a resourceMessage. */
+    XENON_GAS_STAGE_MESSAGE = 8,
+    /** Monoprollent in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    MONO_MESSAGE = 9,
+    /** EVA propellant. Only available for Kerbals on EVA.
+        Messages on this channel contain a resourceMessage. */
+    EVA_MESSAGE = 10,
 
-      \code
-      if (msg & SAS_ACTION) {
-        // code to execute if SAS is active
-      }
-      \endcode
+    // |------------------|
+    // | Vessel Resources |
+    // |------------------|
 
-      Possible action groups are:
+    /** Electic Charge in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    ELECTRIC_MESSAGE = 20,
+    /** Ore in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    ORE_MESSAGE = 21,
+    /** Ablator in the vessel.
+         Messages on this channel contain a resourceMessage. */
+    AB_MESSAGE = 22,
+    /** Ablator in the current stage.
+        Messages on this channel contain a resourceMessage. */
+    AB_STAGE_MESSAGE = 23,
 
-      - STAGE_ACTION
-      - GEAR_ACTION
-      - LIGHT_ACTION
-      - RCS_ACTION
-      - SAS_ACTION
-      - BRAKES_ACTION
-      - ABORT_ACTION 
-  */
-  ACTIONSTATUS_MESSAGE = 23,
+    // |--------------------------|
+    // | Vessel Movement/Position |
+    // |--------------------------|
 
-  /** Time to the next apoapsis and periapsis.
-      Messages on this channel contain an apsidesTimeMessage. */
-  APSIDESTIME_MESSAGE = 24,
+    /** Sea level and surface altitude.
+        Messages on this channel contain an altitudeMessage. */
+    ALTITUDE_MESSAGE = 30,
+    /** Vessel velocity.
+        Messages on this channel contain a velocityMessage. */
+    VELOCITY_MESSAGE = 31,
+    /** Information about airspeed.
+        This channel delivers messages containing indicated airspeed and
+        mach number for the active vessel. */
+    AIRSPEED_MESSAGE = 32,
+    /** Apoapsis and periapsis.
+        Messages on this channel contain an apsidesMessage. */
+    APSIDES_MESSAGE = 33,
+    /** Time to the next apoapsis and periapsis.
+        Messages on this channel contain an apsidesTimeMessage. */
+    APSIDESTIME_MESSAGE = 34,
 
-  /** Information about targetted object.
-      This channel delivers messages about the object targetted by the
-      active vessel. Messages on this channel contain a targetInfoMessage. */
-  TARGETINFO_MESSAGE = 25,
 
-  /** Name of current Sphere of Influence.
-      This channel delivers an ASCII string containing the name of the body
-      the active vessel is currently orbiting. Note that this is always the
-      English name, regardless of the language the game is currently set to. */
-  SOI_MESSAGE = 26,
+    // |----------------|
+    // | Vessel Details |
+    // |----------------|
 
-  /** Information about airspeed.
-      This channel delivers messages containing indicated airspeed and
-      mach number for the active vessel. */
-  AIRSPEED_MESSAGE = 27,
+    /** Action groups.
+         Messages on this channel contain a single byte representing the
+        currently active action groups. A given action group can be checked
+        by performing a
+        <a href="http://playground.arduino.cc/Code/BitMath#bitwise_and">bitwise AND</a>
+        with the message. For example:
+
+        \code
+        if (msg & SAS_ACTION) {
+            // code to execute if SAS is active
+        }
+        \endcode
+
+        Possible action groups are:
+
+        - STAGE_ACTION
+        - GEAR_ACTION
+        - LIGHT_ACTION
+        - RCS_ACTION
+        - SAS_ACTION
+        - BRAKES_ACTION
+        - ABORT_ACTION 
+    */
+    ACTIONSTATUS_MESSAGE = 40,
+
+
+    // |----------------------|
+    // | External Environment |
+    // |----------------------|
+
+    /** Information about targetted object.
+        This channel delivers messages about the object targetted by the
+        active vessel. Messages on this channel contain a targetInfoMessage. */
+    TARGETINFO_MESSAGE = 50,
+    /** Name of current Sphere of Influence.
+        This channel delivers an ASCII string containing the name of the body
+        the active vessel is currently orbiting. Note that this is always the
+        English name, regardless of the language the game is currently set to. */
+    SOI_MESSAGE = 51,
+    /** Scene change packets are sent by the plugin when
+     entering or leaving the flight scene. */
+    SCENE_CHANGE_MESSAGE = 52
+
 };
 
 /** Inbound packets.
