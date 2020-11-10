@@ -96,6 +96,12 @@ struct wheelMessage {
   byte mask;
 } __attribute__((packed));
 
+/** A throttle control message.
+    This struct contains information about wheel steering and throttle. */
+struct wheelMessage {
+  int16_t throttle; /**< Throttle. */
+} __attribute__((packed));
+
 // Message parsing functions
 
 /** Parse a message containing Altitude data.
