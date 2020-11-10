@@ -98,7 +98,7 @@ struct wheelMessage {
 
 /** A throttle control message.
     This struct contains information about wheel steering and throttle. */
-struct wheelMessage {
+struct throttleMessage {
   int16_t throttle; /**< Throttle. */
 } __attribute__((packed));
 
