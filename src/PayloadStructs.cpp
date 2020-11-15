@@ -44,3 +44,21 @@ airspeedMessage parseAirspeed(byte msg[]) {
   airspeed = (airspeedMessage*)msg;
   return *airspeed;
 }
+
+deltaVMessage parseDeltaV(byte msg[]) {
+  deltaVMessage* deltaV;
+  deltaV = (deltaVMessage*)msg;
+  return *deltaV;
+}
+
+deltaVEnvMessage parseDeltaVEnv(byte msg[]) {
+  deltaVEnvMessage* deltaVEnv;
+  deltaVEnv = (deltaVEnvMessage*)msg;
+  return *deltaVEnv;
+}
+
+burnTimeMessage parseBurnTime(byte msg[]) {
+  burnTimeMessage* burnTime;
+  burnTime = (burnTimeMessage*)msg;
+  return *burnTime;
+}

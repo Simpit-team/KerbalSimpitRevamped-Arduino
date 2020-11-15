@@ -123,6 +123,16 @@ enum OutboundPackets {
         - ABORT_ACTION 
     */
     ACTIONSTATUS_MESSAGE = 40,
+	/** Amount of deltaV of the current vessel in the current situation.
+        Messages on this channel contain an deltaVMessage. */
+    DELTAV_MESSAGE = 41,
+	/** Amount of deltaV of the current vessel in different situations
+	    (Atmospheric sea level and in vacuum).
+        Messages on this channel contain an deltaVEnvMessage. */
+    DELTAVENV_MESSAGE = 42,
+	/** Amount of burn time of the current vessel.
+        Messages on this channel contain an burnTimeMessage. */
+    BURNTIME_MESSAGE = 43,
 
 
     // |----------------------|

@@ -50,6 +50,26 @@ struct airspeedMessage {
   float mach; /**< Mach number. */
 } __attribute__((packed));
 
+/** A deltaV information message. */
+struct deltaVMessage {
+  float stageDeltaV; /**< DeltaV of the current stage. */
+  float totalDeltaV; /**< DeltaV of the whole vessel. */
+} __attribute__((packed));
+
+/** A deltaV information message in different environments.*/
+struct deltaVEnvMessage {
+	float stageDeltaVASL; /**< DeltaV of the current stage at atmospheric sea level. */
+	float totalDeltaVASL; /**< DeltaV of the whole vessel at atmospheric sea level. */
+	float stageDeltaVVac; /**< DeltaV of the current stage in vacuum. */
+	float totalDeltaVVac; /**< DeltaV of the whole vessel in vacuum. */
+} __attribute__((packed));
+
+/** A burn time information message. */
+struct burnTimeMessage {
+  float stageBurnTime; /**< Burn time of the current stage. */
+  float totalBurnTime; /**< Burn time of the whole vessel. */
+} __attribute__((packed));
+
 /** A vessel rotation message.
     This struct contains information about vessel rotation commands. */
 struct rotationMessage {
@@ -129,5 +149,17 @@ targetMessage parseTarget(byte msg[]);
     @returns airspeedMessage a formatted airspeedMessage struct.
 */
 airspeedMessage parseAirspeed(byte msg[]);
+/** Parse a message containing DeltaV data.
+    @returns deltaVMessage a formatted deltaVMessage struct.
+*/
+deltaVMessage parseDeltaV(byte msg[]);
+/** Parse a message containing DeltaVEnv data.
+    @returns deltaVEnvMessage a formatted deltaVEnvMessage struct.
+*/
+deltaVEnvMessage parseDeltaVEnv(byte msg[]);
+/** Parse a message containing BurnTime data.
+    @returns burnTimeMessage a formatted burnTimeMessage struct.
+*/
+burnTimeMessage parseBurnTime(byte msg[]);
 
 #endif
