@@ -1,9 +1,13 @@
 /* KerbalSimpitThrottleDemo
 
    A demonstration of how to use KerbalSimPit to send throttle 
-   or rotation command
+   or rotation command.
 
-   Assume A0, A1, A2 are plugged on a potentiometer
+   Assume A0, A1, A2 are plugged on a potentiometer. Each potentiometer will be used
+   to control throttle, pitch and roll of you rocket.
+   See those linkd for the basic description and hook up guide of a potentiometer
+     - https://www.arduino.cc/en/tutorial/potentiometer
+     - https://learn.sparkfun.com/tutorials/sparkfun-inventors-kit-experiment-guide---v40/circuit-1b-potentiometer
 */
 
 #include "KerbalSimpit.h"
@@ -51,7 +55,7 @@ void loop() {
   // Read the values of the potentiometers
   int reading_pitch = analogRead(PITCH_PIN);
   int reading_roll = analogRead(ROLL_PIN);
-  // Convert them in KerbalSimpit range (you can add deadzone here)
+  // Convert them in KerbalSimpit range
   rot_msg.pitch = map(reading_pitch, 0, 1023, INT16_MIN, INT16_MAX);
   rot_msg.roll = map(reading_roll, 0, 1023, INT16_MIN, INT16_MAX);
   // Set the mask to indicate that Pitch and roll are set but yaw is not
