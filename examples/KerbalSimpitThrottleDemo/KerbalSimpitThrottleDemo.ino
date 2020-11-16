@@ -5,7 +5,7 @@
 
    Assume A0, A1, A2 are plugged on a potentiometer. Each potentiometer will be used
    to control throttle, pitch and roll of you rocket.
-   See those linkd for the basic description and hook up guide of a potentiometer
+   See these links for basic descriptions of how to hook up a potentiometer:
      - https://www.arduino.cc/en/tutorial/potentiometer
      - https://learn.sparkfun.com/tutorials/sparkfun-inventors-kit-experiment-guide---v40/circuit-1b-potentiometer
 */
