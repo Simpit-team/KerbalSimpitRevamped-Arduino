@@ -50,6 +50,14 @@ struct airspeedMessage {
   float mach; /**< Mach number. */
 } __attribute__((packed));
 
+/** A maneuver information message. */
+struct maneuverMessage {
+  float timeToNextManeuver; /**< Time to the next planned maneuver. */
+  float deltaVNextManeuver; /**< Delta to the next planned maneuver. */
+  float durationNextManeuver; /**< Duration of the burn for the next planned maneuver. */
+  float deltaVTotal; /**< DeltaV of all the planned maneuvers. */
+} __attribute__((packed));
+
 /** A deltaV information message. */
 struct deltaVMessage {
   float stageDeltaV; /**< DeltaV of the current stage. */
@@ -155,6 +163,10 @@ targetMessage parseTarget(byte msg[]);
     @returns airspeedMessage a formatted airspeedMessage struct.
 */
 airspeedMessage parseAirspeed(byte msg[]);
+/** Parse a message containing Maneuver data.
+    @returns maneuverMessage a formatted maneuverMessage struct.
+*/
+maneuverMessage parseManeuver(byte msg[]);
 /** Parse a message containing DeltaV data.
     @returns deltaVMessage a formatted deltaVMessage struct.
 */

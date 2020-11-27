@@ -93,6 +93,9 @@ enum OutboundPackets {
     /** Time to the next apoapsis and periapsis.
         Messages on this channel contain an apsidesTimeMessage. */
     APSIDESTIME_MESSAGE = 34,
+	/** Data about the planned maneuvers.
+        Messages on this channel contain an maneuverMessage. */
+    MANEUVER_MESSAGE = 35,
 
 
     // |----------------|
