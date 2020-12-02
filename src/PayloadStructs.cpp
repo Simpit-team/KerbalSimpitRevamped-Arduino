@@ -45,6 +45,12 @@ airspeedMessage parseAirspeed(byte msg[]) {
   return *airspeed;
 }
 
+maneuverMessage parseManeuver(byte msg[]) {
+  maneuverMessage* maneuver;
+  maneuver = (maneuverMessage*)msg;
+  return *maneuver;
+}
+
 deltaVMessage parseDeltaV(byte msg[]) {
   deltaVMessage* deltaV;
   deltaV = (deltaVMessage*)msg;
