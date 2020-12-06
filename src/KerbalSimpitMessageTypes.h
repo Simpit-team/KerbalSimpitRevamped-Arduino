@@ -136,6 +136,11 @@ enum OutboundPackets {
 	/** Amount of burn time of the current vessel.
         Messages on this channel contain an burnTimeMessage. */
     BURNTIME_MESSAGE = 43,
+	/** Current status of all the custom action groups.
+	    Messages on this channel contains a cagStatusMessage. 
+		This cagStatusMessage has a is_action_activated method 
+		taking the action ground number as an argumetnt. */
+    CAGSTATUS_MESSAGE = 44,
 
 
     // |----------------------|
