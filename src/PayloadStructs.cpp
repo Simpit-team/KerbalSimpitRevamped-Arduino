@@ -3,6 +3,13 @@
 */
 #include "PayloadStructs.h"
 
+cagStatusMessage parseCAGStatusMessage(byte msg[]){
+  cagStatusMessage* cagstatus;
+  cagstatus = (cagStatusMessage*)msg;
+  return *cagstatus;
+}
+
+
 altitudeMessage parseAltitude(byte msg[]) {
   altitudeMessage* alt;
   alt = (altitudeMessage*)msg;

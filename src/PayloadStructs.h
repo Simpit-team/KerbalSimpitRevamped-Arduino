@@ -6,6 +6,16 @@
 
 #include <Arduino.h>
 
+
+/** An Altitude message. */
+struct cagStatusMessage {
+  byte status[32]; /**< List of all the action status organised by bytes. Read them with the is_action_activated method.*/
+
+  bool is_action_activated(byte i){
+    return bitRead(status[i/8], i%8);
+  }
+} __attribute__((packed));
+
 /** An Altitude message. */
 struct altitudeMessage {
   float sealevel; /**< Altitude above sea level. */
@@ -132,6 +142,14 @@ struct throttleMessage {
 
 // Message parsing functions
 
+
+
+
+/** Parse a message containing status of all the CAG.
+    @param msg The byte array of the message body.
+    @returns cagStatusMessage A formatted cagStatusMessage struct.
+*/
+cagStatusMessage parseCAGStatusMessage(byte msg[]);
 /** Parse a message containing Altitude data.
     @param msg The byte array of the message body.
     @returns altitudeMessage A formatted altitudeMessage struct.
