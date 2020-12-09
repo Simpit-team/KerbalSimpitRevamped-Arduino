@@ -196,7 +196,8 @@ enum InboundPackets {
   /** Send SAS mode commands.
        The payload should be a single byte, possible SAS modes are listed
        in the AutopilotMode enum. */
-  SAS_MODE_MESSAGE = 20
+  SAS_MODE_MESSAGE = 20,
+  CAMERA_CONTROL_MODE = 21
 };
 
 /** Action Group Indexes
@@ -248,6 +249,24 @@ enum AutopilotMode {
   AP_TARGET = 8,
   AP_ANTITARGET = 9,
   AP_MANEUVER = 10
+};
+
+
+/** Camera Mode
+    The possible camera mode control options. */
+enum CameraControlMode {
+
+    // Flight Camera Modes
+    CAMERA_MODE_FLIGHT = 1,
+
+    FLIGHT_CAMERA_AUTO = 2,
+    FLIGHT_CAMERA_FREE = 3,
+    FLIGHT_CAMERA_ORBITAL = 4,
+    FLIGHT_CAMERA_CHASE = 5,
+    FLIGHT_CAMERA_LOCKED = 6,
+    FLIGHT_CAMERA_NEXT = 7,
+    FLIGHT_CAMERA_PREVIOUS = 8
+
 };
 
 #endif
