@@ -197,7 +197,8 @@ enum InboundPackets {
        The payload should be a single byte, possible SAS modes are listed
        in the AutopilotMode enum. */
   SAS_MODE_MESSAGE = 20,
-  CAMERA_CONTROL_MODE = 21
+  CAMERA_CONTROL_MODE = 21,
+  CAMERA_ROTATION_MESSAGE = 22
 };
 
 /** Action Group Indexes

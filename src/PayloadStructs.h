@@ -130,6 +130,17 @@ struct throttleMessage {
   int16_t throttle; /**< Throttle. */
 } __attribute__((packed));
 
+/** A camera mode message.
+    This struct contains information about the camera mode. */
+struct cameraRotationMessage {
+  int16_t cameraPitch;
+  int16_t cameraRoll;
+  int16_t cameraYaw;
+
+  byte mask;
+} __attribute__((packed));
+
+
 // Message parsing functions
 
 /** Parse a message containing Altitude data.
