@@ -140,6 +140,13 @@ struct throttleMessage {
   int16_t throttle; /**< Throttle. */
 } __attribute__((packed));
 
+/** A timewarp message.
+    This struct contains a single timewarp command, defined in the Timewarp enum. */
+struct timewarpMessage {
+  byte command; /**< Command in the Timewarp enum. */
+} __attribute__((packed));
+
+
 // Message parsing functions
 
 
