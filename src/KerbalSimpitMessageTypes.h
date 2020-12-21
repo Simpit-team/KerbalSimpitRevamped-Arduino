@@ -97,6 +97,7 @@ enum OutboundPackets {
         Messages on this channel contain an maneuverMessage. */
     MANEUVER_MESSAGE = 35,
 
+    SAS_MODE_STATUS_MESSAGE = 36,
 
     // |----------------|
     // | Vessel Details |
