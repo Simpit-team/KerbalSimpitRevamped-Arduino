@@ -21,7 +21,15 @@ bool KerbalSimpit::init()
   i = i + 1;
   _receiveState = WaitingFirstByte;
   _send(0x00, _outboundBuffer, i); // Send SYN
-  while (!_serial->available());
+
+  uint8_t count = 0;
+  while (!_serial->available()){
+    count += 1;
+    delay(100);
+    if(count > 10){
+      return false;  
+    }
+  }
   if (_serial->read() == 0xAA) { // First byte of header
     while (!_serial->available());
     if (_serial->read() == 0x50) { // Second byte of header
