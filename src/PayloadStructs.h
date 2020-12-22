@@ -136,7 +136,7 @@ struct cameraRotationMessage {
   int16_t cameraPitch;
   int16_t cameraRoll;
   int16_t cameraYaw;
-
+  int16_t cameraZoom;
   byte mask;
 } __attribute__((packed));
 

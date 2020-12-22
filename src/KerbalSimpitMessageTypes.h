@@ -225,7 +225,8 @@ enum ActionGroupIndexes {
 enum RotationAxes {
   PITCH_ROT = 1, /**< Bitmask for the pitch axis. */
   ROLL_ROT = 2, /**< Bitmask for the roll axis. */
-  YAW_ROT = 4 /**< Bitmask for thw yaw axis. */
+  YAW_ROT = 4, /**< Bitmask for the yaw axis. */
+  ZOOM_ROT = 8 /**< Bitmask for the zoom axis. */
 };
 
 /** Translation Axes
