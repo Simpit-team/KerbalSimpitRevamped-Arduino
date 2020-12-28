@@ -202,7 +202,9 @@ enum InboundPackets {
   /** Send SAS mode commands.
        The payload should be a single byte, possible SAS modes are listed
        in the AutopilotMode enum. */
-  SAS_MODE_MESSAGE = 20
+  SAS_MODE_MESSAGE = 20,
+  CAMERA_CONTROL_MODE = 21,
+  CAMERA_ROTATION_MESSAGE = 22
 };
 
 /** Action Group Indexes
@@ -229,7 +231,8 @@ enum ActionGroupIndexes {
 enum RotationAxes {
   PITCH_ROT = 1, /**< Bitmask for the pitch axis. */
   ROLL_ROT = 2, /**< Bitmask for the roll axis. */
-  YAW_ROT = 4 /**< Bitmask for thw yaw axis. */
+  YAW_ROT = 4, /**< Bitmask for the yaw axis. */
+  ZOOM_ROT = 8 /**< Bitmask for the zoom axis. */
 };
 
 /** Translation Axes
@@ -254,6 +257,27 @@ enum AutopilotMode {
   AP_TARGET = 8,
   AP_ANTITARGET = 9,
   AP_MANEUVER = 10
+};
+
+
+/** Camera Mode
+    The possible camera mode control options. */
+enum CameraControlMode {
+
+    // Flight Camera Modes
+    CAMERA_MODE_FLIGHT = 1,
+
+    FLIGHT_CAMERA_AUTO = 2,
+    FLIGHT_CAMERA_FREE = 3,
+    FLIGHT_CAMERA_ORBITAL = 4,
+    FLIGHT_CAMERA_CHASE = 5,
+    FLIGHT_CAMERA_LOCKED = 6,
+
+    CAMERA_NEXT = 50,
+    CAMERA_PREVIOUS = 51,
+    CAMERA_NEXT_MODE = 52,
+    CAMERA_PREVIOUS_MODE = 53
+
 };
 
 #endif

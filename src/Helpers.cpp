@@ -37,3 +37,8 @@ void KerbalSimpit::setSASMode(byte mode)
 {
   _send(SAS_MODE_MESSAGE, &mode, 1);
 }
+
+void KerbalSimpit::setCameraMode(byte mode)
+{
+  _send(CAMERA_CONTROL_MODE, &mode, 1);
+}
