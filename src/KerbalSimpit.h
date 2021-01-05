@@ -121,6 +121,8 @@ class KerbalSimpit
   */
   void setSASMode(byte mode);
 
+  void setCameraMode(byte mode);
+
  private:
   byte _readBuffer;
   byte _inboundType;

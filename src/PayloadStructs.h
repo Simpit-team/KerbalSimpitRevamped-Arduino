@@ -140,10 +140,21 @@ struct throttleMessage {
   int16_t throttle; /**< Throttle. */
 } __attribute__((packed));
 
+
 /** A timewarp message.
     This struct contains a single timewarp command, defined in the Timewarp enum. */
 struct timewarpMessage {
   byte command; /**< Command in the Timewarp enum. */
+} __attribute__((packed));
+
+/** A camera mode message.
+    This struct contains information about the camera mode. */
+struct cameraRotationMessage {
+  int16_t cameraPitch;
+  int16_t cameraRoll;
+  int16_t cameraYaw;
+  int16_t cameraZoom;
+  byte mask;
 } __attribute__((packed));
 
 
