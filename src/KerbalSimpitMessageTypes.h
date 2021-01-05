@@ -204,7 +204,13 @@ enum InboundPackets {
        in the AutopilotMode enum. */
   SAS_MODE_MESSAGE = 20,
   CAMERA_CONTROL_MODE = 21,
-  CAMERA_ROTATION_MESSAGE = 22
+  CAMERA_ROTATION_MESSAGE = 22,
+
+  /** Send a time warp commands.
+       The payload should be a single byte, possible commands are listed
+       in the Timewarp enum. */
+  TIMEWARP_MESSAGE = 24
+
 };
 
 /** Action Group Indexes
@@ -224,6 +230,47 @@ enum ActionGroupIndexes {
   BRAKES_ACTION = 32,
   /** Bitmask for the Abort action group. */
   ABORT_ACTION = 64
+};
+
+/** Timewarp command
+    These are used for a TIMEWARP_MESSAGE. */
+enum Timewarp {
+  /** Set Timewarp to x1. */
+  TIMEWARP_X1 = 0,
+  /** Set Timewarp to x5 (no effect in atmosphere). */
+  TIMEWARP_X5 = 1,
+  /** Set Timewarp to x10 (no effect in atmosphere). */
+  TIMEWARP_X10 = 2,
+  /** Set Timewarp to x50 (no effect in atmosphere). */
+  TIMEWARP_X50 = 3,
+  /** Set Timewarp to x100 (no effect in atmosphere). */
+  TIMEWARP_X100 = 4,
+  /** Set Timewarp to x1000 (no effect in atmosphere). */
+  TIMEWARP_X1000 = 5,
+  /** Set Timewarp to x10000 (no effect in atmosphere). */
+  TIMEWARP_X10000 = 6,
+  /** Set Timewarp to x100000 (no effect in atmosphere). */
+  TIMEWARP_X100000 = 7,
+  /** Set Timewarp to x2 in atmosphere (no effect out of atmosphere). */
+  TIMEWARP_X2_PHYSICAL = 8,
+  /** Set Timewarp to x3 in atmosphere (no effect out of atmosphere). */
+  TIMEWARP_X3_PHYSICAL = 9,
+  /** Set Timewarp to x4 in atmosphere (no effect out of atmosphere). */
+  TIMEWARP_X4_PHYSICAL = 10,
+  /** Set Timewarp the next rate available. */
+  TIMEWARP_UP = 11,
+  /** Set Timewarp the previous rate available. */
+  TIMEWARP_DOWN = 12,
+  /** Warp to the next maneuver. */
+  TIMEWARP_NEXT_MANEUVER = 13,
+  /** Warp to the next SOI change. */
+  TIMEWARP_NEXT_SOI = 14,
+  /** Warp to the apoapsis. */
+  TIMEWARP_APOAPSIS = 15,
+  /** Warp to the periapsis. */
+  TIMEWARP_PERIAPSIS = 16,
+  /** Cancel the current auto-timewarp and reset it to x1. */
+  TIMEWARP_CANCEL_AUTOWARP = 17
 };
 
 /** Rotation Axes
