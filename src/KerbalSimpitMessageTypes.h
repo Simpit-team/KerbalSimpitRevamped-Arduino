@@ -274,7 +274,7 @@ enum Timewarp {
 };
 
 /** Rotation Axes
-    These are used to indicate which axes in a ROTATION_MESSAGE are active. */
+    These are used to indicate which axes in a ROTATION_MESSAGE or CAMERA_ROTATION_MESSAGE are active. */
 enum RotationAxes {
   PITCH_ROT = 1, /**< Bitmask for the pitch axis. */
   ROLL_ROT = 2, /**< Bitmask for the roll axis. */
@@ -288,6 +288,13 @@ enum TranslationAxes {
   X_TRANS = 1, /**< Bitmask for the X axis. */
   Y_TRANS = 2, /**< Bitmask for the Y axis. */
   Z_TRANS = 4 /**< Bitmask for the Z axis. */
+};
+
+/** Translation Axes
+    These are used to indicate which axes in a WHEEL_MESSAGE are active. */
+enum WheelAxes {
+  STEER_WHEEL = 1, /**< Bitmask for the steer. */
+  THROTTLE_WHEEL = 2, /**< Bitmask for the throttle. */
 };
 
 /** Autopilot Mode

@@ -97,11 +97,17 @@ struct rotationMessage {
   /** The mask indicates which elements are intentionally set. Unset elements
       should be ignored. It should be one or more of:
 
-      - 1: pitch
-      - 2: roll
-      - 4: yaw
+      - 1: pitch (PITCH_ROT)
+      - 2: roll (ROLL_ROT)
+      - 4: yaw (YAW_ROT)
   */
   byte mask;
+
+  rotationMessage();
+  void setPitch(int16_t pitch);
+  void setRoll(int16_t roll);
+  void setYaw(int16_t yaw);
+  void setPitchRollYaw(int16_t pitch, int16_t roll, int16_t yaw);
 } __attribute__((packed));
 
 /** A vessel translation message.
@@ -113,11 +119,17 @@ struct translationMessage {
   /** The mask indicates which elements are intentionally set. Unset elements
       should be ignored. It should be one or more of:
 
-      - 1: X
-      - 2: Y
-      - 4: Z
+      - 1: X (X_TRANS)
+      - 2: Y (Y_TRANS)
+      - 4: Z (Z_TRANS)
   */
   byte mask;
+
+  translationMessage();
+  void setX(int16_t x);
+  void setY(int16_t y);
+  void setZ(int16_t z);
+  void setXYZ(int16_t x, int16_t y, int16_t z);
 } __attribute__((packed));
 
 /** A wheel control message.
@@ -128,10 +140,15 @@ struct wheelMessage {
   /** The mask indicates which elements are intentionally set. Unset elements
       should be ignored. It should be one or more of:
 
-      - 1: steer
-      - 2: throttle
+      - 1: steer (STEER_WHEEL)
+      - 2: throttle (THROTTLE_WHEEL)
   */
   byte mask;
+  
+  wheelMessage();
+  void setSteer(int16_t steer);
+  void setThrottle(int16_t throttle);
+  void setSteerThrottle(int16_t steer, int16_t throttle);
 } __attribute__((packed));
 
 /** A throttle control message.
@@ -154,7 +171,17 @@ struct cameraRotationMessage {
   int16_t cameraRoll;
   int16_t cameraYaw;
   int16_t cameraZoom;
+  /** The mask indicates which elements are intentionally set. Unset elements
+      should be ignored. Based on the RotationAxes enum.
+  */
   byte mask;
+
+  cameraRotationMessage();
+  void setPitch(int16_t pitch);
+  void setRoll(int16_t roll);
+  void setYaw(int16_t yaw);
+  void setZoom(int16_t zoom);
+  void setPitchRollYawZoom(int16_t pitch, int16_t roll, int16_t yaw, int16_t zoom);
 } __attribute__((packed));
 
 
