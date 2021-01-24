@@ -269,6 +269,8 @@ enum Timewarp {
   TIMEWARP_APOAPSIS = 15,
   /** Warp to the periapsis. */
   TIMEWARP_PERIAPSIS = 16,
+  /** Warp to the next morning. */
+  TIMEWARP_NEXT_MORNING = 18,
   /** Cancel the current auto-timewarp and reset it to x1. */
   TIMEWARP_CANCEL_AUTOWARP = 17
 };
