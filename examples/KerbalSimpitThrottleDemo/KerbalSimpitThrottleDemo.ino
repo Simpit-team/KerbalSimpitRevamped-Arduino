@@ -56,10 +56,11 @@ void loop() {
   int reading_pitch = analogRead(PITCH_PIN);
   int reading_roll = analogRead(ROLL_PIN);
   // Convert them in KerbalSimpit range
-  rot_msg.pitch = map(reading_pitch, 0, 1023, INT16_MIN, INT16_MAX);
-  rot_msg.roll = map(reading_roll, 0, 1023, INT16_MIN, INT16_MAX);
-  // Set the mask to indicate that Pitch and roll are set but yaw is not
-  rot_msg.mask = PITCH_ROT + ROLL_ROT;
+  int16_t pitch = map(reading_pitch, 0, 1023, INT16_MIN, INT16_MAX);
+  int16_t roll = map(reading_roll, 0, 1023, INT16_MIN, INT16_MAX);
+  // Put those values in the message
+  rot_msg.setPitch(pitch);
+  rot_msg.setRoll(roll);
   // Send the message
   mySimpit.send(ROTATION_MESSAGE, rot_msg);
 }
