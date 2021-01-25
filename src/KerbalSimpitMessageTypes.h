@@ -275,8 +275,10 @@ enum Timewarp
     TIMEWARP_APOAPSIS = 16,
     /** Warp to the periapsis. */
     TIMEWARP_PERIAPSIS = 17,
+    /** Warp to the next morning. */
+    TIMEWARP_NEXT_MORNING = 18,
     /** Cancel the current auto-timewarp and reset it to x1. */
-    TIMEWARP_CANCEL_AUTOWARP = 18
+    TIMEWARP_CANCEL_AUTOWARP = 255
 };
 
 /** Rotation Axes
