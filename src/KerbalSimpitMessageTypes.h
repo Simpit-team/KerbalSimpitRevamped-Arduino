@@ -7,19 +7,21 @@
 /** Common packets.
     These packet types are used for both inbound and outbound messages.
 */
-enum CommonPackets {
-  /// Sync message. Used for handshaking.
-  SYNC_MESSAGE = 0,
-  /// Echo request. Either end can send this, and an echo response is expected.
-  ECHO_REQ_MESSAGE = 1,
-  /// Echo response. Sent in reply to an echo request.
-  ECHO_RESP_MESSAGE = 2
+enum CommonPackets
+{
+    /// Sync message. Used for handshaking.
+    SYNC_MESSAGE = 0,
+    /// Echo request. Either end can send this, and an echo response is expected.
+    ECHO_REQ_MESSAGE = 1,
+    /// Echo response. Sent in reply to an echo request.
+    ECHO_RESP_MESSAGE = 2
 };
 
 /** Outbound packets.
     IDs for packets that go from the game to devices.
 */
-enum OutboundPackets {
+enum OutboundPackets
+{
 
     // |----------------------|
     // | Propulsion Resources |
@@ -93,7 +95,7 @@ enum OutboundPackets {
     /** Time to the next apoapsis and periapsis.
         Messages on this channel contain an apsidesTimeMessage. */
     APSIDESTIME_MESSAGE = 34,
-	/** Data about the planned maneuvers.
+    /** Data about the planned maneuvers.
         Messages on this channel contain an maneuverMessage. */
     MANEUVER_MESSAGE = 35,
 
@@ -127,22 +129,21 @@ enum OutboundPackets {
         - ABORT_ACTION 
     */
     ACTIONSTATUS_MESSAGE = 40,
-	/** Amount of deltaV of the current vessel in the current situation.
+    /** Amount of deltaV of the current vessel in the current situation.
         Messages on this channel contain an deltaVMessage. */
     DELTAV_MESSAGE = 41,
-	/** Amount of deltaV of the current vessel in different situations
+    /** Amount of deltaV of the current vessel in different situations
 	    (Atmospheric sea level and in vacuum).
         Messages on this channel contain an deltaVEnvMessage. */
     DELTAVENV_MESSAGE = 42,
-	/** Amount of burn time of the current vessel.
+    /** Amount of burn time of the current vessel.
         Messages on this channel contain an burnTimeMessage. */
     BURNTIME_MESSAGE = 43,
-	/** Current status of all the custom action groups.
+    /** Current status of all the custom action groups.
 	    Messages on this channel contains a cagStatusMessage. 
 		This cagStatusMessage has a is_action_activated method 
 		taking the action ground number as an argumetnt. */
     CAGSTATUS_MESSAGE = 44,
-
 
     // |----------------------|
     // | External Environment |
@@ -166,111 +167,118 @@ enum OutboundPackets {
 /** Inbound packets.
     These packet types are used for packets going from devices to the game.
 */
-enum InboundPackets {
-  /** Register to receive messages on a given channel. */
-  REGISTER_MESSAGE = 8,
-  /** Deregister, indicate that no further messages
+enum InboundPackets
+{
+    /** Register to receive messages on a given channel. */
+    REGISTER_MESSAGE = 8,
+    /** Deregister, indicate that no further messages
       for the given channel should be sent. */
-  DEREGISTER_MESSAGE = 9,
-  // Custom action packets activate and deactivate custom action groups
-  /** Activate the given Custom Action Group(s). */
-  CAGACTIVATE_MESSAGE = 10,
-  /** Deactivate the given Custom Action Group(s). */
-  CAGDEACTIVATE_MESSAGE = 11,
-  /** Toggle the given Custom Action Group(s) (Active CAGs will
+    DEREGISTER_MESSAGE = 9,
+    // Custom action packets activate and deactivate custom action groups
+    /** Activate the given Custom Action Group(s). */
+    CAGACTIVATE_MESSAGE = 10,
+    /** Deactivate the given Custom Action Group(s). */
+    CAGDEACTIVATE_MESSAGE = 11,
+    /** Toggle the given Custom Action Group(s) (Active CAGs will
       deactivate, inactive CAGs will activate). */
-  CAGTOGGLE_MESSAGE = 12,
-  /** Activate the given standard Action Group(s).
+    CAGTOGGLE_MESSAGE = 12,
+    /** Activate the given standard Action Group(s).
       Note that *every request* to activate the Stage action group will
       result in the next stage being activated.
       For all other action groups, multiple activate requests will have
       no effect.
   */
-  AGACTIVATE_MESSAGE = 13,
-  /** Deactivate the given standard Action Group(s). */
-  AGDEACTIVATE_MESSAGE = 14,
-  /** Toggle the given standard Action Group(s). */
-  AGTOGGLE_MESSAGE = 15,
-  /** Send vessel rotation commands. */
-  ROTATION_MESSAGE = 16,
-  /** Send vessel translation commands. */
-  TRANSLATION_MESSAGE = 17,
-  /** Send wheel steering/throttle commands. */
-  WHEEL_MESSAGE = 18,
-  /** Send vessel throttle commands. */
-  THROTTLE_MESSAGE = 19,
-  /** Send SAS mode commands.
+    AGACTIVATE_MESSAGE = 13,
+    /** Deactivate the given standard Action Group(s). */
+    AGDEACTIVATE_MESSAGE = 14,
+    /** Toggle the given standard Action Group(s). */
+    AGTOGGLE_MESSAGE = 15,
+    /** Send vessel rotation commands. */
+    ROTATION_MESSAGE = 16,
+    /** Send vessel translation commands. */
+    TRANSLATION_MESSAGE = 17,
+    /** Send wheel steering/throttle commands. */
+    WHEEL_MESSAGE = 18,
+    /** Send vessel throttle commands. */
+    THROTTLE_MESSAGE = 19,
+    /** Send SAS mode commands.
        The payload should be a single byte, possible SAS modes are listed
        in the AutopilotMode enum. */
-  SAS_MODE_MESSAGE = 20,
-  CAMERA_CONTROL_MODE = 21,
-  CAMERA_ROTATION_MESSAGE = 22,
+    SAS_MODE_MESSAGE = 20,
+    CAMERA_CONTROL_MODE = 21,
+    CAMERA_ROTATION_MESSAGE = 22,
 
-  /** Send a time warp commands.
+    /** Send a time warp commands.
        The payload should be a single byte, possible commands are listed
        in the Timewarp enum. */
-  TIMEWARP_MESSAGE = 24
+    TIMEWARP_MESSAGE = 24
 
 };
 
 /** Action Group Indexes
     These are used to mask out elements of an ACTIONSTATUS_MESSAGE. */
-enum ActionGroupIndexes {
-  /** Bitmask for the Stage action group. */
-  STAGE_ACTION = 1,
-  /** Bitmask for the Gear action group. */
-  GEAR_ACTION = 2,
-  /** Bitmask for the Light action group. */
-  LIGHT_ACTION = 4,
-  /** Bitmask for the RCS action group. */
-  RCS_ACTION = 8,
-  /** Bitmask for the SAS action group. */
-  SAS_ACTION = 16,
-  /** Bitmask for the Brakes action group. */
-  BRAKES_ACTION = 32,
-  /** Bitmask for the Abort action group. */
-  ABORT_ACTION = 64
+enum ActionGroupIndexes
+{
+    /** Bitmask for the Stage action group. */
+    STAGE_ACTION = 1,
+    /** Bitmask for the Gear action group. */
+    GEAR_ACTION = 2,
+    /** Bitmask for the Light action group. */
+    LIGHT_ACTION = 4,
+    /** Bitmask for the RCS action group. */
+    RCS_ACTION = 8,
+    /** Bitmask for the SAS action group. */
+    SAS_ACTION = 16,
+    /** Bitmask for the Brakes action group. */
+    BRAKES_ACTION = 32,
+    /** Bitmask for the Abort action group. */
+    ABORT_ACTION = 64
 };
 
 /** Timewarp command
     These are used for a TIMEWARP_MESSAGE. */
-enum Timewarp {
-  /** Set Timewarp to x1. */
-  TIMEWARP_X1 = 0,
-  /** Set Timewarp to x5 (no effect in atmosphere). */
-  TIMEWARP_X5 = 1,
-  /** Set Timewarp to x10 (no effect in atmosphere). */
-  TIMEWARP_X10 = 2,
-  /** Set Timewarp to x50 (no effect in atmosphere). */
-  TIMEWARP_X50 = 3,
-  /** Set Timewarp to x100 (no effect in atmosphere). */
-  TIMEWARP_X100 = 4,
-  /** Set Timewarp to x1000 (no effect in atmosphere). */
-  TIMEWARP_X1000 = 5,
-  /** Set Timewarp to x10000 (no effect in atmosphere). */
-  TIMEWARP_X10000 = 6,
-  /** Set Timewarp to x100000 (no effect in atmosphere). */
-  TIMEWARP_X100000 = 7,
-  /** Set Timewarp to x2 in atmosphere (no effect out of atmosphere). */
-  TIMEWARP_X2_PHYSICAL = 8,
-  /** Set Timewarp to x3 in atmosphere (no effect out of atmosphere). */
-  TIMEWARP_X3_PHYSICAL = 9,
-  /** Set Timewarp to x4 in atmosphere (no effect out of atmosphere). */
-  TIMEWARP_X4_PHYSICAL = 10,
-  /** Set Timewarp the next rate available. */
-  TIMEWARP_UP = 11,
-  /** Set Timewarp the previous rate available. */
-  TIMEWARP_DOWN = 12,
-  /** Warp to the next maneuver. */
-  TIMEWARP_NEXT_MANEUVER = 13,
-  /** Warp to the next SOI change. */
-  TIMEWARP_NEXT_SOI = 14,
-  /** Warp to the apoapsis. */
-  TIMEWARP_APOAPSIS = 15,
-  /** Warp to the periapsis. */
-  TIMEWARP_PERIAPSIS = 16,
-  /** Cancel the current auto-timewarp and reset it to x1. */
-  TIMEWARP_CANCEL_AUTOWARP = 17
+enum Timewarp
+{
+    /** Set Timewarp to x1. */
+    TIMEWARP_X1 = 0,
+    /** Set Timewarp to x5 (no effect in atmosphere). */
+    TIMEWARP_X5 = 1,
+    /** Set Timewarp to x10 (no effect in atmosphere). */
+    TIMEWARP_X10 = 2,
+    /** Set Timewarp to x50 (no effect in atmosphere). */
+    TIMEWARP_X50 = 3,
+    /** Set Timewarp to x100 (no effect in atmosphere). */
+    TIMEWARP_X100 = 4,
+    /** Set Timewarp to x1000 (no effect in atmosphere). */
+    TIMEWARP_X1000 = 5,
+    /** Set Timewarp to x10000 (no effect in atmosphere). */
+    TIMEWARP_X10000 = 6,
+    /** Set Timewarp to x100000 (no effect in atmosphere). */
+    TIMEWARP_X100000 = 7,
+    /** Set Timewarp to x1 in atmosphere (no effect out of atmosphere). */
+    TIMEWARP_X1_PHYSICAL = 8,
+    /** Set Timewarp to x2 in atmosphere (no effect out of atmosphere). */
+    TIMEWARP_X2_PHYSICAL = 9,
+    /** Set Timewarp to x3 in atmosphere (no effect out of atmosphere). */
+    TIMEWARP_X3_PHYSICAL = 10,
+    /** Set Timewarp to x4 in atmosphere (no effect out of atmosphere). */
+    TIMEWARP_X4_PHYSICAL = 11,
+    /** Set Timewarp the next rate available. */
+    TIMEWARP_UP = 12,
+    /** Set Timewarp the previous rate available. */
+    TIMEWARP_DOWN = 13,
+    /** Warp to the next maneuver. */
+    TIMEWARP_NEXT_MANEUVER = 14,
+    /** Warp to the next SOI change. */
+    TIMEWARP_NEXT_SOI = 15,
+    /** Warp to the apoapsis. */
+    TIMEWARP_APOAPSIS = 16,
+    /** Warp to the periapsis. */
+    TIMEWARP_PERIAPSIS = 17,
+    /** Warp to the next morning. */
+    TIMEWARP_NEXT_MORNING = 18,
+    /** Cancel the current auto-timewarp and reset it to x1. */
+    TIMEWARP_CANCEL_AUTOWARP = 255
 };
 
 /** Rotation Axes
@@ -279,15 +287,16 @@ enum RotationAxes {
   PITCH_ROT = 1, /**< Bitmask for the pitch axis. */
   ROLL_ROT = 2, /**< Bitmask for the roll axis. */
   YAW_ROT = 4, /**< Bitmask for the yaw axis. */
-  ZOOM_ROT = 8 /**< Bitmask for the zoom axis. */
+  ZOOM_ROT = 8 /**< Bitmask for the zoom axis. Added here purely for camera control. */
 };
 
 /** Translation Axes
     These are used to indicate which axes in a TRANSLATION_MESSAGE are active. */
-enum TranslationAxes {
-  X_TRANS = 1, /**< Bitmask for the X axis. */
-  Y_TRANS = 2, /**< Bitmask for the Y axis. */
-  Z_TRANS = 4 /**< Bitmask for the Z axis. */
+enum TranslationAxes
+{
+    X_TRANS = 1, /**< Bitmask for the X axis. */
+    Y_TRANS = 2, /**< Bitmask for the Y axis. */
+    Z_TRANS = 4  /**< Bitmask for the Z axis. */
 };
 
 /** Translation Axes
@@ -300,23 +309,24 @@ enum WheelAxes {
 /** Autopilot Mode
     The possible Autopilot (SAS) modes. This enum corresponds with
     VesselPilot.AutopilotMode in the KSP API. */
-enum AutopilotMode {
-  AP_STABILITYASSIST = 1,
-  AP_PROGRADE = 2,
-  AP_RETROGRADE = 3,
-  AP_NORMAL = 4,
-  AP_ANTINORMAL = 5,
-  AP_RADIALIN = 6,
-  AP_RADIALOUT = 7,
-  AP_TARGET = 8,
-  AP_ANTITARGET = 9,
-  AP_MANEUVER = 10
+enum AutopilotMode
+{
+    AP_STABILITYASSIST = 1,
+    AP_PROGRADE = 2,
+    AP_RETROGRADE = 3,
+    AP_NORMAL = 4,
+    AP_ANTINORMAL = 5,
+    AP_RADIALIN = 6,
+    AP_RADIALOUT = 7,
+    AP_TARGET = 8,
+    AP_ANTITARGET = 9,
+    AP_MANEUVER = 10
 };
-
 
 /** Camera Mode
     The possible camera mode control options. */
-enum CameraControlMode {
+enum CameraControlMode
+{
 
     // Flight Camera Modes
     CAMERA_MODE_FLIGHT = 1,
