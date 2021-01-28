@@ -74,6 +74,12 @@ enum OutboundPackets
     /** Ablator in the current stage.
         Messages on this channel contain a resourceMessage. */
     AB_STAGE_MESSAGE = 23,
+    /** TAC Life Support ressources.
+        Messages on this channel contain a TACLSRessourceMessage. */
+    TACLS_RESSOURCE_MESSAGE = 24,
+    /** TAC Life Support waste ressources.
+        Messages on this channel contain a TACLSWasteMessage. */
+    TACLS_WASTE_MESSAGE = 25,
 
     // |--------------------------|
     // | Vessel Movement/Position |
