@@ -35,6 +35,18 @@ resourceMessage parseResource(byte msg[]) {
   return *resource;
 }
 
+TACLSRessourceMessage parseTACLSRessource(byte msg[]) {
+  TACLSRessourceMessage* resource;
+  resource = (TACLSRessourceMessage*)msg;
+  return *resource;
+}
+
+TACLSWasteMessage parseTACLSWaste(byte msg[]) {
+  TACLSWasteMessage* resource;
+  resource = (TACLSWasteMessage*)msg;
+  return *resource;
+}
+
 velocityMessage parseVelocity(byte msg[]) {
   velocityMessage* velocity;
   velocity = (velocityMessage*)msg;

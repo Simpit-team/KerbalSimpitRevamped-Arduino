@@ -41,6 +41,26 @@ struct resourceMessage {
   float available; /**< Current resource level. */
 } __attribute__((packed));
 
+/** A Resource message for TACLS ressources. */
+struct TACLSRessourceMessage {
+  float currentFood; /**< Current resource level for food. */
+  float maxFood; /**< Maximum capacity of food. */
+  float currentWater; /**< Current resource level for water. */
+  float maxWater; /**< Maximum capacity of water. */
+  float currentOxygen; /**< Current resource level for oxygen. */
+  float maxOxygen; /**< Maximum capacity of oxygen. */
+} __attribute__((packed));
+
+/** A Resource message for TACLS ressources. */
+struct TACLSWasteMessage {
+  float currentWaste; /**< Current resource level for waste. */
+  float maxWaste; /**< Maximum capacity of waste. */
+  float currentLiquidWaste; /**< Current resource level for liquid waste. */
+  float maxLiquidWaste; /**< Maximum capacity of liquid waste. */
+  float currentCO2; /**< Current resource level for CO2. */
+  float maxCO2; /**< Maximum capacity of CO2. */
+} __attribute__((packed));
+
 /** A Velocity message. */
 struct velocityMessage {
   float orbital; /**< Orbital velocity. */
@@ -214,6 +234,14 @@ apsidesTimeMessage parseApsidesTime(byte msg[]);
     @returns resourceMessage A formatted resourceMessage struct.
 */
 resourceMessage parseResource(byte msg[]);
+/** Parse a message countaining TACLSRessourceMessage data.
+    @returns TACLSRessourceMessage A formatted TACLSRessourceMessage struct.
+*/
+TACLSRessourceMessage parseTACLSRessource(byte msg[]);
+/** Parse a message countaining parseTACLSWaste data.
+    @returns parseTACLSWaste A formatted parseTACLSWaste struct.
+*/
+TACLSWasteMessage parseTACLSWaste(byte msg[]);
 /** Parse a message containing Velocity data.
     @returns velocityMessage A formatted velocityMessage struct.
 */
