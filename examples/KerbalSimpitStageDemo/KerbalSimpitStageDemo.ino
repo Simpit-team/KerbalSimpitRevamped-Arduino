@@ -40,7 +40,7 @@ void setup() {
   Serial.begin(115200);
 
   // Set initial pin states, and turn on the LED
-  pinMode(buttonPin, INPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(ledPin, HIGH);
 
