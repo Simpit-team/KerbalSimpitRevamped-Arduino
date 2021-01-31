@@ -16,6 +16,7 @@ messages to and from the plugin.
    kerbalsimpit
    messagetypes
    payloadstructs
+   troubleshooting
 
 ----
 
