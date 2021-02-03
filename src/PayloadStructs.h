@@ -61,7 +61,7 @@ struct resourceMessage {
 } __attribute__((packed));
 
 /** A Resource message for TACLS ressources. */
-struct TACLSRessourceMessage {
+struct TACLSResourceMessage {
   float currentFood; /**< Current resource level for food. */
   float maxFood; /**< Maximum capacity of food. */
   float currentWater; /**< Current resource level for water. */
@@ -78,6 +78,20 @@ struct TACLSWasteMessage {
   float maxLiquidWaste; /**< Maximum capacity of liquid waste. */
   float currentCO2; /**< Current resource level for CO2. */
   float maxCO2; /**< Maximum capacity of CO2. */
+} __attribute__((packed));
+
+/** A Resource message for custom ressources. The resources must be set in the 
+ *  configuration file.
+ */
+struct CustomResourceMessage {
+  float currentResource1; /**< Current resource level resource 1. */
+  float maxResource1; /**< Maximum capacity of resource 1. */
+  float currentResource2; /**< Current resource level resource 2. */
+  float maxResource2; /**< Maximum capacity of resource 2. */
+  float currentResource3; /**< Current resource level resource 3. */
+  float maxResource3; /**< Maximum capacity of resource 3. */
+  float currentResource4; /**< Current resource level resource 4. */
+  float maxResource4; /**< Maximum capacity of resource 4. */
 } __attribute__((packed));
 
 /** A Velocity message. */
@@ -263,14 +277,18 @@ apsidesTimeMessage parseApsidesTime(byte msg[]);
     @returns resourceMessage A formatted resourceMessage struct.
 */
 resourceMessage parseResource(byte msg[]);
-/** Parse a message countaining TACLSRessourceMessage data.
-    @returns TACLSRessourceMessage A formatted TACLSRessourceMessage struct.
+/** Parse a message countaining TACLSResourceMessage data.
+    @returns TACLSResourceMessage A formatted TACLSResourceMessage struct.
 */
-TACLSRessourceMessage parseTACLSRessource(byte msg[]);
-/** Parse a message countaining parseTACLSWaste data.
-    @returns parseTACLSWaste A formatted parseTACLSWaste struct.
+TACLSResourceMessage parseTACLSResource(byte msg[]);
+/** Parse a message countaining TACLSWasteMessage data.
+    @returns TACLSWasteMessage A formatted TACLSWasteMessage struct.
 */
 TACLSWasteMessage parseTACLSWaste(byte msg[]);
+/** Parse a message countaining CustomResourceMessage data.
+    @returns CustomResourceMessage A formatted CustomResourceMessage struct.
+*/
+CustomResourceMessage parseCustomResource(byte msg[]);
 /** Parse a message containing Velocity data.
     @returns velocityMessage A formatted velocityMessage struct.
 */

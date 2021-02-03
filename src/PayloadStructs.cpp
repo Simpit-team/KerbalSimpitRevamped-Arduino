@@ -47,15 +47,21 @@ resourceMessage parseResource(byte msg[]) {
   return *resource;
 }
 
-TACLSRessourceMessage parseTACLSRessource(byte msg[]) {
-  TACLSRessourceMessage* resource;
-  resource = (TACLSRessourceMessage*)msg;
+TACLSResourceMessage parseTACLSResource(byte msg[]) {
+  TACLSResourceMessage* resource;
+  resource = (TACLSResourceMessage*)msg;
   return *resource;
 }
 
 TACLSWasteMessage parseTACLSWaste(byte msg[]) {
   TACLSWasteMessage* resource;
   resource = (TACLSWasteMessage*)msg;
+  return *resource;
+}
+
+CustomResourceMessage parseCustomResource(byte msg[]) {
+  CustomResourceMessage* resource;
+  resource = (CustomResourceMessage*)msg;
   return *resource;
 }
 
