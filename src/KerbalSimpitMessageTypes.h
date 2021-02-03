@@ -76,10 +76,16 @@ enum OutboundPackets
     AB_STAGE_MESSAGE = 23,
     /** TAC Life Support ressources.
         Messages on this channel contain a TACLSRessourceMessage. */
-    TACLS_RESSOURCE_MESSAGE = 24,
+    TACLS_RESOURCE_MESSAGE = 24,
     /** TAC Life Support waste ressources.
         Messages on this channel contain a TACLSWasteMessage. */
     TACLS_WASTE_MESSAGE = 25,
+	/** Custom ressources. Specific ressource to use to be set in the configuration file.
+        Messages on this channel contain a CustomResourceMessage. */
+    CUSTOM_RESOURCE_1_MESSAGE = 26,
+    /** Custom ressources. Specific ressource to use to be set in the configuration file.
+        Messages on this channel contain a CustomResourceMessage. */
+    CUSTOM_RESOURCE_2_MESSAGE = 27,
 
     // |--------------------------|
     // | Vessel Movement/Position |
