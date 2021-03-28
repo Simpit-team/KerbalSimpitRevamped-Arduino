@@ -123,6 +123,9 @@ class KerbalSimpit
 
   void setCameraMode(byte mode);
 
+  void printToKSP(String msg);
+  void printToKSP(String msg, byte options);
+
  private:
   byte _readBuffer;
   byte _inboundType;
