@@ -36,6 +36,8 @@ void setup() {
   }
   // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
+  // Display a message in KSP to indicate handshaking is complete.
+  mySimpit.printToKSP("Connected", PRINT_TO_SCREEN);
   // Sets our callback function. The KerbalSimpit library will
   // call this function every time a packet is received.
   mySimpit.inboundHandler(messageHandler);

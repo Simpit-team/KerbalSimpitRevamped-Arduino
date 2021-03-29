@@ -38,6 +38,8 @@ void setup() {
   }
   // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
+  // Display a message in KSP to indicate handshaking is complete.
+  mySimpit.printToKSP("Connected", PRINT_TO_SCREEN);
 }
 
 void loop() {

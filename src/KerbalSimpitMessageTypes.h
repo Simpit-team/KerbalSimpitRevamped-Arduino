@@ -211,8 +211,12 @@ enum InboundPackets
     /** Send a time warp commands.
        The payload should be a single byte, possible commands are listed
        in the Timewarp enum. */
-    TIMEWARP_MESSAGE = 24
-
+    TIMEWARP_MESSAGE = 24,
+	/** Send a custom log message.
+	   The message will be printed in the KSP log. The options are defined
+	   in the CustomLogStatus enum.
+	   The message should not be more than 31 char.*/
+    CUSTOM_LOG = 25,
 };
 
 /** Action Group Indexes
@@ -279,6 +283,15 @@ enum Timewarp
     TIMEWARP_NEXT_MORNING = 18,
     /** Cancel the current auto-timewarp and reset it to x1. */
     TIMEWARP_CANCEL_AUTOWARP = 255
+};
+
+enum CustomLogStatus {
+    /** If set, the message will only be put in the KSP log is the Simpit mod is in verbose mode */
+    VERBOSE_ONLY = 1,
+    /** If set, the message will also be displayed to the user (and not only in the log) */
+    PRINT_TO_SCREEN = 2,
+    /** If set, the message will *not* be prefixed with 'Simpit :' */
+    NO_HEADER = 4,
 };
 
 /** Rotation Axes

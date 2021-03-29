@@ -67,6 +67,30 @@ void KerbalSimpit::deregisterChannel(byte channelID)
   _send(DEREGISTER_MESSAGE, &channelID, 1);
 }
 
+void KerbalSimpit::printToKSP(String msg){
+	printToKSP(msg, 0);
+}
+
+void KerbalSimpit::printToKSP(String msg, byte options){
+  byte payload[32];
+  payload[0] = options;
+
+  bool hasDataLeft = true;
+  for(unsigned int i = 0; i < 31; i++){
+    if(msg[i] == '\0'){
+      hasDataLeft = false;
+    }
+
+    if(!hasDataLeft){
+      payload[i+1] = '\0';
+    } else {
+      payload[i+1] = msg[i];
+    }
+  }
+
+  _send(CUSTOM_LOG, payload, 32);
+}
+
 void KerbalSimpit::_send(byte messageType, byte msg[], byte msgSize)
 {
   _serial->write(0xAA);
