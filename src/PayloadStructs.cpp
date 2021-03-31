@@ -224,3 +224,10 @@ void cameraRotationMessage::setPitchRollYawZoom(int16_t pitch, int16_t roll, int
   this->cameraZoom = zoom;
   mask = PITCH_ROT + ROLL_ROT + YAW_ROT + ZOOM_ROT;
 }
+
+keyboardEmulatorMessage::keyboardEmulatorMessage(int16_t keyCode) : keyboardEmulatorMessage(keyCode, 0) {}
+
+keyboardEmulatorMessage::keyboardEmulatorMessage(int16_t keyCode, byte modifier){
+  this->keyCode = keyCode;
+  this->modifier = modifier;
+}

@@ -261,6 +261,16 @@ struct cameraRotationMessage {
 } __attribute__((packed));
 
 
+/** A keyboard emulator message.
+    This struct contains information about the keypress to emulate. */
+struct keyboardEmulatorMessage {
+  byte modifier;
+  int16_t keyCode;
+
+  keyboardEmulatorMessage(int16_t keyCode);
+  keyboardEmulatorMessage(int16_t keyCode, byte modifier);
+} __attribute__((packed));
+
 // Message parsing functions
 
 

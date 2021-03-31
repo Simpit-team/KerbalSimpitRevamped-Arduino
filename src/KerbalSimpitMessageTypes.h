@@ -242,6 +242,16 @@ enum InboundPackets
 	   in the CustomLogStatus enum.
 	   The message should not be more than 31 char.*/
     CUSTOM_LOG = 25,
+    /** Send a message to emulate a key press.
+        The message contains a key modifyer and a key code.
+        The key code indicate which key to press. It is taken from the file named VirtualKeyCode
+        in the folder KerbalSimpit\Contrib\InputSimulator\WindowsInput\Native.
+        For instance :
+          - 0x4D for 'm' to open the map
+          - 0x74 for 'F5' to quicksave
+        The modifier is used to emulate key press while holding keys such as CTRL, SHIFT, etc.
+     */
+    KEYBOARD_EMULATOR = 26,
 };
 
 /** Action Group Indexes
@@ -317,6 +327,15 @@ enum CustomLogStatus {
     PRINT_TO_SCREEN = 2,
     /** If set, the message will *not* be prefixed with 'Simpit :' */
     NO_HEADER = 4,
+};
+
+enum KeyboardEmulatorModifier {
+  /** If set, emulate the use of Shift */
+  SHIFT_MOD = 1,
+  /** If set, emulate the use of CTRL */
+  CTRL_MOD = 2,
+  /** If set, emulate the use of ALT */
+  ALT_MOD = 4,
 };
 
 /** Rotation Axes
