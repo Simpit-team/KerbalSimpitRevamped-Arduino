@@ -34,6 +34,19 @@ struct apsidesTimeMessage {
   int32_t apoapsis; /** Time until the current vessel's orbital apoapsis, in seconds. */
 } __attribute__((packed));
 
+/** An message containing orbital information. */
+struct orbitInfoMessage
+{
+  float eccentricity; /**< Current vessel's orbital eccentricity. */
+  float semiMajorAxis; /**< Current vessel's orbital semi major axis. */
+  float inclination; /**< Current vessel's orbital inclination. */
+  float longAscendingNode; /**< Current vessel's orbital longitude of ascending node. */
+  float argPeriapsis; /**< Current vessel's orbital argument of periapsis. */
+  float trueAnomaly; /**< Current vessel's orbital true anomaly. */
+  float meanAnomaly; /**< Current vessel's orbital mean anomaly. */
+  float period; /**< Current vessel's orbital period. */
+} __attribute__((packed));
+
 /** A Resource message.
     All resource messages use this struct for sending data. */
 struct resourceMessage {
@@ -204,7 +217,10 @@ altitudeMessage parseAltitude(byte msg[]);
     @returns apsidesMessage A formatted apsidesMessage struct.
 */
 apsidesMessage parseApsides(byte msg[]);
-
+/** Parse a message containing orbital information.
+    @returns orbitInfoMessage A formatted orbitInfoMessage struct.
+*/
+orbitInfoMessage parseOrbitInfo(byte msg[]);
 /** Parse a message containing Apsides Time data.
     @returns apsidesTimeMessage A formatted apsidesTimeMessage struct.
 */
