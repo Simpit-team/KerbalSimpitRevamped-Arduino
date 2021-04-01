@@ -100,6 +100,9 @@ enum OutboundPackets
     MANEUVER_MESSAGE = 35,
 
     SAS_MODE_STATUS_MESSAGE = 36,
+    /** Data about the current orbit.
+        Messages on this channel contain an orbitInfoMessage. */
+    ORBIT_INFO = 37,
 
     // |----------------|
     // | Vessel Details |
