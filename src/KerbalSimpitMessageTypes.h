@@ -98,8 +98,10 @@ enum OutboundPackets
     /** Data about the planned maneuvers.
         Messages on this channel contain an maneuverMessage. */
     MANEUVER_MESSAGE = 35,
+    /** Data about the current SAS mode.
+	    Messages on this channel contain a SASInfoMessage. */
+    SAS_MODE_INFO_MESSAGE = 36,
 
-    SAS_MODE_STATUS_MESSAGE = 36,
 
     // |----------------|
     // | Vessel Details |

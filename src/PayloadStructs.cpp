@@ -11,6 +11,12 @@ cagStatusMessage parseCAGStatusMessage(byte msg[]){
 }
 
 
+SASInfoMessage parseSASInfoMessage(byte msg[]){
+  SASInfoMessage* sasinfo;
+  sasinfo = (SASInfoMessage*)msg;
+  return *sasinfo;
+}
+
 altitudeMessage parseAltitude(byte msg[]) {
   altitudeMessage* alt;
   alt = (altitudeMessage*)msg;
