@@ -8,14 +8,14 @@ Go to your *KSP/GameData* folder. You should see a *KerbalSimpit* folder if SimP
 
 Open the configuration file *KSP/GameData/KerbalSimpit/PluginData/Settings.cfg*
 
-The line ``PortName = COM3`` should be updated with the correct port number. It should be identical to the one used with the Arduino IDE.
+The line ``PortName = COM3`` should be updated with the correct port number. It should be identical to the one used with the Arduino IDE on Windows. On a Linux or a Mac, the USB port ID will look like /dev/cu.usbmodem401 OR /dev/ttyUSBO.
 
 The line ``Verbose = False`` should be replaced by ``Verbose = True`` to increase the level of detail written in the logs. It is assumed for this guide that Verbose is set to True.
 
 Launch KSP and check in the logs that you can see the following lines (either by opening the in-game console with Alt+F12 or by opening the file *KSP/KSP.log* :
  * ``KerbalSimpit Has put a message into the console!``
  * ``KerbalSimpit: Settings loaded.``
- * ``KerbalSimpit: Using serial polling thread for XXX`` where XXX is your port name as used in the Arduino IDE.
+ * ``KerbalSimpit: Using serial polling thread for XXX`` where XXX is your port name (on Windows, it should be the same as the one set in the config file).
 
 Make sure that you installed the SimPit Arduino library in the library folder of Arduino. You should see the *File/Examples* a category called *Kerbal Sim Pit*.
 
