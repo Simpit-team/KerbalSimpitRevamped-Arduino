@@ -35,6 +35,12 @@ apsidesTimeMessage parseApsidesTime(byte msg[]) {
   return *apsidesTime;
 }
 
+orbitInfoMessage parseOrbitInfo(byte msg[]) {
+  orbitInfoMessage* orbitInfo;
+  orbitInfo = (orbitInfoMessage*)msg;
+  return *orbitInfo;
+}
+
 resourceMessage parseResource(byte msg[]) {
   resourceMessage* resource;
   resource = (resourceMessage*)msg;

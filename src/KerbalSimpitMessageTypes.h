@@ -101,7 +101,9 @@ enum OutboundPackets
     /** Data about the current SAS mode.
 	    Messages on this channel contain a SASInfoMessage. */
     SAS_MODE_INFO_MESSAGE = 36,
-
+    /** Data about the current orbit.
+        Messages on this channel contain an orbitInfoMessage. */
+    ORBIT_INFO = 37,
 
     // |----------------|
     // | Vessel Details |
