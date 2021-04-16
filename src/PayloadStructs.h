@@ -16,6 +16,12 @@ struct cagStatusMessage {
   }
 } __attribute__((packed));
 
+/** An SAS info message to reprsent the current SAS state. */
+struct SASInfoMessage {
+  byte currentSASMode; /**< Current SAS mode. SAS modes are listed in the AutopilotMode enum. 255 is used to indicate a disabled SAS. */
+  int16_t SASModeAvailability; /**< bitmask for the availability of each SAS mode. If a mode is not available, a SAS_MODE_MESSAGE setting this mode will be ignored. */
+} __attribute__((packed));
+
 /** An Altitude message. */
 struct altitudeMessage {
   float sealevel; /**< Altitude above sea level. */
@@ -208,6 +214,13 @@ struct cameraRotationMessage {
     @returns cagStatusMessage A formatted cagStatusMessage struct.
 */
 cagStatusMessage parseCAGStatusMessage(byte msg[]);
+
+/** Parse a message containing status of the SAS.
+    @param msg The byte array of the message body.
+    @returns SASInfoMessage A formatted SASInfoMessage struct.
+*/
+SASInfoMessage parseSASInfoMessage(byte msg[]);
+
 /** Parse a message containing Altitude data.
     @param msg The byte array of the message body.
     @returns altitudeMessage A formatted altitudeMessage struct.
