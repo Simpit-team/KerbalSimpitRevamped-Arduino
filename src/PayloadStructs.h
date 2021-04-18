@@ -141,6 +141,12 @@ struct burnTimeMessage {
   float totalBurnTime; /**< Burn time of the whole vessel. */
 } __attribute__((packed));
 
+/** A temperator limit message. */
+struct tempLimitMessage {
+  byte tempLimitPercentage; /**< Maximum temperature percentage (as current temp over max temp) of any part of the vessel. */
+  byte skinTempLimitPercentage; /**< Maximum temperature percentage (as current skin temp over max skin temp) of any part of the vessel. */
+} __attribute__((packed));
+
 /** A vessel rotation message.
     This struct contains information about vessel rotation commands. */
 struct rotationMessage {
@@ -317,5 +323,9 @@ deltaVEnvMessage parseDeltaVEnv(byte msg[]);
     @returns burnTimeMessage a formatted burnTimeMessage struct.
 */
 burnTimeMessage parseBurnTime(byte msg[]);
+/** Parse a message containing tempLimitMessage data.
+    @returns tempLimitMessage a formatted tempLimitMessage struct.
+*/
+tempLimitMessage parseTempLimitMessage(byte msg[]);
 
 #endif

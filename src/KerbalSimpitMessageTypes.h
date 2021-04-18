@@ -160,6 +160,12 @@ enum OutboundPackets
 		This cagStatusMessage has a is_action_activated method 
 		taking the action ground number as an argumetnt. */
     CAGSTATUS_MESSAGE = 44,
+	/** Current maximum temperature of the any vessel part.
+		This message contains the maximum percentage value of the temperature
+		of any part of the vessel. It contains a percentage for both core and
+		skin temperature. The two maximum percentage can come from different parts.
+		Messages on this channel contain an tempLimitMessage. */
+    TEMP_LIMIT_MESSAGE = 45,
 
     // |----------------------|
     // | External Environment |

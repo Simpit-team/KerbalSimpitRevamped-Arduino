@@ -107,6 +107,12 @@ burnTimeMessage parseBurnTime(byte msg[]) {
   return *burnTime;
 }
 
+tempLimitMessage parseTempLimitMessage(byte msg[]){
+  tempLimitMessage* tempLimit;
+  tempLimit = (tempLimitMessage*)msg;
+  return *tempLimit;
+}
+
 
 // Helper functions for using bitmask
 
