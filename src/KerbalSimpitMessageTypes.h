@@ -182,7 +182,10 @@ enum OutboundPackets
     SOI_MESSAGE = 51,
     /** Scene change packets are sent by the plugin when
      entering or leaving the flight scene. */
-    SCENE_CHANGE_MESSAGE = 52
+    SCENE_CHANGE_MESSAGE = 52,
+    /** Information about the current fligth (warp speed, status, crew, com).
+        Messages on this channel contain a flightStatusMessage. */
+    FLIGHT_STATUS_MESSAGE = 53
 
 };
 
@@ -377,6 +380,15 @@ enum CameraControlMode
     CAMERA_NEXT_MODE = 52,
     CAMERA_PREVIOUS_MODE = 53
 
+};
+
+/** Flags used for the FlightStatus message. */
+enum FligthStatusFlags
+{
+    FLIGHT_IN_FLIGHT = 1, /**< True if the game is currently in the flight screen. */
+    FLIGHT_IS_EVA = 2, /**< True if the current flight is an EVA. */
+    FLIGHT_IS_RECOVERABLE = 4, /**< True if the current vesset is recoverable. */
+    FLIGHT_IS_ATMO_TW = 8 /**< True if the current Timewarp mode is for atmosphere (i.e. physical timewarp). */
 };
 
 #endif

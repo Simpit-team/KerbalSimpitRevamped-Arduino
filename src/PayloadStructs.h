@@ -5,6 +5,7 @@
 #define PayloadStructs_h
 
 #include <Arduino.h>
+#include "KerbalSimpitMessageTypes.h"
 
 
 /** An Altitude message. */
@@ -51,6 +52,22 @@ struct orbitInfoMessage
   float trueAnomaly; /**< Current vessel's orbital true anomaly. */
   float meanAnomaly; /**< Current vessel's orbital mean anomaly. */
   float period; /**< Current vessel's orbital period. */
+} __attribute__((packed));
+
+/** An message containing information about the current flight. */
+struct flightStatusMessage
+{
+  byte flightStatusFlags; /**< Different booleans as defined by FligthStatusFlags. You can access them with the helper funtions.*/
+  byte vesselSituation; /**< Current situation of the vessel, as defined by the Vessel.Situations enum in the KSP API (1 for Landed, 8 for flying, etc.).*/
+  byte currentTWIndex; /**< Current TW index */
+  byte crewCapacity; /**< Current vessel crew total capacity */
+  byte crewCount; /**< Current vessel crew count */
+  byte commNetSignalStrenghPercentage; /**< Current vessel commNet signal strengh (in percentage). 0 when CommNet is not used */
+
+  inline bool isInFligth(){ return this->flightStatusFlags & FLIGHT_IN_FLIGHT; }
+  inline bool isInEVA(){ return this->flightStatusFlags & FLIGHT_IS_EVA; }
+  inline bool isRecoverable(){ return this->flightStatusFlags & FLIGHT_IS_RECOVERABLE; }
+  inline bool isInAtmoTW(){ return this->flightStatusFlags & FLIGHT_IS_ATMO_TW; }
 } __attribute__((packed));
 
 /** A Resource message.
@@ -327,5 +344,11 @@ burnTimeMessage parseBurnTime(byte msg[]);
     @returns tempLimitMessage a formatted tempLimitMessage struct.
 */
 tempLimitMessage parseTempLimitMessage(byte msg[]);
+/** Parse a message containing flightStatusMessage data.
+    @returns flightStatusMessage a formatted flightStatusMessage struct.
+*/
+flightStatusMessage parseFlightStatusMessage(byte msg[]);
+
+
 
 #endif

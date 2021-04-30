@@ -113,6 +113,11 @@ tempLimitMessage parseTempLimitMessage(byte msg[]){
   return *tempLimit;
 }
 
+flightStatusMessage parseFlightStatusMessage(byte msg[]){
+  flightStatusMessage* flightStatus;
+  flightStatus = (flightStatusMessage*)msg;
+  return *flightStatus;
+}
 
 // Helper functions for using bitmask
 
