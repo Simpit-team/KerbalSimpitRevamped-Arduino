@@ -349,16 +349,16 @@ enum WheelAxes {
     VesselPilot.AutopilotMode in the KSP API. */
 enum AutopilotMode
 {
-    AP_STABILITYASSIST = 1,
-    AP_PROGRADE = 2,
-    AP_RETROGRADE = 3,
-    AP_NORMAL = 4,
-    AP_ANTINORMAL = 5,
-    AP_RADIALIN = 6,
-    AP_RADIALOUT = 7,
-    AP_TARGET = 8,
-    AP_ANTITARGET = 9,
-    AP_MANEUVER = 10
+    AP_STABILITYASSIST = 0,
+    AP_PROGRADE = 1,
+    AP_RETROGRADE = 2,
+    AP_NORMAL = 3,
+    AP_ANTINORMAL = 4,
+    AP_RADIALIN = 5,
+    AP_RADIALOUT = 6,
+    AP_TARGET = 7,
+    AP_ANTITARGET = 8,
+    AP_MANEUVER = 9
 };
 
 /** Camera Mode
