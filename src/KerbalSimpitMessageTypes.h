@@ -249,7 +249,8 @@ enum InboundPackets
         For instance :
           - 0x4D for 'm' to open the map
           - 0x74 for 'F5' to quicksave
-        The modifier is used to emulate key press while holding keys such as CTRL, SHIFT, etc.
+        The modifier is used to emulate key press while holding keys such as CTRL, SHIFT, etc
+        This only works on Windows, not on iOS or Linux.
      */
     KEYBOARD_EMULATOR = 26,
 };
