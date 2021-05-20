@@ -129,7 +129,7 @@ enum OutboundPackets
         with the message. For example:
 
         \code
-        if (msg & SAS_ACTION) {
+        if (msg[0] & SAS_ACTION) {
             // code to execute if SAS is active
         }
         \endcode
