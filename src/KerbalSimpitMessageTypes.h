@@ -337,6 +337,10 @@ enum KeyboardEmulatorModifier {
   CTRL_MOD = 2,
   /** If set, emulate the use of ALT */
   ALT_MOD = 4,
+  /** If set, emulate only the key down */
+  KEY_DOWN_MOD = 8,
+  /** If set, emulate only the key up */
+  KEY_UP_MOD = 16,
 };
 
 /** Rotation Axes
