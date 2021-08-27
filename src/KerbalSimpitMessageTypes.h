@@ -29,34 +29,34 @@ enum OutboundPackets
 
     /** Liquid fuel in the vessel.
          Messages on this channel contain a resourceMessage. */
-    LF_MESSAGE = 1,
+    LF_MESSAGE = 10,
     /** Liquid fuel in the current stage.
          Messages on this channel contain a resourceMessage. */
-    LF_STAGE_MESSAGE = 2,
+    LF_STAGE_MESSAGE = 11,
     /** Oxidizer in the vessel.
          Messages on this channel contain a resourceMessage. */
-    OX_MESSAGE = 3,
+    OX_MESSAGE = 12,
     /** Oxidizer in the current stage.
          Messages on this channel contain a resourceMessage. */
-    OX_STAGE_MESSAGE = 4,
+    OX_STAGE_MESSAGE = 13,
     /** Solid fuel in the vessel.
          Messages on this channel contain a resourceMessage. */
-    SF_MESSAGE = 5,
+    SF_MESSAGE = 14,
     /** Solid fuel in the current stage.
          Messages on this channel contain a resourceMessage. */
-    SF_STAGE_MESSAGE = 6,
+    SF_STAGE_MESSAGE = 15,
     /** Xenon gas in the vessel.
          Messages on this channel contain a resourceMessage. */
-    XENON_GAS_MESSAGE = 7,
+    XENON_GAS_MESSAGE = 28,
     /** Xenon Gas in the current stage.
          Messages on this channel contain a resourceMessage. */
-    XENON_GAS_STAGE_MESSAGE = 8,
+    XENON_GAS_STAGE_MESSAGE = 29,
     /** Monoprollent in the vessel.
          Messages on this channel contain a resourceMessage. */
-    MONO_MESSAGE = 9,
+    MONO_MESSAGE = 16,
     /** EVA propellant. Only available for Kerbals on EVA.
         Messages on this channel contain a resourceMessage. */
-    EVA_MESSAGE = 10,
+    EVA_MESSAGE = 18,
 
     // |------------------|
     // | Vessel Resources |
@@ -64,28 +64,28 @@ enum OutboundPackets
 
     /** Electic Charge in the vessel.
          Messages on this channel contain a resourceMessage. */
-    ELECTRIC_MESSAGE = 20,
+    ELECTRIC_MESSAGE = 17,
     /** Ore in the vessel.
          Messages on this channel contain a resourceMessage. */
-    ORE_MESSAGE = 21,
+    ORE_MESSAGE = 19,
     /** Ablator in the vessel.
          Messages on this channel contain a resourceMessage. */
-    AB_MESSAGE = 22,
+    AB_MESSAGE = 20,
     /** Ablator in the current stage.
         Messages on this channel contain a resourceMessage. */
-    AB_STAGE_MESSAGE = 23,
+    AB_STAGE_MESSAGE = 21,
     /** TAC Life Support ressources.
         Messages on this channel contain a TACLSRessourceMessage. */
-    TACLS_RESOURCE_MESSAGE = 24,
+    TACLS_RESOURCE_MESSAGE = 30,
     /** TAC Life Support waste ressources.
         Messages on this channel contain a TACLSWasteMessage. */
-    TACLS_WASTE_MESSAGE = 25,
+    TACLS_WASTE_MESSAGE = 31,
 	/** Custom ressources. Specific ressource to use to be set in the configuration file.
         Messages on this channel contain a CustomResourceMessage. */
-    CUSTOM_RESOURCE_1_MESSAGE = 26,
+    CUSTOM_RESOURCE_1_MESSAGE = 32,
     /** Custom ressources. Specific ressource to use to be set in the configuration file.
         Messages on this channel contain a CustomResourceMessage. */
-    CUSTOM_RESOURCE_2_MESSAGE = 27,
+    CUSTOM_RESOURCE_2_MESSAGE = 33,
 
     // |--------------------------|
     // | Vessel Movement/Position |
@@ -93,29 +93,29 @@ enum OutboundPackets
 
     /** Sea level and surface altitude.
         Messages on this channel contain an altitudeMessage. */
-    ALTITUDE_MESSAGE = 30,
+    ALTITUDE_MESSAGE = 8,
     /** Vessel velocity.
         Messages on this channel contain a velocityMessage. */
-    VELOCITY_MESSAGE = 31,
+    VELOCITY_MESSAGE = 22,
     /** Information about airspeed.
         This channel delivers messages containing indicated airspeed and
         mach number for the active vessel. */
-    AIRSPEED_MESSAGE = 32,
+    AIRSPEED_MESSAGE = 27,
     /** Apoapsis and periapsis.
         Messages on this channel contain an apsidesMessage. */
-    APSIDES_MESSAGE = 33,
+    APSIDES_MESSAGE = 9,
     /** Time to the next apoapsis and periapsis.
         Messages on this channel contain an apsidesTimeMessage. */
-    APSIDESTIME_MESSAGE = 34,
+    APSIDESTIME_MESSAGE = 24,
     /** Data about the planned maneuvers.
         Messages on this channel contain an maneuverMessage. */
-    MANEUVER_MESSAGE = 35,
+    MANEUVER_MESSAGE = 34,
     /** Data about the current SAS mode.
 	    Messages on this channel contain a SASInfoMessage. */
-    SAS_MODE_INFO_MESSAGE = 36,
+    SAS_MODE_INFO_MESSAGE = 35,
     /** Data about the current orbit.
         Messages on this channel contain an orbitInfoMessage. */
-    ORBIT_INFO = 37,
+    ORBIT_INFO = 36,
 
     // |----------------|
     // | Vessel Details |
@@ -144,28 +144,28 @@ enum OutboundPackets
         - BRAKES_ACTION
         - ABORT_ACTION 
     */
-    ACTIONSTATUS_MESSAGE = 40,
+    ACTIONSTATUS_MESSAGE = 37,
     /** Amount of deltaV of the current vessel in the current situation.
         Messages on this channel contain an deltaVMessage. */
-    DELTAV_MESSAGE = 41,
+    DELTAV_MESSAGE = 38,
     /** Amount of deltaV of the current vessel in different situations
 	    (Atmospheric sea level and in vacuum).
         Messages on this channel contain an deltaVEnvMessage. */
-    DELTAVENV_MESSAGE = 42,
+    DELTAVENV_MESSAGE = 39,
     /** Amount of burn time of the current vessel.
         Messages on this channel contain an burnTimeMessage. */
-    BURNTIME_MESSAGE = 43,
+    BURNTIME_MESSAGE = 40,
     /** Current status of all the custom action groups.
 	    Messages on this channel contains a cagStatusMessage. 
 		This cagStatusMessage has a is_action_activated method 
 		taking the action ground number as an argumetnt. */
-    CAGSTATUS_MESSAGE = 44,
+    CAGSTATUS_MESSAGE = 41,
 	/** Current maximum temperature of the any vessel part.
 		This message contains the maximum percentage value of the temperature
 		of any part of the vessel. It contains a percentage for both core and
 		skin temperature. The two maximum percentage can come from different parts.
 		Messages on this channel contain an tempLimitMessage. */
-    TEMP_LIMIT_MESSAGE = 45,
+    TEMP_LIMIT_MESSAGE = 42,
 
     // |----------------------|
     // | External Environment |
@@ -174,18 +174,18 @@ enum OutboundPackets
     /** Information about targetted object.
         This channel delivers messages about the object targetted by the
         active vessel. Messages on this channel contain a targetInfoMessage. */
-    TARGETINFO_MESSAGE = 50,
+    TARGETINFO_MESSAGE = 25,
     /** Name of current Sphere of Influence.
         This channel delivers an ASCII string containing the name of the body
         the active vessel is currently orbiting. Note that this is always the
         English name, regardless of the language the game is currently set to. */
-    SOI_MESSAGE = 51,
+    SOI_MESSAGE = 26,
     /** Scene change packets are sent by the plugin when
      entering or leaving the flight scene. */
-    SCENE_CHANGE_MESSAGE = 52,
+    SCENE_CHANGE_MESSAGE = 3,
     /** Information about the current fligth (warp speed, status, crew, com).
         Messages on this channel contain a flightStatusMessage. */
-    FLIGHT_STATUS_MESSAGE = 53
+    FLIGHT_STATUS_MESSAGE = 43
 
 };
 
