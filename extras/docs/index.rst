@@ -6,7 +6,7 @@ This library manages a serial connection to the `Kerbal Simpit`_ plugin for
 and receiving, and provides data structures and methods for dealing with
 messages to and from the plugin.
 
-.. _Kerbal Simpit: https://bitbucket.org/pjhardy/kerbalsimpit
+.. _Kerbal Simpit: https://github.com/Simpit-team
 .. _Kerbal Space Program: https://kerbalspaceprogram.com/
 
 .. toctree::
