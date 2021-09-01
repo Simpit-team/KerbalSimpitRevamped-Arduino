@@ -42,6 +42,9 @@ class KerbalSimpit
       This function sends a channel subscription message to the plugin,
       indicating that this device would like to receive messages send
       to a given channel.
+	  This function should only be called with an ID from the
+	  OutboundPackets enum. The IDs from the InboundPackets enum are only
+	  used when sending data to KSP and should not be registered.
       @param channelID The ID of the channel to subscribe to.
   */
   void registerChannel(byte channelID);
