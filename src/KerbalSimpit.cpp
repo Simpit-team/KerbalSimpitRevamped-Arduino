@@ -13,6 +13,12 @@ bool KerbalSimpit::init()
   if (_serial == NULL) {
     return false;
   }
+
+  // First, empty the receiving buffer to avoid looking into it looking for the SYNACK
+  while (_serial->available())
+	_serial->read();
+
+  // Format and send a SYN packet
   _outboundBuffer[0] = 0x00;
   int i;
   for (i=0; i<sizeof(KERBALSIMPIT_VERSION); i++) {
@@ -22,6 +28,7 @@ bool KerbalSimpit::init()
   _receiveState = WaitingFirstByte;
   _send(0x00, _outboundBuffer, i); // Send SYN
 
+  // Wait for an answer. If no answer in 1 sec, return false
   uint8_t count = 0;
   while (!_serial->available()){
     count += 1;
@@ -30,21 +37,25 @@ bool KerbalSimpit::init()
       return false;  
     }
   }
-  if (_serial->read() == 0xAA) { // First byte of header
-    while (!_serial->available());
-    if (_serial->read() == 0x50) { // Second byte of header
-      while (!_serial->available());
-      _serial->read(); // size
-      while (!_serial->available());
-      if (_serial->read() == 0x00) { // type
-        while (!_serial->available());
-        if (_serial->read() == 0x01) { // first byte of payload, we got a SYNACK
-          // TODO: Do we care about tracking handshake state?
-          _outboundBuffer[0] = 0x02;
-          _send(0x00, _outboundBuffer, i); // Send ACK
-          return true;
-        }
-      }
+
+  // Read all the bytes available and look for the SYNACK
+  while(_serial->available()){
+    if (_serial->read() == 0xAA) { // First byte of header
+	  while (!_serial->available()); // Wait for a next byte
+	  if (_serial->read() == 0x50) { // Second byte of header
+	    while (!_serial->available()); // Wait for a next byte
+	    _serial->read(); // size
+	    while (!_serial->available()); // Wait for a next byte
+	    if (_serial->read() == 0x00) { // type
+		  while (!_serial->available()); // Wait for a next byte
+		  if (_serial->read() == 0x01) { // first byte of payload, we got a SYNACK
+		    // TODO: Do we care about tracking handshake state?
+		    _outboundBuffer[0] = 0x02;
+		    _send(0x00, _outboundBuffer, i); // Send ACK
+		    return true;
+		  }
+	    }
+	  }
     }
   }
   return false;
