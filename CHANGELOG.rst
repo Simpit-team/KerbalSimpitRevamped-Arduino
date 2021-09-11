@@ -1,6 +1,13 @@
 Kerbal Simpit Changelog
 =======================
 
+* **2.0.0**: 2021-09-11
+
+  * Improve the init process by purging the whole USB buffer before attemping an handshake (this prevent an issue preventing the handshake to take place in some cases after an Arduino reset)
+  * Add a troubleshooting guide
+  * Add some examples
+  * Add the new messages introduced in SimpitRevamp v2.0
+
 * **1.3.0**: 2020-06-29
 
   * Fix build errors on recent Arduino toolchains.
