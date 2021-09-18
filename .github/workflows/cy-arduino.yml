@@ -1,0 +1,20 @@
+# Workflow to check correctness of simpit Arduino lib
+
+name: CI-Arduino
+
+# Controls when the workflow will run
+on: [push, pull_request]
+
+# Two steps : static check for library and a compilation check for all examples.
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: arduino/arduino-lint-action@v1
+        with:
+          compliance: strict
+          project-type: library
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: 'arduino:avr:uno'
