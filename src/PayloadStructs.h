@@ -273,92 +273,100 @@ struct keyboardEmulatorMessage {
 
 // Message parsing functions
 
+/** Parse a message of type MsgType.
+ *  Use it as 'altitudeMessage myMsg = parseMessage<altitudeMessage>(msg);'
+    @param msg The byte array of the message body.
+    @returns MsgType A formatted MsgType struct.
+*/
+template<typename MsgType>
+MsgType parseMessage(byte msg[]){
+  MsgType* message;
+  message = (MsgType*)msg;
+  return *message;
+}
 
-
-
-/** Parse a message containing status of all the CAG.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing status of all the CAG.
     @param msg The byte array of the message body.
     @returns cagStatusMessage A formatted cagStatusMessage struct.
 */
 cagStatusMessage parseCAGStatusMessage(byte msg[]);
 
-/** Parse a message containing status of the SAS.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing status of the SAS.
     @param msg The byte array of the message body.
     @returns SASInfoMessage A formatted SASInfoMessage struct.
 */
 SASInfoMessage parseSASInfoMessage(byte msg[]);
 
-/** Parse a message containing Altitude data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing Altitude data.
     @param msg The byte array of the message body.
     @returns altitudeMessage A formatted altitudeMessage struct.
 */
 altitudeMessage parseAltitude(byte msg[]);
-/** Parse a message containing Apsides data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing Apsides data.
     @returns apsidesMessage A formatted apsidesMessage struct.
 */
 apsidesMessage parseApsides(byte msg[]);
-/** Parse a message containing orbital information.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing orbital information.
     @returns orbitInfoMessage A formatted orbitInfoMessage struct.
 */
 orbitInfoMessage parseOrbitInfo(byte msg[]);
-/** Parse a message containing Apsides Time data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing Apsides Time data.
     @returns apsidesTimeMessage A formatted apsidesTimeMessage struct.
 */
 apsidesTimeMessage parseApsidesTime(byte msg[]);
 
-/** Parse a message countaining Resource data.
+/** DEPRECATED. Use parseMessage instead. Parse a message countaining Resource data.
     @returns resourceMessage A formatted resourceMessage struct.
 */
 resourceMessage parseResource(byte msg[]);
-/** Parse a message countaining TACLSResourceMessage data.
+/** DEPRECATED. Use parseMessage instead. Parse a message countaining TACLSResourceMessage data.
     @returns TACLSResourceMessage A formatted TACLSResourceMessage struct.
 */
 TACLSResourceMessage parseTACLSResource(byte msg[]);
-/** Parse a message countaining TACLSWasteMessage data.
+/** DEPRECATED. Use parseMessage instead. Parse a message countaining TACLSWasteMessage data.
     @returns TACLSWasteMessage A formatted TACLSWasteMessage struct.
 */
 TACLSWasteMessage parseTACLSWaste(byte msg[]);
-/** Parse a message countaining CustomResourceMessage data.
+/** DEPRECATED. Use parseMessage instead. Parse a message countaining CustomResourceMessage data.
     @returns CustomResourceMessage A formatted CustomResourceMessage struct.
 */
 CustomResourceMessage parseCustomResource(byte msg[]);
-/** Parse a message containing Velocity data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing Velocity data.
     @returns velocityMessage A formatted velocityMessage struct.
 */
 velocityMessage parseVelocity(byte msg[]);
-/** Parse a message containing Target data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing Target data.
     @returns targetMessage A formatted targetMessage struct.
 */
 targetMessage parseTarget(byte msg[]);
-/** Parse a message containing Airspeed data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing Airspeed data.
     @returns airspeedMessage a formatted airspeedMessage struct.
 */
 airspeedMessage parseAirspeed(byte msg[]);
-/** Parse a message containing Maneuver data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing Maneuver data.
     @returns maneuverMessage a formatted maneuverMessage struct.
 */
 maneuverMessage parseManeuver(byte msg[]);
-/** Parse a message containing DeltaV data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing DeltaV data.
     @returns deltaVMessage a formatted deltaVMessage struct.
 */
 deltaVMessage parseDeltaV(byte msg[]);
-/** Parse a message containing DeltaVEnv data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing DeltaVEnv data.
     @returns deltaVEnvMessage a formatted deltaVEnvMessage struct.
 */
 deltaVEnvMessage parseDeltaVEnv(byte msg[]);
-/** Parse a message containing BurnTime data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing BurnTime data.
     @returns burnTimeMessage a formatted burnTimeMessage struct.
 */
 burnTimeMessage parseBurnTime(byte msg[]);
-/** Parse a message containing tempLimitMessage data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing tempLimitMessage data.
     @returns tempLimitMessage a formatted tempLimitMessage struct.
 */
 tempLimitMessage parseTempLimitMessage(byte msg[]);
-/** Parse a message containing flightStatusMessage data.
+/** DEPRECATED. Use parseMessage instead. Parse a message containing flightStatusMessage data.
     @returns flightStatusMessage a formatted flightStatusMessage struct.
 */
 flightStatusMessage parseFlightStatusMessage(byte msg[]);
-
 
 
 #endif
