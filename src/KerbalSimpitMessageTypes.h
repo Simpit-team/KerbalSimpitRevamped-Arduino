@@ -183,9 +183,12 @@ enum OutboundPackets
     /** Scene change packets are sent by the plugin when
      entering or leaving the flight scene. */
     SCENE_CHANGE_MESSAGE = 3,
-    /** Information about the current fligth (warp speed, status, crew, com).
+    /** Information about the current flight (warp speed, status, crew, com).
         Messages on this channel contain a flightStatusMessage. */
-    FLIGHT_STATUS_MESSAGE = 43
+    FLIGHT_STATUS_MESSAGE = 43,
+	/** Information about the current atmospheric conditions.
+        Messages on this channel contain a atmoConditionsMessage. */
+    ATMO_CONDITIONS_MESSAGE = 44
 
 };
 
@@ -413,6 +416,14 @@ enum FligthStatusFlags
     FLIGHT_IS_EVA = 2, /**< True if the current flight is an EVA. */
     FLIGHT_IS_RECOVERABLE = 4, /**< True if the current vesset is recoverable. */
     FLIGHT_IS_ATMO_TW = 8 /**< True if the current Timewarp mode is for atmosphere (i.e. physical timewarp). */
+};
+
+/** Flags used for the atmoConditionsMessage message. */
+enum AtmoConditionsFlags
+{
+    HAS_ATMOSPHERE = 1, /**< True if the current body has an atmosphere. */
+    HAS_OXYGEN = 2, /**< True if the current body has oxygen in its atmosphere. */
+    IS_IN_ATMOSPHERE = 4, /**< True if the current vesset is atmosphere. */
 };
 
 #endif

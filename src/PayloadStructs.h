@@ -70,6 +70,19 @@ struct flightStatusMessage
   inline bool isInAtmoTW(){ return this->flightStatusFlags & FLIGHT_IS_ATMO_TW; }
 } __attribute__((packed));
 
+/** An message containing information about the current atmospheric conditions. */
+struct atmoConditionsMessage
+{
+  byte atmoCharacteristics; /**< Different booleans as defined by AtmoConditionsFlags. You can access them with the helper funtions.*/
+  float airDensity;   /**< Current density in the current atmosphere where the current vessel is. Only defined if in atmosphere.  */
+  float temperature;  /**< Current temperature in the current atmosphere where the current vessel is. Only defined if in atmosphere.  */
+  float pressure;     /**< Current pressure in the current atmosphere where the current vessel is. Only defined if in atmosphere.  */
+
+  inline bool hasAtmosphere(){ return this->atmoCharacteristics & HAS_ATMOSPHERE; }
+  inline bool hasOxygen(){ return this->atmoCharacteristics & HAS_OXYGEN; }
+  inline bool isVesselInAtmosphere(){ return this->atmoCharacteristics & IS_IN_ATMOSPHERE; }
+} __attribute__((packed));
+
 /** A Resource message.
     All resource messages use this struct for sending data. */
 struct resourceMessage {
