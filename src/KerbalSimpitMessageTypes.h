@@ -415,7 +415,9 @@ enum FligthStatusFlags
     FLIGHT_IN_FLIGHT = 1, /**< True if the game is currently in the flight screen. */
     FLIGHT_IS_EVA = 2, /**< True if the current flight is an EVA. */
     FLIGHT_IS_RECOVERABLE = 4, /**< True if the current vesset is recoverable. */
-    FLIGHT_IS_ATMO_TW = 8 /**< True if the current Timewarp mode is for atmosphere (i.e. physical timewarp). */
+    FLIGHT_IS_ATMO_TW = 8, /**< True if the current Timewarp mode is for atmosphere (i.e. physical timewarp). */
+    FLIGHT_CONTROL_LEVEL_0 = 16, /**< 2 bits used to code the Control Level. Use the helper function of flightStatusMessage to parse it. */
+    FLIGHT_CONTROL_LEVEL_1 = 32, /**< 2 bits used to code the Control Level. Use the helper function of flightStatusMessage to parse it. */
 };
 
 /** Flags used for the atmoConditionsMessage message. */
