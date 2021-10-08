@@ -89,6 +89,12 @@ maneuverMessage parseManeuver(byte msg[]) {
   return *maneuver;
 }
 
+vesselPointingMessage parseRotation(byte msg[]) {
+  vesselPointingMessage* rot;
+  rot = (vesselPointingMessage*)msg;
+  return *rot;
+}
+
 deltaVMessage parseDeltaV(byte msg[]) {
   deltaVMessage* deltaV;
   deltaV = (deltaVMessage*)msg;

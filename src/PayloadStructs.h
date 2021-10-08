@@ -151,6 +151,16 @@ struct maneuverMessage {
   float deltaVNextManeuver; /**< Delta to the next planned maneuver. */
   float durationNextManeuver; /**< Duration of the burn for the next planned maneuver. */
   float deltaVTotal; /**< DeltaV of all the planned maneuvers. */
+  float x; /**< X rotation of maneuver node relative to worldspace */
+  float y; /**< Y rotation of maneuver node relative to worldspace */
+  float z; /**< Z rotation of maneuver node relative to worldspace */
+} __attribute__((packed));
+
+/** A vessel rotation information message. */
+struct vesselPointingMessage {
+  float x; /**< X rotation of vessel relative to worldspace */
+  float y; /**< Y rotation of vessel relative to worldspace */
+  float z; /**< Z rotation of vessel relative to worldspace */
 } __attribute__((packed));
 
 /** A deltaV information message. */
@@ -350,6 +360,10 @@ CustomResourceMessage parseCustomResource(byte msg[]);
     @returns velocityMessage A formatted velocityMessage struct.
 */
 velocityMessage parseVelocity(byte msg[]);
+/** Parse a message containing Rotation data.
+    @returns vesselPointingMessage a formatted vesselPointingMessage struct.
+*/
+vesselPointingMessage parseRotation(byte msg[]);
 /** DEPRECATED. Use parseMessage instead. Parse a message containing Target data.
     @returns targetMessage A formatted targetMessage struct.
 */
