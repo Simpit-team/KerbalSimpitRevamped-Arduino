@@ -38,6 +38,13 @@ class KerbalSimpit
   */
   void inboundHandler(void (*messageHandler)(byte messageType,
                                             byte msg[], byte msgSize));
+
+  /** Call to request the computer closes the serial connection to this controller.
+   *  The computer will deregister all channels that this controller is subscribed to before
+   *  closing the connection.
+   */
+  void closeSerialConnection();
+
   /** Subscribe to a channel of messages coming from the plugin.
       This function sends a channel subscription message to the plugin,
       indicating that this device would like to receive messages send

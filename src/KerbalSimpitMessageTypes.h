@@ -200,6 +200,8 @@ enum OutboundPackets
 */
 enum InboundPackets
 {
+    /* Packet ID used to ask the computer to close the serial connection to this controller **/
+    CLOSE_SERIAL = 7,
     /** Register to receive messages on a given channel. */
     REGISTER_MESSAGE = 8,
     /** Deregister, indicate that no further messages
