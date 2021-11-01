@@ -50,7 +50,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
       // Create a new Altitude struct
       altitudeMessage myAltitude;
       // Convert the message we received to an Altitude struct.
-      myAltitude = parseAltitude(msg);
+      myAltitude = parseMessage<altitudeMessage>(msg);
       // Turn the LED on if the vessel is higher than 500 metres
       // above sea level. Otherwise turn it off.
       if (myAltitude.sealevel > 500) {

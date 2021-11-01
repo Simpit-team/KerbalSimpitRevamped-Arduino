@@ -107,7 +107,7 @@ basic callback handler for dealing with altitude information from the plugin::
     case ALTITUDE_MESSAGE:
       if (msgSize == sizeof(altitudeMessage)) {
         altitudeMessage myAltitude;
-        myAltitude = parseAltitude(msg);
+        myAltitude = parseMessage<altitudeMessage>(msg);
         // further processing of altitude data in myAltitude here
       }
       break;
