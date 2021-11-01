@@ -63,6 +63,7 @@ struct flightStatusMessage
   byte crewCapacity; /**< Current vessel crew total capacity */
   byte crewCount; /**< Current vessel crew count */
   byte commNetSignalStrenghPercentage; /**< Current vessel commNet signal strengh (in percentage). 0 when CommNet is not used */
+  byte currentStage; /**< Current stage of the vessel (also the total number of stage remaining). Decreased by one at each staging. Caped at 255 by Simpit.*/
 
   inline bool isInFligth(){ return this->flightStatusFlags & FLIGHT_IN_FLIGHT; }
   inline bool isInEVA(){ return this->flightStatusFlags & FLIGHT_IS_EVA; }
