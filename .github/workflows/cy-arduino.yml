@@ -15,6 +15,7 @@ jobs:
         with:
           compliance: strict
           project-type: library
+          library-manager: update
       - uses: arduino/compile-sketches@v1
         with:
           fqbn: 'arduino:avr:uno'
