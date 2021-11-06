@@ -68,6 +68,11 @@ void KerbalSimpit::inboundHandler(void (*messageHandler)(byte messageType,
   _messageHandler = messageHandler;
 }
 
+void KerbalSimpit::closeSerialConnection()
+{
+  _send(CLOSE_SERIAL, 0, 1);
+}
+
 void KerbalSimpit::registerChannel(byte channelID)
 {
   _send(REGISTER_MESSAGE, &channelID, 1);
