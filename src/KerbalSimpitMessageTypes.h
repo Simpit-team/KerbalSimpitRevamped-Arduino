@@ -28,31 +28,31 @@ enum OutboundPackets
     // |----------------------|
 
     /** Liquid fuel in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work. */
     LF_MESSAGE = 10,
     /** Liquid fuel in the current stage.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     LF_STAGE_MESSAGE = 11,
     /** Oxidizer in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     OX_MESSAGE = 12,
     /** Oxidizer in the current stage.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     OX_STAGE_MESSAGE = 13,
     /** Solid fuel in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     SF_MESSAGE = 14,
     /** Solid fuel in the current stage.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     SF_STAGE_MESSAGE = 15,
     /** Xenon gas in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     XENON_GAS_MESSAGE = 28,
     /** Xenon Gas in the current stage.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     XENON_GAS_STAGE_MESSAGE = 29,
     /** Monoprollent in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     MONO_MESSAGE = 16,
     /** EVA propellant. Only available for Kerbals on EVA.
         Messages on this channel contain a resourceMessage. */
@@ -63,28 +63,28 @@ enum OutboundPackets
     // |------------------|
 
     /** Electic Charge in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     ELECTRIC_MESSAGE = 17,
     /** Ore in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     ORE_MESSAGE = 19,
     /** Ablator in the vessel.
-         Messages on this channel contain a resourceMessage. */
+         Messages on this channel contain a resourceMessage. Need ARP to work.*/
     AB_MESSAGE = 20,
     /** Ablator in the current stage.
-        Messages on this channel contain a resourceMessage. */
+        Messages on this channel contain a resourceMessage. Need ARP to work.*/
     AB_STAGE_MESSAGE = 21,
     /** TAC Life Support ressources.
-        Messages on this channel contain a TACLSRessourceMessage. */
+        Messages on this channel contain a TACLSRessourceMessage. Need ARP and TACLS to work.*/
     TACLS_RESOURCE_MESSAGE = 30,
     /** TAC Life Support waste ressources.
-        Messages on this channel contain a TACLSWasteMessage. */
+        Messages on this channel contain a TACLSWasteMessage. Need ARP and TACLS to work.*/
     TACLS_WASTE_MESSAGE = 31,
 	/** Custom ressources. Specific ressource to use to be set in the configuration file.
-        Messages on this channel contain a CustomResourceMessage. */
+        Messages on this channel contain a CustomResourceMessage. Need ARP and Community Resource Pack to work.*/
     CUSTOM_RESOURCE_1_MESSAGE = 32,
     /** Custom ressources. Specific ressource to use to be set in the configuration file.
-        Messages on this channel contain a CustomResourceMessage. */
+        Messages on this channel contain a CustomResourceMessage. Need ARP and Community Resource Pack to work.*/
     CUSTOM_RESOURCE_2_MESSAGE = 33,
 
     // |--------------------------|
