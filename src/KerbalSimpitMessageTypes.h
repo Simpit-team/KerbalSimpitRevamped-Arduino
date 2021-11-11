@@ -261,6 +261,8 @@ enum InboundPackets
         This only works on Windows, not on iOS or Linux.
      */
     KEYBOARD_EMULATOR = 26,
+	/** Send a message to control the custom axis. */
+    CUSTOM_AXIS_MESSAGE = 27,
 };
 
 /** Action Group Indexes

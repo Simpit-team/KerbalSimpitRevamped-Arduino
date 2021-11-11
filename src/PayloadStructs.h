@@ -234,6 +234,31 @@ struct translationMessage {
   void setXYZ(int16_t x, int16_t y, int16_t z);
 } __attribute__((packed));
 
+/** A vessel custom axis message.
+    This struct contains information about custom axis commands. */
+struct customAxisMessage {
+  int16_t custom1; /**< Value for the custom1 axis. */
+  int16_t custom2; /**< Value for the custom2 axis. */
+  int16_t custom3; /**< Value for the custom3 axis. */
+  int16_t custom4; /**< Value for the custom4 axis. */
+  /** The mask indicates which elements are intentionally set. Unset elements
+      should be ignored. It should be one or more of:
+
+      - 1: Custom1
+      - 2: Custom2
+      - 4: Custom3
+      - 8: Custom4
+  */
+  byte mask;
+
+  customAxisMessage();
+  void setCustom1(int16_t val);
+  void setCustom2(int16_t val);
+  void setCustom3(int16_t val);
+  void setCustom4(int16_t val);
+  void setAllCustom(int16_t custom1, int16_t custom2, int16_t custom3, int16_t custom4);
+} __attribute__((packed));
+
 /** A wheel control message.
     This struct contains information about wheel steering and throttle. */
 struct wheelMessage {

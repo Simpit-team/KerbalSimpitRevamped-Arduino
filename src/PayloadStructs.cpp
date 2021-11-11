@@ -179,6 +179,38 @@ void translationMessage::setXYZ(int16_t x, int16_t y, int16_t z){
   mask = X_TRANS + Y_TRANS + Z_TRANS;
 }
 
+customAxisMessage::customAxisMessage(){
+  this->mask = 0;
+}
+
+void customAxisMessage::setCustom1(int16_t val){
+  this->custom1 = val;
+  mask |= 1;
+}
+
+void customAxisMessage::setCustom2(int16_t val){
+  this->custom2 = val;
+  mask |= 2;
+}
+
+void customAxisMessage::setCustom3(int16_t val){
+  this->custom3 = val;
+  mask |= 4;
+}
+
+void customAxisMessage::setCustom4(int16_t val){
+  this->custom4 = val;
+  mask |= 8;
+}
+
+void customAxisMessage::setAllCustom(int16_t custom1, int16_t custom2, int16_t custom3, int16_t custom4){
+  this->custom1 = custom1;
+  this->custom2 = custom2;
+  this->custom3 = custom3;
+  this->custom4 = custom4;
+  mask = 1 + 2 + 4 + 8;
+}
+
 wheelMessage::wheelMessage(){
   this->mask = 0;
 }
