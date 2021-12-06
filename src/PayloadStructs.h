@@ -71,6 +71,7 @@ struct flightStatusMessage
   inline bool isInAtmoTW(){ return this->flightStatusFlags & FLIGHT_IS_ATMO_TW; }
   /** Returns the current control level. 0 for no control, 1 for partially unmanned, 2 for partially manned, 3 for full control. */
   inline byte getControlLevel() { return (this->flightStatusFlags >> 4) & 3; }
+  inline bool hasTarget(){ return this->flightStatusFlags & FLIGHT_HAS_TARGET; }
 } __attribute__((packed));
 
 /** An message containing information about the current atmospheric conditions. */

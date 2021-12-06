@@ -425,6 +425,7 @@ enum FligthStatusFlags
     FLIGHT_IS_ATMO_TW = 8, /**< True if the current Timewarp mode is for atmosphere (i.e. physical timewarp). */
     FLIGHT_CONTROL_LEVEL_0 = 16, /**< 2 bits used to code the Control Level. Use the helper function of flightStatusMessage to parse it. */
     FLIGHT_CONTROL_LEVEL_1 = 32, /**< 2 bits used to code the Control Level. Use the helper function of flightStatusMessage to parse it. */
+    FLIGHT_HAS_TARGET = 64, /**< True if a target is set currently. */
 };
 
 /** Flags used for the atmoConditionsMessage message. */
