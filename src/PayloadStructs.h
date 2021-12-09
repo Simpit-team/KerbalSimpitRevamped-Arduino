@@ -64,6 +64,7 @@ struct flightStatusMessage
   byte crewCount; /**< Current vessel crew count */
   byte commNetSignalStrenghPercentage; /**< Current vessel commNet signal strengh (in percentage). 0 when CommNet is not used */
   byte currentStage; /**< Current stage of the vessel (also the total number of stage remaining). Decreased by one at each staging. Caped at 255 by Simpit.*/
+  byte vesselType; /**< Current type of the vessel (e.g. 0 for debris, 5 for rover, 3 for probe, 7 for ship, etc.) as indicated in https://www.kerbalspaceprogram.com/api/_vessel_8cs.html#afa39c7ec7cc0926b332fcd2d77425edb*/
 
   inline bool isInFlight(){ return this->flightStatusFlags & FLIGHT_IN_FLIGHT; }
   inline bool isInEVA(){ return this->flightStatusFlags & FLIGHT_IS_EVA; }
