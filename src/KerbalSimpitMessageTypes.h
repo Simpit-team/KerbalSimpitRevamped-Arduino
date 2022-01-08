@@ -226,7 +226,9 @@ enum InboundPackets
     AGDEACTIVATE_MESSAGE = 14,
     /** Toggle the given standard Action Group(s). */
     AGTOGGLE_MESSAGE = 15,
-    /** Send vessel rotation commands. */
+    /** Send vessel rotation commands.
+	    If set and not 0, those command will supersede SAS command. The SAS will appear not the work when the jostick is in use.
+	    If this is the case for you, make sure you are sending 0 command to KSP on all used axis.*/
     ROTATION_MESSAGE = 16,
     /** Send vessel translation commands. */
     TRANSLATION_MESSAGE = 17,
