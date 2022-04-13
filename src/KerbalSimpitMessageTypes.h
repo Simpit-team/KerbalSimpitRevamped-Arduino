@@ -191,7 +191,11 @@ enum OutboundPackets
     FLIGHT_STATUS_MESSAGE = 43,
 	/** Information about the current atmospheric conditions.
         Messages on this channel contain a atmoConditionsMessage. */
-    ATMO_CONDITIONS_MESSAGE = 44
+    ATMO_CONDITIONS_MESSAGE = 44,
+	/** Current name of the vessel.
+        Messages on this channel contain a table of size 32 max (name is truncated)
+        and only ascii characters are used. */
+    VESSEL_NAME_MESSAGE = 46
 
 };
 
