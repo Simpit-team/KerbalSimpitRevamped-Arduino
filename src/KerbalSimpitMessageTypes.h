@@ -269,6 +269,8 @@ enum InboundPackets
     KEYBOARD_EMULATOR = 26,
 	/** Send a message to control the custom axis. */
     CUSTOM_AXIS_MESSAGE = 27,
+    /** Send a message to cycle the NavBall mode to the next mode. */
+    NAVBALLMODE_MESSAGE = 28,
 };
 
 /** Action Group Indexes

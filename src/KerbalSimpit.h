@@ -133,6 +133,8 @@ class KerbalSimpit
 
   void setCameraMode(byte mode);
 
+  void cycleNavBallMode();
+
   void printToKSP(String msg);
   void printToKSP(String msg, byte options);
 
