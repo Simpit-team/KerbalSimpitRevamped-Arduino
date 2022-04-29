@@ -117,8 +117,9 @@ enum OutboundPackets
         Messages on this channel contain an orbitInfoMessage. */
     ORBIT_MESSAGE = 36,
     /** Data about the vessel's rotation (including velocities). This is an output, not be confused with rotationMessage, an input from joysticks.
-        Messages on this channel contain an vesselPointingMessage. */
-    ROTATION_DATA = 45,
+        Messages on this channel contain an vesselPointingMessage.  
+        This value was renamed in v2.2 from ROTATION_DATA. */
+    ROTATION_DATA_MESSAGE = 45,
 
     // |----------------|
     // | Vessel Details |
