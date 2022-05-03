@@ -45,5 +45,6 @@ void KerbalSimpit::setCameraMode(byte mode)
 
 void KerbalSimpit::cycleNavBallMode()
 {
-  _send(NAVBALLMODE_MESSAGE, 1, 1);
+  byte payload = 0;
+  _send(NAVBALLMODE_MESSAGE, &payload, 1);
 }
