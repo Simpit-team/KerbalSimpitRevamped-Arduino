@@ -6,6 +6,7 @@
 KerbalSimpit::KerbalSimpit(Stream &serial)
 {
   _serial = &serial;
+  packetDroppedNbr = 0;
 }
 
 bool KerbalSimpit::init()
@@ -25,7 +26,6 @@ bool KerbalSimpit::init()
     _outboundBuffer[i+1] = KERBALSIMPIT_VERSION[i];
   }
   i = i + 1;
-  _receiveState = WaitingFirstByte;
   _send(0x00, _outboundBuffer, i); // Send SYN
 
   // Wait for an answer. If no answer in 1 sec, return false
@@ -38,26 +38,28 @@ bool KerbalSimpit::init()
     }
   }
 
-  // Read all the bytes available and look for the SYNACK
+  _receivedIndex = 0;
   while(_serial->available()){
-    if (_serial->read() == 0xAA) { // First byte of header
-	  while (!_serial->available()); // Wait for a next byte
-	  if (_serial->read() == 0x50) { // Second byte of header
-	    while (!_serial->available()); // Wait for a next byte
-	    _serial->read(); // size
-	    while (!_serial->available()); // Wait for a next byte
-	    if (_serial->read() == 0x00) { // type
-		  while (!_serial->available()); // Wait for a next byte
-		  if (_serial->read() == 0x01) { // first byte of payload, we got a SYNACK
-		    // TODO: Do we care about tracking handshake state?
-		    _outboundBuffer[0] = 0x02;
-		    _send(0x00, _outboundBuffer, i); // Send ACK
-		    return true;
-		  }
-	    }
-	  }
+    _inboundBuffer[_receivedIndex] = _serial->read();
+    if(!_inboundBuffer[_receivedIndex]){
+      cobsDecode(_inboundBuffer, _receivedIndex + 1, _inboundDecodedBuffer);
+      _receivedIndex = 0;
+      
+      // Test is the message received is a SYNACK
+      if(_inboundDecodedBuffer[0] == SYNC_MESSAGE && _inboundDecodedBuffer[1] == 0x01){
+        _outboundBuffer[0] = 0x02;
+        _send(0x00, _outboundBuffer, i); // Send ACK
+
+        // Log the serial buffer size
+        printToKSP("Buffer receive size : " + String(SERIAL_RX_BUFFER_SIZE));
+        return true;
+      } else {
+        return false;
+      }
     }
+    _receivedIndex ++;
   }
+
   return false;
 }
 
@@ -109,59 +111,93 @@ void KerbalSimpit::printToKSP(String msg, byte options){
 
 void KerbalSimpit::_send(byte messageType, byte msg[], byte msgSize)
 {
-  _serial->write(0xAA);
-  _serial->write(0x50);
-  _serial->write(msgSize);
-  _serial->write(messageType);
-  for (int x=0; x<msgSize; x++) {
-    _serial->write(*(msg+x));
+  _msgBuffer[0] = messageType;
+  byte checksum = messageType;
+  for(byte i = 0; i < msgSize; i++){
+    _msgBuffer[i+1] = msg[i];
+    checksum ^= msg[i];
   }
+  _msgBuffer[msgSize+1] = checksum;
+
+  byte encodedMsgSize = cobsEncode(_msgBuffer, msgSize + 2, _encodedBuffer);
+  for (byte x=0; x<encodedMsgSize; x++) {
+    _serial->write(_encodedBuffer[x]);
+  }
+  _serial->write((byte) 0); // Encoded buffer does not have the null terminating byte.
 }
 
 void KerbalSimpit::update()
 {
-  while (_serial->available()) {
-    _readBuffer = _serial->read();
-    switch (_receiveState) {
-    case WaitingFirstByte:
-      if (_readBuffer == 0xAA) {
-        _receiveState = WaitingSecondByte;
+  while(_serial->available()){
+    _inboundBuffer[_receivedIndex] = _serial->read();
+    _receivedIndex ++;
+    
+    if(!_inboundBuffer[_receivedIndex - 1]){
+      byte decodedSize = cobsDecode(_inboundBuffer, _receivedIndex + 1, _inboundDecodedBuffer);
+      
+      // Account for the overhead of 1 byte of COBS
+      if(decodedSize != _receivedIndex - 1){
+        // Ill-formed packet
+        packetDroppedNbr ++;
       } else {
-        _receiveState = WaitingFirstByte;
-      }
-      break;
-    case WaitingSecondByte:
-      if (_readBuffer == 0x50) {
-        _receiveState = WaitingSize;
-      } else {
-        _receiveState = WaitingFirstByte;
-      }
-      break;
-    case WaitingSize:
-      if (_readBuffer > MAX_PAYLOAD_SIZE) {
-	_receiveState = WaitingFirstByte;
-      } else {
-	_inboundSize = _readBuffer;
-	_receiveState = WaitingType;
-      }
-      break;
-    case WaitingType:
-      _inboundType = _readBuffer;
-      _receivedIndex = 0;
-      _receiveState = WaitingData;
-      break;
-    case WaitingData:
-       _inboundBuffer[_receivedIndex] = _readBuffer;
-       _receivedIndex++;
-       if (_receivedIndex == _inboundSize) {
-         _receiveState = WaitingFirstByte;
-	 if (_messageHandler != NULL) {
-          _messageHandler(_inboundType, _inboundBuffer, _inboundSize);
+        // Check checksum
+        byte checksum = 0;
+        for(byte x = 0; x < decodedSize - 2; x++){
+          checksum ^= _inboundDecodedBuffer[x];
         }
-       }
-       break;
-    default:
-      _receiveState = WaitingFirstByte;
+        if(checksum != _inboundDecodedBuffer[decodedSize-2]){
+          // Discard message, bad checksum
+          packetDroppedNbr ++;
+        } else {
+          _messageHandler(_inboundDecodedBuffer[0], _inboundDecodedBuffer + 1, decodedSize - 3);
+        }
+      }
+      _receivedIndex = 0;
     }
   }
+}
+
+size_t KerbalSimpit::cobsEncode(const void *data, size_t length, uint8_t *buffer)
+{
+  uint8_t *encode = buffer; // Encoded byte pointer
+  uint8_t *codep = encode++; // Output code pointer
+  uint8_t code = 1; // Code value
+
+  for (const uint8_t *byte = (const uint8_t *)data; length--; ++byte)
+  {
+    if (*byte) // Byte not zero, write it
+      *encode++ = *byte, ++code;
+
+    if (!*byte || code == 0xff) // Input is zero or block completed, restart
+    {
+      *codep = code, code = 1, codep = encode;
+      if (!*byte || length)
+        ++encode;
+    }
+  }
+  *codep = code; // Write final code value
+
+  return (size_t)(encode - buffer);
+}
+
+size_t KerbalSimpit::cobsDecode(const uint8_t *buffer, size_t length, void *data)
+{
+  const uint8_t *byte = buffer; // Encoded input byte pointer
+  uint8_t *decode = (uint8_t *)data; // Decoded output byte pointer
+
+  for (uint8_t code = 0xff, block = 0; byte < buffer + length; --block)
+  {
+    if (block) // Decode block byte
+      *decode++ = *byte++;
+    else
+    {
+      if (code != 0xff) // Encoded zero, write it
+        *decode++ = 0;
+      block = code = *byte++; // Next block length
+      if (!code) // Delimiter code found
+        break;
+    }
+  }
+
+  return (size_t)(decode - (uint8_t *)data);
 }
