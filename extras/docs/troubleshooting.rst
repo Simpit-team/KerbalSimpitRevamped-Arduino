@@ -81,6 +81,17 @@ Here is an example.
 	System.Threading.ThreadHelper.ThreadStart () (at <ad04dee02e7e4a85a1299c7ee81c79f6>:0)
 	UnityEngine.UnhandledExceptionHandler:<RegisterUECatcher>m__0(Object, UnhandledExceptionEventArgs)
 
+When I add more functionalities to my controller, it starts to behave strangely (messages lost, corrupted, etc.)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is probable that the Arduino serial buffer size is too small given the time between each call to ``simpit.update`` and the number of messages sent. You can test this by displaying ``mySimpit.packetDroppedNbr``. If it is non-zero, it means that some messages were corruped.
+
+To fix it, you have several solutions :
+ * Increase the serial buffer size in ``HardwareSerial.h``. To find the right file to modify, see here : https://forum.arduino.cc/t/solved-serial-buffer-size/581828/10. There should be a log line in KSP.log indicating the buffer size when an Arduino connect. The default is 64 bytes and the recommandation is at least 256.
+ * Reduce the number of channels you subscribe to
+ * Call ``simpit.update`` more frequently. For instance if you have a controller with several parts, you can call ``simpit.update`` between each part update instead of updating all the parts and only then call ``simpit.update``.
+
+To test that this is not the root cause of your issue, you can use the KerbalSimpitStressTest example. Subscribe to all the channels you want to use, and test several values of delay to see if some messages are lost. Then try on you controller to measure what is the delay between two calls to ``simpit.update`` and compare the two values.
 
 
 
