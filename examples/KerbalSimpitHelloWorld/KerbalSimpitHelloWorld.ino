@@ -69,7 +69,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
     // The message payload will be either "low" or "high".
     // We use the strcmp function to check what the string payload
     // is, and set the LED status accordingly.
-    if (strcmp(msg, "low")) {
+    if (strcmp((char*) msg, "low")) {
       digitalWrite(LED_BUILTIN, LOW);
     } else {
       digitalWrite(LED_BUILTIN, HIGH);
