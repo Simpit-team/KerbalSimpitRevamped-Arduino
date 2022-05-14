@@ -99,7 +99,8 @@ enum OutboundPackets
     VELOCITY_MESSAGE = 22,
     /** Information about airspeed.
         This channel delivers messages containing indicated airspeed and
-        mach number for the active vessel. */
+        mach number for the active vessel.
+        Messages on this channel contain a airspeedMessage. */
     AIRSPEED_MESSAGE = 27,
     /** Apoapsis and periapsis.
         Messages on this channel contain an apsidesMessage. */
