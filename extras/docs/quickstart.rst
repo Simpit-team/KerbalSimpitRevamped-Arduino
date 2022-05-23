@@ -123,4 +123,4 @@ Going further
 The examples_ directory of the library contains several example sketches
 that demonstrate the different functionality of the library.
 
-.. _examples: https://bitbucket.org/pjhardy/kerbalsimpit-arduino/src/master/examples/
+.. _examples: https://bitbucket.org/pjhardy/kerbalsimpit-arduino/src/main/examples/
