@@ -122,6 +122,31 @@ enum OutboundPackets
         This value was renamed in v2.2 from ROTATION_DATA. */
     ROTATION_DATA_MESSAGE = 45,
 
+
+    // |-----------------|
+    // | Vessel Commands |
+    // |-----------------|
+
+    /** Rotation command after applying Simpit command.
+     *  If not Simpit command is applied, this can be set by the SAS for instance.
+     *  Messages on this channel contain an rotationMessage, with the mask field unused.
+     */
+    ROTATION_CMD_MESSAGE = 47,
+    /** Translation command after applying Simpit command.
+     *  Messages on this channel contain an translationMessage, with the mask field unused.
+     */
+    TRANSLATION_CMD_MESSAGE = 48,
+    /** Wheel command after applying Simpit command.
+     *  Messages on this channel contain an wheelMessage, with the mask field unused.
+     */
+    WHEEL_CMD_MESSAGE = 49,
+    /** Throttle command after applying Simpit command.
+     *  This can be used for instance to control a motorized throttle.
+     *  Messages on this channel contain an throttleMessage (i.e. a single 16-bit integer).
+     */
+    THROTTLE_CMD_MESSAGE = 50,
+
+
     // |----------------|
     // | Vessel Details |
     // |----------------|
