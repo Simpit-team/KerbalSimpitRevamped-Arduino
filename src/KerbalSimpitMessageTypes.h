@@ -238,6 +238,10 @@ enum InboundPackets
     /** Deregister, indicate that no further messages
       for the given channel should be sent. */
     DEREGISTER_MESSAGE = 9,
+    /** Request a new message to be sent on this channel (used for channel that only send message on request).
+     *  If requested on the channel 0, it will trigger a new message on all subscribed channels. 
+     *  May not work on all channels. */
+    REQUEST_MESSAGE = 29,
     // Custom action packets activate and deactivate custom action groups
     /** Activate the given Custom Action Group(s). */
     CAGACTIVATE_MESSAGE = 10,

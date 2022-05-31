@@ -85,6 +85,10 @@ void KerbalSimpit::deregisterChannel(byte channelID)
   _send(DEREGISTER_MESSAGE, &channelID, 1);
 }
 
+void KerbalSimpit::requestMessageOnChannel(byte channelID){
+  _send(REQUEST_MESSAGE, &channelID, 1);
+}
+
 void KerbalSimpit::printToKSP(String msg){
 	printToKSP(msg, 0);
 }

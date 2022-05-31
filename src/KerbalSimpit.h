@@ -139,6 +139,14 @@ class KerbalSimpit
   void printToKSP(String msg, byte options);
 
   /**
+   * Ask Simpit to resend a message on the given channel (useful for channels that only send on change).
+   * When subscribing on a channel, a message is automatically sent so there is no need to call this during init.
+   * May not work on all channels.
+   * @param channelID The channel ID to request from (taken from the OutboundPackets enum). Use 0 as a special value for all channels
+   */
+  void requestMessageOnChannel(byte channelID);
+
+  /**
    * Number of message dropped due to corrupted packet (missing data or bad checksum).
    * This may not be accurate in all cases, some packets can be lost without being noticed here in case of extreme congestion.
    */
