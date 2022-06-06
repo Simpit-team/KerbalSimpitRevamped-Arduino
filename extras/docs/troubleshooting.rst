@@ -94,4 +94,21 @@ To fix it, you have several solutions :
 To test that this is not the root cause of your issue, you can use the KerbalSimpitStressTest example. Subscribe to all the channels you want to use, and test several values of delay to see if some messages are lost. Then try on you controller to measure what is the delay between two calls to ``simpit.update`` and compare the two values.
 
 
+I have some issues with custom action groups (CAG) when using Action Group Extended (AGExt)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+There is some know issues when using AGExt.
+
+For stock CAG (below 10), AGExt seems to disregard activating empty CAG. This means that the controller cannot activate any CAG between 1-10 even when the those CAGs can be activated via keyboard since the game allow to activate empty CAG.
+
+There is also an issue that in some cases the toggling of a CAG is not working when the CAG content was not set at launch but is modified during flight.
+The root cause might be the content of the stock CAG not being the same as the AGExt CAG with the same number.
+Simpit is only using the AGExt CAG, not the stock one, when AGExt is installed.
+In this case, you should check (and modify) CAG content using AGExt GUI only, not the stock one, to avoid this issue.
+
+For non-stock CAG (11 and above), there seem to be an issue with empty CAGs.
+AGExt allow to activate empty CAG, and the value of the CAG seems to be shared between several vessels (behavior not consistent with stock CAG).
+Meaning that if craft A and B have an empty CAG 11, it can be toggled on any craft and when switching craft, the value is kept instead of being tied to the vessel.
+If the CAG is populated on both craft, switching from one to the other works as expected.
+
+There is no known workaround currently, the issue seems to be in the way AGExt handle those edgecases. AGExt should not be installed when not needed.
