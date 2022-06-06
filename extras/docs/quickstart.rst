@@ -124,3 +124,10 @@ The examples_ directory of the library contains several example sketches
 that demonstrate the different functionality of the library.
 
 .. _examples: https://bitbucket.org/pjhardy/kerbalsimpit-arduino/src/master/examples/
+
+When you first install Simpit, you have to modify the *Settings.cfg* file that is found in the *GameData\KerbalSimpit* folder.
+You can copy the provided ``Settings.cfg.sample`` as a baseline, and you must at least define the port name to use. More information in :any:`troubleshooting`.
+
+Simpit allow several controllers to be used at the same time. For this, you can define several *SerialPort* blocks in the *Settings.cfg* file. All controllers are managed independantely.
+
+Simpit also allow to open/close a port while the game is running. This allow to reprogram the Arduino while KSP is running (you have to close the port, upload the program, open the port again).
