@@ -99,7 +99,8 @@ enum OutboundPackets
     VELOCITY_MESSAGE = 22,
     /** Information about airspeed.
         This channel delivers messages containing indicated airspeed and
-        mach number for the active vessel. */
+        mach number for the active vessel.
+        Messages on this channel contain a airspeedMessage. */
     AIRSPEED_MESSAGE = 27,
     /** Apoapsis and periapsis.
         Messages on this channel contain an apsidesMessage. */
@@ -117,8 +118,34 @@ enum OutboundPackets
         Messages on this channel contain an orbitInfoMessage. */
     ORBIT_MESSAGE = 36,
     /** Data about the vessel's rotation (including velocities). This is an output, not be confused with rotationMessage, an input from joysticks.
-        Messages on this channel contain an vesselPointingMessage. */
-    ROTATION_DATA = 45,
+        Messages on this channel contain an vesselPointingMessage.  
+        This value was renamed in v2.2 from ROTATION_DATA. */
+    ROTATION_DATA_MESSAGE = 45,
+
+
+    // |-----------------|
+    // | Vessel Commands |
+    // |-----------------|
+
+    /** Rotation command after applying Simpit command.
+     *  If not Simpit command is applied, this can be set by the SAS for instance.
+     *  Messages on this channel contain an rotationMessage, with the mask field unused.
+     */
+    ROTATION_CMD_MESSAGE = 47,
+    /** Translation command after applying Simpit command.
+     *  Messages on this channel contain an translationMessage, with the mask field unused.
+     */
+    TRANSLATION_CMD_MESSAGE = 48,
+    /** Wheel command after applying Simpit command.
+     *  Messages on this channel contain an wheelMessage, with the mask field unused.
+     */
+    WHEEL_CMD_MESSAGE = 49,
+    /** Throttle command after applying Simpit command.
+     *  This can be used for instance to control a motorized throttle.
+     *  Messages on this channel contain an throttleMessage (i.e. a single 16-bit integer).
+     */
+    THROTTLE_CMD_MESSAGE = 50,
+
 
     // |----------------|
     // | Vessel Details |
@@ -191,7 +218,11 @@ enum OutboundPackets
     FLIGHT_STATUS_MESSAGE = 43,
 	/** Information about the current atmospheric conditions.
         Messages on this channel contain a atmoConditionsMessage. */
-    ATMO_CONDITIONS_MESSAGE = 44
+    ATMO_CONDITIONS_MESSAGE = 44,
+	/** Current name of the vessel.
+        Messages on this channel contain a table of size 32 max (name is truncated)
+        and only ascii characters are used. */
+    VESSEL_NAME_MESSAGE = 46
 
 };
 
@@ -207,6 +238,10 @@ enum InboundPackets
     /** Deregister, indicate that no further messages
       for the given channel should be sent. */
     DEREGISTER_MESSAGE = 9,
+    /** Request a new message to be sent on this channel (used for channel that only send message on request).
+     *  If requested on the channel 0, it will trigger a new message on all subscribed channels. 
+     *  May not work on all channels. */
+    REQUEST_MESSAGE = 29,
     // Custom action packets activate and deactivate custom action groups
     /** Activate the given Custom Action Group(s). */
     CAGACTIVATE_MESSAGE = 10,
@@ -226,7 +261,9 @@ enum InboundPackets
     AGDEACTIVATE_MESSAGE = 14,
     /** Toggle the given standard Action Group(s). */
     AGTOGGLE_MESSAGE = 15,
-    /** Send vessel rotation commands. */
+    /** Send vessel rotation commands.
+	    If set and not 0, those command will supersede SAS command. The SAS will appear not the work when the jostick is in use.
+	    If this is the case for you, make sure you are sending 0 command to KSP on all used axis.*/
     ROTATION_MESSAGE = 16,
     /** Send vessel translation commands. */
     TRANSLATION_MESSAGE = 17,
@@ -263,6 +300,8 @@ enum InboundPackets
     KEYBOARD_EMULATOR = 26,
 	/** Send a message to control the custom axis. */
     CUSTOM_AXIS_MESSAGE = 27,
+    /** Send a message to cycle the NavBall mode to the next mode. */
+    NAVBALLMODE_MESSAGE = 28,
 };
 
 /** Action Group Indexes

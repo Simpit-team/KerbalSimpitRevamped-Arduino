@@ -133,17 +133,17 @@ rotationMessage::rotationMessage(){
 
 void rotationMessage::setPitch(int16_t pitch){
   this->pitch = pitch;
-  mask += PITCH_ROT;
+  mask |= PITCH_ROT;
 }
 
 void rotationMessage::setRoll(int16_t roll){
   this->roll = roll;
-  mask += ROLL_ROT;
+  mask |= ROLL_ROT;
 }
 
 void rotationMessage::setYaw(int16_t yaw){
   this->yaw = yaw;
-  mask += YAW_ROT;
+  mask |= YAW_ROT;
 }
 
 void rotationMessage::setPitchRollYaw(int16_t pitch, int16_t roll, int16_t yaw){

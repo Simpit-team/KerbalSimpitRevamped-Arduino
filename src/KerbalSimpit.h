@@ -10,7 +10,7 @@
 #include "PayloadStructs.h"
 
 const char KERBALSIMPIT_VERSION[] = "1.3.0"; /**< Library version sent to the plugin for compatibility checking. */
-const byte MAX_PAYLOAD_SIZE = 32; /**< Maximum payload size does not include header. */
+const byte MAX_PAYLOAD_SIZE = 32; /**< Maximum payload size does not include header. Header is 4 chars. */
 
 /** The KerbalSimpit class manages a serial connection to KSP.
     It automates the handshaking process, and provides utility
@@ -133,27 +133,33 @@ class KerbalSimpit
 
   void setCameraMode(byte mode);
 
+  void cycleNavBallMode();
+
   void printToKSP(String msg);
   void printToKSP(String msg, byte options);
 
+  /**
+   * Ask Simpit to resend a message on the given channel (useful for channels that only send on change).
+   * When subscribing on a channel, a message is automatically sent so there is no need to call this during init.
+   * May not work on all channels.
+   * @param channelID The channel ID to request from (taken from the OutboundPackets enum). Use 0 as a special value for all channels
+   */
+  void requestMessageOnChannel(byte channelID);
+
+  /**
+   * Number of message dropped due to corrupted packet (missing data or bad checksum).
+   * This may not be accurate in all cases, some packets can be lost without being noticed here in case of extreme congestion.
+   */
+  unsigned int packetDroppedNbr;
+
  private:
-  byte _readBuffer;
-  byte _inboundType;
-  byte _inboundSize;
-  byte _inboundBuffer[MAX_PAYLOAD_SIZE];
-  byte _outboundBuffer[MAX_PAYLOAD_SIZE];
-  byte _outboundSize;
+  byte _inboundBuffer[MAX_PAYLOAD_SIZE + 4]; // used to store incoming data
+  byte _inboundDecodedBuffer[MAX_PAYLOAD_SIZE + 4]; // used to store decoded incoming data.
+  byte _outboundBuffer[MAX_PAYLOAD_SIZE]; // used to store the outbound message for initital handshake
+  byte _msgBuffer[MAX_PAYLOAD_SIZE + 2]; // used to build the message before sending it (adding type, checksum)
+  byte _encodedBuffer[MAX_PAYLOAD_SIZE + 4]; // used to encode message before sending it
   Stream *_serial;
 
-  enum ReceiveState_t
-  {
-    WaitingFirstByte,
-    WaitingSecondByte,
-    WaitingSize,
-    WaitingType,
-    WaitingData,
-  };
-  ReceiveState_t _receiveState;
   byte _receivedIndex;
 
   /** Callback function to handle messages from the plugin.
@@ -174,6 +180,25 @@ class KerbalSimpit
       @param msgSize The size of msg.
   */
   void _send(byte messageType, byte msg[], byte msgSize);
+
+  /** COBS decode data from buffer. Taken from Wikipedia : https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing
+    @param buffer Pointer to encoded input bytes
+    @param length Number of bytes to decode
+    @param data Pointer to decoded output data
+    @return Number of bytes successfully decoded
+    @note Stops decoding if delimiter byte is found
+  */
+  size_t cobsDecode(const uint8_t *buffer, size_t length, void *data);
+
+  /** COBS encode data to buffer. Taken from Wikipedia : https://en.wikipedia.org/wiki/Consistent_Overhead_Byte_Stuffing
+    @param data Pointer to input data to encode
+    @param length Number of bytes to encode
+    @param buffer Pointer to encoded output buffer
+    @return Encoded buffer length in bytes
+    @note Does not output delimiter byte
+  */
+  size_t cobsEncode(const void *data, size_t length, uint8_t *buffer);
 };
+
 
 #endif

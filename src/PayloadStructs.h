@@ -150,6 +150,7 @@ struct targetMessage {
 struct airspeedMessage {
   float IAS; /**< Indicated airspeed. */
   float mach; /**< Mach number. */
+  float gForces; /**< G forces. */
 } __attribute__((packed));
 
 /** A maneuver information message. */
