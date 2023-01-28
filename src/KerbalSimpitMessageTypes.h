@@ -222,7 +222,13 @@ enum OutboundPackets
 	/** Current name of the vessel.
         Messages on this channel contain a table of size 32 max (name is truncated)
         and only ascii characters are used. */
-    VESSEL_NAME_MESSAGE = 46
+    VESSEL_NAME_MESSAGE = 46,
+	/** Vessel Change packets are sent when the current vessel change
+        Messages on this channel contain a single byte indicating the origin of the change :
+		  1 for vessel switching
+		  2 for docking
+		  3 for undocking. */
+    VESSEL_CHANGE_MESSAGE = 51
 
 };
 
