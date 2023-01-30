@@ -51,7 +51,11 @@ bool KerbalSimpit::init()
         _send(0x00, _outboundBuffer, i); // Send ACK
 
         // Log the serial buffer size
-        printToKSP("Buffer receive size : " + String(SERIAL_RX_BUFFER_SIZE));
+        #ifdef SERIAL_RX_BUFFER_SIZE
+          printToKSP("Buffer receive size : " + String(SERIAL_RX_BUFFER_SIZE));
+        #else
+          printToKSP("Buffer receive size not found");
+        #endif
         return true;
       } else {
         return false;
