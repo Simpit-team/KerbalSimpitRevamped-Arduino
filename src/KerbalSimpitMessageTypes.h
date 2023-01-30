@@ -302,6 +302,9 @@ enum InboundPackets
           - 0x74 for 'F5' to quicksave
         The modifier is used to emulate key press while holding keys such as CTRL, SHIFT, etc
         This only works on Windows, not on iOS or Linux.
+
+        Another alternative is to use the keyboard.h library. This only works on some Arduino board
+        (based on ATmega32U4 such as the Due or Leonardo). See the KerbalSimpitTranslationForShipAndEVADemo example for instance.
      */
     KEYBOARD_EMULATOR = 26,
 	/** Send a message to control the custom axis. */
