@@ -1,0 +1,28 @@
+# Workflow to check correctness of Simpit Arduino lib by compiling all examples
+
+name: CI-Arduino
+
+# Controls when the workflow will run
+on: [push, pull_request]
+
+# Two steps : static check for library and a compilation check for all examples. Example are split between Uno and Due examples.
+# Some example needs a Due for using the keyboard library
+jobs:
+  lint-and-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: arduino/arduino-lint-action@v1
+        with:
+          compliance: strict
+          project-type: library
+          library-manager: update
+      - uses: ArminJo/arduino-test-compile@v3
+        with:
+          arduino-board-fqbn: 'arduino:avr:uno'
+          sketches-exclude: KerbalSimpitTranslationForShipAndEVADemo
+      - uses: ArminJo/arduino-test-compile@v3
+        with:
+          arduino-board-fqbn: 'arduino:sam:arduino_due_x'
+          required-libraries: Keyboard
+          sketch-names: KerbalSimpitTranslationForShipAndEVADemo.ino
