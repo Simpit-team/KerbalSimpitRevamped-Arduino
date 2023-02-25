@@ -368,12 +368,18 @@ enum Timewarp
     TIMEWARP_DOWN = 13,
     /** Warp to the next maneuver. */
     TIMEWARP_NEXT_MANEUVER = 14,
+    /** Warp 30s before the begining of the burn of the next maneuver. */
+    TIMEWARP_BEFORE_NEXT_MANEUVER = 19,
     /** Warp to the next SOI change. */
     TIMEWARP_NEXT_SOI = 15,
     /** Warp to the apoapsis. */
     TIMEWARP_APOAPSIS = 16,
+    /** Warp 30s before the apoapsis. */
+    TIMEWARP_BEFORE_APOAPSIS = 20,
     /** Warp to the periapsis. */
     TIMEWARP_PERIAPSIS = 17,
+    /** Warp 30s before the periapsis. */
+    TIMEWARP_BEFORE_PERIAPSIS = 21,
     /** Warp to the next morning. */
     TIMEWARP_NEXT_MORNING = 18,
     /** Cancel the current auto-timewarp and reset it to x1. */
