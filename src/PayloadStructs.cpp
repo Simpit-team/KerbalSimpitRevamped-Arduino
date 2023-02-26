@@ -269,3 +269,8 @@ keyboardEmulatorMessage::keyboardEmulatorMessage(int16_t keyCode, byte modifier)
   this->keyCode = keyCode;
   this->modifier = modifier;
 }
+
+timewarpToMessage::timewarpToMessage(byte instant, float delay){
+	this->instant = instant;
+	this->delay = delay;
+}

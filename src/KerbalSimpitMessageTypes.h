@@ -284,10 +284,15 @@ enum InboundPackets
     CAMERA_CONTROL_MODE = 21,
     CAMERA_ROTATION_MESSAGE = 22,
 
-    /** Send a time warp commands.
+    /** Send a timewarp commands. This is to change the game speed.
        The payload should be a single byte, possible commands are listed
        in the Timewarp enum. */
     TIMEWARP_MESSAGE = 24,
+	/** Send a timewarp TO commands. This is to timewarp to a given time.
+	   The message (see timewarpToMessage struct) contains a single byte for the specific point to aim (periapsis, maneuver node, etc.)
+	   and a delay in seconds with respect to this point.
+	   This allow to timewarp 1h before the next morning, 30s before periapsis or 1 min before the start of the burn of the next maneuver.*/
+    TIMEWARP_TO_MESSAGE = 29,
 	/** Send a custom log message.
 	   The message will be printed in the KSP log. The options are defined
 	   in the CustomLogStatus enum.
@@ -366,24 +371,27 @@ enum Timewarp
     TIMEWARP_UP = 12,
     /** Set Timewarp the previous rate available. */
     TIMEWARP_DOWN = 13,
-    /** Warp to the next maneuver. */
-    TIMEWARP_NEXT_MANEUVER = 14,
-    /** Warp 30s before the begining of the burn of the next maneuver. */
-    TIMEWARP_BEFORE_NEXT_MANEUVER = 19,
-    /** Warp to the next SOI change. */
-    TIMEWARP_NEXT_SOI = 15,
-    /** Warp to the apoapsis. */
-    TIMEWARP_APOAPSIS = 16,
-    /** Warp 30s before the apoapsis. */
-    TIMEWARP_BEFORE_APOAPSIS = 20,
-    /** Warp to the periapsis. */
-    TIMEWARP_PERIAPSIS = 17,
-    /** Warp 30s before the periapsis. */
-    TIMEWARP_BEFORE_PERIAPSIS = 21,
-    /** Warp to the next morning. */
-    TIMEWARP_NEXT_MORNING = 18,
     /** Cancel the current auto-timewarp and reset it to x1. */
     TIMEWARP_CANCEL_AUTOWARP = 255
+};
+
+/** Timewarp command
+    These are used for a TIMEWARP_TO_MESSAGE in a timewarpToMessage struct. */
+enum TimewarpTo {
+	/** Warp to now, used to add a delay to the given time */
+	TIMEWARP_TO_NOW = 0,
+	/** Warp to the next maneuver node. */
+    TIMEWARP_TO_NEXT_MANEUVER = 1,
+	/** Warp to the start of the burn of the next maneuver, estiming the burntime using KSP estimations. It is recommended to add a delay to account for the needed rotation. */
+    TIMEWARP_TO_NEXT_BURN = 2,
+    /** Warp to the next SOI change. */
+    TIMEWARP_TO_NEXT_SOI = 3,
+    /** Warp to the apoapsis. */
+    TIMEWARP_TO_APOAPSIS = 4,
+    /** Warp to the periapsis. */
+    TIMEWARP_TO_PERIAPSIS = 5,
+    /** Warp to the next morning. */
+    TIMEWARP_TO_NEXT_MORNING = 6,
 };
 
 enum CustomLogStatus {

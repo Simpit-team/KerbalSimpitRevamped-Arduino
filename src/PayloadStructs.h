@@ -301,6 +301,18 @@ struct timewarpMessage {
   byte command; /**< Command in the Timewarp enum. */
 } __attribute__((packed));
 
+
+
+/** A timewarp TO message.
+    This struct contains a single timewarp command, defined in the Timewarp enum. */
+struct timewarpToMessage {
+  byte instant;/**< Instant defined in the TimewarpTo enum. */
+  float delay; /**< Delay in seconds to add to the instant defined (negative to timewarp before the target instant). */
+  
+  timewarpToMessage(byte instant, float delay);
+} __attribute__((packed));
+
+
 /** A camera mode message.
     This struct contains information about the camera mode. */
 struct cameraRotationMessage {
