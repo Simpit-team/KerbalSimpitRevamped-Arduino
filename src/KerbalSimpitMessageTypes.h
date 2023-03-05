@@ -293,7 +293,7 @@ enum InboundPackets
 	   The message (see timewarpToMessage struct) contains a single byte for the specific point to aim (periapsis, maneuver node, etc.)
 	   and a delay in seconds with respect to this point.
 	   This allow to timewarp 1h before the next morning, 30s before periapsis or 1 min before the start of the burn of the next maneuver.*/
-    TIMEWARP_TO_MESSAGE = 29,
+    TIMEWARP_TO_MESSAGE = 30,
 	/** Send a custom log message.
 	   The message will be printed in the KSP log. The options are defined
 	   in the CustomLogStatus enum.
