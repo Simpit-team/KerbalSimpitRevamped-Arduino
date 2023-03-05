@@ -211,7 +211,8 @@ enum OutboundPackets
         English name, regardless of the language the game is currently set to. */
     SOI_MESSAGE = 26,
     /** Scene change packets are sent by the plugin when
-     entering or leaving the flight scene. */
+     entering or leaving the flight scene.
+     This message has a single byte : 0 when a flight is ready, 1 when exiting a flight scene.*/
     SCENE_CHANGE_MESSAGE = 3,
     /** Information about the current flight (warp speed, status, crew, com).
         Messages on this channel contain a flightStatusMessage. */
