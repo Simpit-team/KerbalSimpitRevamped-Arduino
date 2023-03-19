@@ -20,7 +20,7 @@ struct cagStatusMessage {
 /** An SAS info message to reprsent the current SAS state. */
 struct SASInfoMessage {
   byte currentSASMode; /**< Current SAS mode. SAS modes are listed in the AutopilotMode enum. 255 is used to indicate a disabled SAS. */
-  int16_t SASModeAvailability; /**< bitmask for the availability of each SAS mode. If a mode is not available, a SAS_MODE_MESSAGE setting this mode will be ignored. */
+  int16_t SASModeAvailability; /**< bitmask for the availability of each SAS mode. If a mode is not available, a SAS_MODE_MESSAGE setting this mode will be ignored. The corresponing bitmask can be obtained with `1 << AP_RADIALIN` for the radial in direction for instance, taking values from the AutopilotMode enum.*/
 } __attribute__((packed));
 
 /** An Altitude message. */
