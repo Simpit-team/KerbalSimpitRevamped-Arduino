@@ -473,8 +473,8 @@ enum CameraControlMode
     FLIGHT_CAMERA_CHASE = 5,
     FLIGHT_CAMERA_LOCKED = 6,
 
-    CAMERA_NEXT = 50,
-    CAMERA_PREVIOUS = 51,
+    CAMERA_NEXT = 50, //unused
+    CAMERA_PREVIOUS = 51, //unused
     CAMERA_NEXT_MODE = 52,
     CAMERA_PREVIOUS_MODE = 53
 
