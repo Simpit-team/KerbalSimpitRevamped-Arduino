@@ -47,6 +47,7 @@ bool KerbalSimpit::init()
       
       // Test is the message received is a SYNACK
       if(_inboundDecodedBuffer[0] == SYNC_MESSAGE && _inboundDecodedBuffer[1] == 0x01){
+		if (_inboundDecodedBuffer[2] == KERBAL_SPACE_PROGRAM_2) _connectedToKSP2 = true;
         _outboundBuffer[0] = 0x02;
         _send(0x00, _outboundBuffer, i); // Send ACK
 

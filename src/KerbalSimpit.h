@@ -32,6 +32,12 @@ class KerbalSimpit
       this method.
   */
   bool init();
+  /** See which KSP version the controller is connected to.
+      Can be used to adjust the controllers behaviour depending on which KSP game is played 
+      as not all features are available in both games.
+      @return true if connected to KSP2; false if connected to KSP1 or not connected yet.
+  */
+  bool connectedToKSP2() { return _connectedToKSP2; }
   /** Specify a callback function to handle messages received from the plugin.
       @see messageHandler
       @param messageHandler The callback function.
@@ -159,6 +165,7 @@ class KerbalSimpit
   byte _msgBuffer[MAX_PAYLOAD_SIZE + 2]; // used to build the message before sending it (adding type, checksum)
   byte _encodedBuffer[MAX_PAYLOAD_SIZE + 4]; // used to encode message before sending it
   Stream *_serial;
+  bool _connectedToKSP2; // used to store wether the controller is connected to KSP1 or KSP2s
 
   byte _receivedIndex;
 

@@ -320,6 +320,16 @@ enum InboundPackets
     NAVBALLMODE_MESSAGE = 28,
 };
 
+/** Handshake values
+    These are used to communicate the version of KSP the controller is connected to. */
+enum HandshakeValues
+{
+    /** Connection to KSP 1. */
+    KERBAL_SPACE_PROGRAM_1 = 0x37,
+    /** Connection to KSP 2. */
+    KERBAL_SPACE_PROGRAM_2 = 0xC8
+};
+
 /** Action Group Indexes
     These are used to mask out elements of an ACTIONSTATUS_MESSAGE. */
 enum ActionGroupIndexes
