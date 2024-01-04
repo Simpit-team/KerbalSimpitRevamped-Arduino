@@ -127,7 +127,7 @@ void setup() {
       mySimpit.toggleCAG(1);
       mySimpit.toggleCAG(2);
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
 
@@ -141,7 +141,7 @@ void setup() {
     {
       mySimpit.activateAction(STAGE_ACTION);
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
 
@@ -152,7 +152,7 @@ void setup() {
     {
       mySimpit.activateAction(ABORT_ACTION);
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
 
@@ -182,9 +182,9 @@ void setup() {
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
     {
-      mySimpit.activateAction(GEAR_ACTION);
+      mySimpit.toggleAction(GEAR_ACTION);
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
 
@@ -324,7 +324,7 @@ void setup() {
           TestSas("Maneuver", AP_MANEUVER);
           break;
       }
-      WaitForTestButtonReleased();
+      WaitForActionButtonReleased();
     }
   }
   WaitForContinueButtonReleased();
@@ -363,7 +363,7 @@ void setup() {
           TestCamera("Camera Locked Mode", FLIGHT_CAMERA_LOCKED);
           break;
       }
-      WaitForTestButtonReleased();
+      WaitForActionButtonReleased();
     }
   }
   WaitForContinueButtonReleased();
@@ -371,14 +371,14 @@ void setup() {
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW) mySimpit.setCameraMode(CAMERA_NEXT_MODE);
-    WaitForTestButtonReleased();  
+    WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
   mySimpit.printToKSP("Previous Camera Mode", PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW) mySimpit.setCameraMode(CAMERA_PREVIOUS_MODE);
-    WaitForTestButtonReleased();  
+    WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
 
@@ -444,7 +444,7 @@ void setup() {
           TestTimewarp("TW x100000", TIMEWARP_X100000);
           break;
       }
-      WaitForTestButtonReleased();
+      WaitForActionButtonReleased();
     }
   }
   WaitForContinueButtonReleased();
@@ -477,7 +477,7 @@ void setup() {
           if(digitalRead(ACTION_INPUT_PIN) == LOW) TestTimewarp("TW phys x4", TIMEWARP_X4_PHYSICAL);
           break;
       }
-      WaitForTestButtonReleased();
+      WaitForActionButtonReleased();
     }
   }
   WaitForContinueButtonReleased();
@@ -494,7 +494,7 @@ void setup() {
       tw_msg.command = TIMEWARP_UP;
       mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
     }
-    WaitForTestButtonReleased();  
+    WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
   mySimpit.printToKSP("Step : TW down", PRINT_TO_SCREEN);
@@ -506,7 +506,7 @@ void setup() {
       tw_msg.command = TIMEWARP_DOWN;
       mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
     }
-    WaitForTestButtonReleased();  
+    WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
   mySimpit.printToKSP("Step : TW stop", PRINT_TO_SCREEN);
@@ -518,7 +518,7 @@ void setup() {
       tw_msg.command = TIMEWARP_CANCEL_AUTOWARP;
       mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
     }
-    WaitForTestButtonReleased();  
+    WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
 
@@ -533,7 +533,7 @@ void setup() {
       timewarpToMessage twTo_msg(TIMEWARP_TO_NOW, 5*60);
       mySimpit.send(TIMEWARP_TO_MESSAGE, twTo_msg);
     }
-    WaitForTestButtonReleased();  
+    WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
 
@@ -558,7 +558,7 @@ void setup() {
       keyboardEmulatorMessage msg(M_KEY);
       mySimpit.send(KEYBOARD_EMULATOR, msg);
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
 
@@ -594,7 +594,7 @@ void setup() {
     {
       mySimpit.cycleNavBallMode();
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
   
@@ -639,7 +639,7 @@ void WaitForContinueButtonReleased()
   delay(100);
 }
 
-void WaitForTestButtonReleased()
+void WaitForActionButtonReleased()
 {
   delay(10);
   while (digitalRead(ACTION_INPUT_PIN) == LOW);
@@ -671,9 +671,9 @@ void TestActionGroup(String name, byte actionGroupIndex)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
     {
-      mySimpit.activateAction(actionGroupIndex);
+      mySimpit.toggleAction(actionGroupIndex);
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
 }
@@ -711,7 +711,7 @@ void TestTimewarpTo(String description, byte pointInTime, float delay)
       timewarpToMessage twTo_msg(pointInTime, delay);
       mySimpit.send(TIMEWARP_TO_MESSAGE, twTo_msg);
     }
-    WaitForTestButtonReleased();
+    WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();  
 }
