@@ -165,7 +165,7 @@ class KerbalSimpit
   byte _msgBuffer[MAX_PAYLOAD_SIZE + 2]; // used to build the message before sending it (adding type, checksum)
   byte _encodedBuffer[MAX_PAYLOAD_SIZE + 4]; // used to encode message before sending it
   Stream *_serial;
-  bool _connectedToKSP2; // used to store wether the controller is connected to KSP1 or KSP2s
+  bool _connectedToKSP2 = false; // used to store wether the controller is connected to KSP1 or KSP2s
 
   byte _receivedIndex;
 
