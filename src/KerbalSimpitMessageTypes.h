@@ -27,34 +27,34 @@ enum OutboundPackets
     // | Propulsion Resources |
     // |----------------------|
 
-    /** Liquid fuel in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work. */
+    /** Liquid fuel (KSP1) or Methane (KSP2) in the vessel.
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1. */
     LF_MESSAGE = 10,
-    /** Liquid fuel in the current stage.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+    /** Liquid fuel (KSP1) or Methane (KSP2) in the current stage.
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     LF_STAGE_MESSAGE = 11,
     /** Oxidizer in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     OX_MESSAGE = 12,
     /** Oxidizer in the current stage.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     OX_STAGE_MESSAGE = 13,
     /** Solid fuel in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     SF_MESSAGE = 14,
     /** Solid fuel in the current stage.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     SF_STAGE_MESSAGE = 15,
     /** Xenon gas in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     XENON_GAS_MESSAGE = 28,
     /** Xenon Gas in the current stage.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     XENON_GAS_STAGE_MESSAGE = 29,
     /** Monoprollent in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     MONO_MESSAGE = 16,
-    /** EVA propellant. Only available for Kerbals on EVA.
+    /** EVA propellant. Only works in KSP1. Only available for Kerbals on EVA.
         Messages on this channel contain a resourceMessage. */
     EVA_MESSAGE = 18,
 
@@ -63,27 +63,27 @@ enum OutboundPackets
     // |------------------|
 
     /** Electic Charge in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     ELECTRIC_MESSAGE = 17,
-    /** Ore in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+    /** Ore in the vessel. Only works in KSP1.
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     ORE_MESSAGE = 19,
     /** Ablator in the vessel.
-         Messages on this channel contain a resourceMessage. Need ARP to work.*/
+         Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     AB_MESSAGE = 20,
-    /** Ablator in the current stage.
-        Messages on this channel contain a resourceMessage. Need ARP to work.*/
+    /** Ablator in the current stage. Currently only works in KSP1.
+        Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     AB_STAGE_MESSAGE = 21,
-    /** TAC Life Support ressources.
+    /** TAC Life Support ressources. Only works in KSP1. 
         Messages on this channel contain a TACLSRessourceMessage. Need ARP and TACLS to work.*/
     TACLS_RESOURCE_MESSAGE = 30,
-    /** TAC Life Support waste ressources.
+    /** TAC Life Support waste ressources. Only works in KSP1. 
         Messages on this channel contain a TACLSWasteMessage. Need ARP and TACLS to work.*/
     TACLS_WASTE_MESSAGE = 31,
-	/** Custom ressources. Specific ressource to use to be set in the configuration file.
+	/** Custom ressources. Only works in KSP1. Specific ressource to use to be set in the configuration file.
         Messages on this channel contain a CustomResourceMessage. Need ARP and Community Resource Pack to work.*/
     CUSTOM_RESOURCE_1_MESSAGE = 32,
-    /** Custom ressources. Specific ressource to use to be set in the configuration file.
+    /** Custom ressources. Only works in KSP1. Specific ressource to use to be set in the configuration file.
         Messages on this channel contain a CustomResourceMessage. Need ARP and Community Resource Pack to work.*/
     CUSTOM_RESOURCE_2_MESSAGE = 33,
 
@@ -201,8 +201,8 @@ enum OutboundPackets
     // | External Environment |
     // |----------------------|
 
-    /** Information about targetted object.
-        This channel delivers messages about the object targetted by the
+    /** Information about targeted object.
+        This channel delivers messages about the object targeted by the
         active vessel. Messages on this channel contain a targetInfoMessage. */
     TARGETINFO_MESSAGE = 25,
     /** Name of current Sphere of Influence.
@@ -282,7 +282,9 @@ enum InboundPackets
        The payload should be a single byte, possible SAS modes are listed
        in the AutopilotMode enum. */
     SAS_MODE_MESSAGE = 20,
+    /** Not yet implemented in KSP2 */
     CAMERA_CONTROL_MODE = 21,
+    /** Not yet implemented in KSP2 */
     CAMERA_ROTATION_MESSAGE = 22,
 
     /** Send a timewarp commands. This is to change the game speed.
@@ -314,7 +316,7 @@ enum InboundPackets
         See the KerbalSimpitTranslationForShipAndEVADemo example for instance.
      */
     KEYBOARD_EMULATOR = 26,
-	/** Send a message to control the custom axis. */
+	/** Send a message to control the custom axis. Only for KSP1 */
     CUSTOM_AXIS_MESSAGE = 27,
     /** Send a message to cycle the NavBall mode to the next mode. */
     NAVBALLMODE_MESSAGE = 28,
@@ -351,7 +353,10 @@ enum ActionGroupIndexes
 };
 
 /** Timewarp command
-    These are used for a TIMEWARP_MESSAGE. */
+    These are used for a TIMEWARP_MESSAGE. 
+    The warp rates given here are for KSP1.
+    Setting Timewarp in KSP2 works, but the rates are different 
+    and there might be differences concerning physical warp. */
 enum Timewarp
 {
     /** Set Timewarp to x1. */
@@ -401,7 +406,7 @@ enum TimewarpTo {
     TIMEWARP_TO_APOAPSIS = 4,
     /** Warp to the periapsis. */
     TIMEWARP_TO_PERIAPSIS = 5,
-    /** Warp to the next morning. */
+    /** Warp to the next morning. Not implemented in KSP2 yet. */
     TIMEWARP_TO_NEXT_MORNING = 6,
 };
 
@@ -454,7 +459,8 @@ enum WheelAxes {
 
 /** Autopilot Mode
     The possible Autopilot (SAS) modes. This enum corresponds with
-    VesselPilot.AutopilotMode in the KSP API. */
+    VesselPilot.AutopilotMode in the KSP1 API (values 0 to 9)
+    and with KSP.Sim.AutopilotMode in KSP2 (values 0 to 11) */
 enum AutopilotMode
 {
     AP_STABILITYASSIST = 0,
@@ -466,7 +472,9 @@ enum AutopilotMode
     AP_RADIALOUT = 6,
     AP_TARGET = 7,
     AP_ANTITARGET = 8,
-    AP_MANEUVER = 9
+    AP_MANEUVER = 9,
+    AP_NAVIGATION = 10,
+    AP_AUTOPILOT = 11
 };
 
 /** Camera Mode

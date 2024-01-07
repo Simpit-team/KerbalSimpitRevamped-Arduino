@@ -8,7 +8,7 @@
 #include "KerbalSimpitMessageTypes.h"
 
 
-/** An Altitude message. */
+/** An Custom Action Group message. */
 struct cagStatusMessage {
   byte status[32]; /**< List of all the action status organised by bytes. Read them with the is_action_activated method.*/
 
@@ -57,20 +57,20 @@ struct orbitInfoMessage
 /** An message containing information about the current flight. */
 struct flightStatusMessage
 {
-  byte flightStatusFlags; /**< Different booleans as defined by FligthStatusFlags. You can access them with the helper funtions.*/
+  byte flightStatusFlags; /**< Different booleans as defined by FlightStatusFlags. You can access them with the helper funtions.*/
   byte vesselSituation; /**< Current situation of the vessel, as defined by the Vessel.Situations enum in the KSP API (1 for Landed, 8 for flying, etc.).*/
   byte currentTWIndex; /**< Current TW index */
   byte crewCapacity; /**< Current vessel crew total capacity */
   byte crewCount; /**< Current vessel crew count */
   byte commNetSignalStrenghPercentage; /**< Current vessel commNet signal strengh (in percentage). 0 when CommNet is not used */
   byte currentStage; /**< Current stage of the vessel (also the total number of stage remaining). Decreased by one at each staging. Caped at 255 by Simpit.*/
-  byte vesselType; /**< Current type of the vessel (e.g. 0 for debris, 5 for rover, 3 for probe, 7 for ship, etc.) as indicated in https://www.kerbalspaceprogram.com/api/_vessel_8cs.html#afa39c7ec7cc0926b332fcd2d77425edb*/
+  byte vesselType; /**< Current type of the vessel (KSP1: e.g. 0 for debris, 5 for rover, 3 for probe, 7 for ship, etc. as indicated in https://www.kerbalspaceprogram.com/api/_vessel_8cs.html#afa39c7ec7cc0926b332fcd2d77425edb ). Gives the map item as in KSP.Map.MapItemType for KSP2 (0 for unknown, 1 for CelestialBody, 2 for Debries, 3 for Vessel, 4 for Astronaut, etc). */
 
   inline bool isInFlight(){ return this->flightStatusFlags & FLIGHT_IN_FLIGHT; }
   inline bool isInEVA(){ return this->flightStatusFlags & FLIGHT_IS_EVA; }
   inline bool isRecoverable(){ return this->flightStatusFlags & FLIGHT_IS_RECOVERABLE; }
   inline bool isInAtmoTW(){ return this->flightStatusFlags & FLIGHT_IS_ATMO_TW; }
-  /** Returns the current control level. 0 for no control, 1 for partially unmanned, 2 for partially manned, 3 for full control. */
+  /** Returns the current control level. KSP1: 0 for no control, 1 for partially unmanned, 2 for partially manned, 3 for full control. KSP2: 0 for no control, 1 for no CommNet, 2 for Full Control Hibernation, 3 for Full Control.*/
   inline byte getControlLevel() { return (this->flightStatusFlags >> 4) & 3; }
   inline bool hasTarget(){ return this->flightStatusFlags & FLIGHT_HAS_TARGET; }
 } __attribute__((packed));
@@ -95,7 +95,7 @@ struct resourceMessage {
   float available; /**< Current resource level. */
 } __attribute__((packed));
 
-/** A Resource message for TACLS ressources. */
+/** A Resource message for TACLS ressources. Only for KSP1.*/
 struct TACLSResourceMessage {
   float currentFood; /**< Current resource level for food. */
   float maxFood; /**< Maximum capacity of food. */
@@ -105,7 +105,7 @@ struct TACLSResourceMessage {
   float maxOxygen; /**< Maximum capacity of oxygen. */
 } __attribute__((packed));
 
-/** A Resource message for TACLS ressources. */
+/** A Resource message for TACLS ressources. Only for KSP1. */
 struct TACLSWasteMessage {
   float currentWaste; /**< Current resource level for waste. */
   float maxWaste; /**< Maximum capacity of waste. */
@@ -116,7 +116,7 @@ struct TACLSWasteMessage {
 } __attribute__((packed));
 
 /** A Resource message for custom ressources. The resources must be set in the 
- *  configuration file.
+ *  configuration file. Only for KSP1.
  */
 struct CustomResourceMessage {
   float currentResource1; /**< Current resource level resource 1. */
@@ -194,7 +194,7 @@ struct burnTimeMessage {
   float totalBurnTime; /**< Burn time of the whole vessel. */
 } __attribute__((packed));
 
-/** A temperator limit message. */
+/** A temperature limit message. */
 struct tempLimitMessage {
   byte tempLimitPercentage; /**< Maximum temperature percentage (as current temp over max temp) of any part of the vessel. */
   byte skinTempLimitPercentage; /**< Maximum temperature percentage (as current skin temp over max skin temp) of any part of the vessel. */
@@ -244,7 +244,7 @@ struct translationMessage {
   void setXYZ(int16_t x, int16_t y, int16_t z);
 } __attribute__((packed));
 
-/** A vessel custom axis message.
+/** A vessel custom axis message. Only for KSP1.
     This struct contains information about custom axis commands. */
 struct customAxisMessage {
   int16_t custom1; /**< Value for the custom1 axis. */
