@@ -1,4 +1,4 @@
-/* KerbalSimpitAllTheButtonsAndLevers
+/* KerbalSimpitAllCommandDemo
   By Theresa - Tetopia - tetopia.de
 
     A demonstration of how to send all the data that Simpit can send. (Exception: the REQUEST_MESSAGE message)

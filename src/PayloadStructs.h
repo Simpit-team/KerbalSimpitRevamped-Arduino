@@ -58,7 +58,7 @@ struct orbitInfoMessage
 struct flightStatusMessage
 {
   byte flightStatusFlags; /**< Different booleans as defined by FlightStatusFlags. You can access them with the helper funtions.*/
-  byte vesselSituation; /**< Current situation of the vessel, as defined by the Vessel.Situations enum in the KSP API (1 for Landed, 8 for flying, etc.).*/
+  byte vesselSituation; /**< Current situation of the vessel, as defined by the Vessel.Situations enum (KSP1) or KSP.Sim.impl.VesselSituations (KSP2) in the KSP API (KSP1: 1 for Landed, 8 for flying, etc.; KSP2: PreLaunch = 0, Landed = 1, Splashed = 2, Flying = 3, SubOrbital = 4, Orbiting = 5, Escaping = 6, Unknown = byte.MaxValue).*/
   byte currentTWIndex; /**< Current TW index */
   byte crewCapacity; /**< Current vessel crew total capacity */
   byte crewCount; /**< Current vessel crew count */
@@ -197,7 +197,7 @@ struct burnTimeMessage {
 /** A temperature limit message. */
 struct tempLimitMessage {
   byte tempLimitPercentage; /**< Maximum temperature percentage (as current temp over max temp) of any part of the vessel. */
-  byte skinTempLimitPercentage; /**< Maximum temperature percentage (as current skin temp over max skin temp) of any part of the vessel. */
+  byte skinTempLimitPercentage; /**< Maximum temperature percentage (as current skin temp over max skin temp) of any part of the vessel. Only works in KSP1 */
 } __attribute__((packed));
 
 /** A vessel rotation message, only used to send commands to KSP.

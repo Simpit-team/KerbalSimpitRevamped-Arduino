@@ -188,7 +188,7 @@ enum OutboundPackets
     /** Current status of all the custom action groups.
 	    Messages on this channel contains a cagStatusMessage. 
 		This cagStatusMessage has a is_action_activated method 
-		taking the action ground number as an argumetnt. */
+		taking the action group number as an argumetnt. */
     CAGSTATUS_MESSAGE = 41,
 	/** Current maximum temperature of the any vessel part.
 		This message contains the maximum percentage value of the temperature
