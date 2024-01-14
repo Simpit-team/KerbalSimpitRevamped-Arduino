@@ -473,7 +473,7 @@ void loop()
       myByte7 = 0xFF;
       myByte8 = 0xFF;
 
-      myString = "";
+      myString = "xxx";
 
       //Request the channel we are currently looking at to get an updated value
       switch(selectionIndex)
@@ -970,7 +970,8 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
     case SOI_MESSAGE: {
         if (selectionIndex == 37) 
         {
-          myString = String((char*)msg);
+          myString = (char *) msg;
+          myString[msgSize] = '\0';
         }
     } break;
     case SCENE_CHANGE_MESSAGE: {
@@ -1015,7 +1016,8 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
     case VESSEL_NAME_MESSAGE: {
         if (selectionIndex == 46) 
         {
-          myString = String((char*)msg);
+          myString = (char *) msg;
+          myString[msgSize] = '\0';
         }
 
       } break;
