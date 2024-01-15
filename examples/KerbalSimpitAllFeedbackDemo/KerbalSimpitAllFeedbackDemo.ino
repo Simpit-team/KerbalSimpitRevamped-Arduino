@@ -15,7 +15,7 @@ bool lastButtonState = HIGH;       // To find when the button changes state
 
 KerbalSimpit mySimpit(Serial);  // Declare a KerbalSimpit object that will communicate using the "Serial" device.
 
-const int NUMBER_OF_STEPS = 47;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
+const int NUMBER_OF_STEPS = 50;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
 int selectionIndex = 0;             // increased when pushing the continue button to display different Values
 unsigned long timestampLastSent;    // When was the last time something was sent to print on screen
 const int SENDING_INTERVAL = 1000;  // in milliseconds. How often to print data to screen
@@ -110,6 +110,11 @@ void setup() {
   mySimpit.registerChannel(XENON_GAS_STAGE_MESSAGE);
   mySimpit.registerChannel(MONO_MESSAGE);
   mySimpit.registerChannel(EVA_MESSAGE);
+  // | KSP2 only Resources |
+  mySimpit.registerChannel(INTAKE_AIR_MESSAGE);
+  mySimpit.registerChannel(HYDROGEN_MESSAGE);
+  mySimpit.registerChannel(HYDROGEN_STAGE_MESSAGE);
+  mySimpit.registerChannel(URANIUM_MESSAGE);
   // | Vessel Resources |
   mySimpit.registerChannel(ELECTRIC_MESSAGE);
   mySimpit.registerChannel(ORE_MESSAGE);
@@ -418,6 +423,15 @@ void loop()
       case 46: { //Vessel Name
           mySimpit.printToKSP("Vessel Name: '" + myString + "'", PRINT_TO_SCREEN);
         } break;
+      case 47: { //Intake Air
+          mySimpit.printToKSP("IntakeAir " + String(myResourceAvailableShip, 2) + "/" + String(myResourceTotalShip, 2), PRINT_TO_SCREEN);
+        } break;
+      case 48: { //Hydrogen
+          mySimpit.printToKSP("Hydr " + String(myResourceAvailableShip, 2) + "/" + String(myResourceTotalShip, 2) + " " + String(myResourceAvailableStage, 2) + "/" + String(myResourceTotalStage, 2), PRINT_TO_SCREEN);
+        } break;
+      case 49: { //Uranium
+          mySimpit.printToKSP("Uranium " + String(myResourceAvailableShip, 3) + "/" + String(myResourceTotalShip, 3), PRINT_TO_SCREEN);
+        } break;
       default: {
           //mySimpit.printToKSP("Unknown selectionIndex", PRINT_TO_SCREEN);
         } break;
@@ -439,7 +453,7 @@ void loop()
   if (lastButtonState != buttonState) 
   {
     lastButtonState = buttonState;
-    delay(100); //This is for debouncing the button. Note: delay is not a good option, as it pauses your program. Better to check against a timestamp like where stuff is printing to KSP
+    delay(10); //This is for debouncing the button. Note: delay is not a good option, as it pauses your program. Better to check against a timestamp like where stuff is printing to KSP
     if (buttonState == LOW)  //Button got pressed
     {
       selectionIndex++; //Count up the index
@@ -599,6 +613,19 @@ void loop()
         case 46: 
           mySimpit.requestMessageOnChannel(VESSEL_NAME_MESSAGE);
           break;
+
+
+          
+        case 47: 
+          mySimpit.requestMessageOnChannel(INTAKE_AIR_MESSAGE); 
+          break;
+        case 48: 
+          mySimpit.requestMessageOnChannel(HYDROGEN_MESSAGE); 
+          mySimpit.requestMessageOnChannel(HYDROGEN_STAGE_MESSAGE); 
+          break;
+        case 49: 
+          mySimpit.requestMessageOnChannel(URANIUM_MESSAGE); 
+          break;
       }
     }
   }
@@ -698,6 +725,43 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
           myResourceAvailableShip = evaMonopropellantMsg.available;
         }
       } break;
+
+
+
+    case INTAKE_AIR_MESSAGE: { //Only works on KSP2
+        if (msgSize == sizeof(resourceMessage) && selectionIndex == 47)
+        {
+          resourceMessage resourceMsg = parseMessage<resourceMessage>(msg);
+          myResourceTotalShip = resourceMsg.total;
+          myResourceAvailableShip = resourceMsg.available;
+        }
+      } break;
+    case HYDROGEN_MESSAGE: { //Only works on KSP2
+        if (msgSize == sizeof(resourceMessage) && selectionIndex == 49)
+        {
+          resourceMessage resourceMsg = parseMessage<resourceMessage>(msg);
+          myResourceTotalShip = resourceMsg.total;
+          myResourceAvailableShip = resourceMsg.available;
+        }
+      } break;
+    case HYDROGEN_STAGE_MESSAGE: { //Only works on KSP2
+        if (msgSize == sizeof(resourceMessage) && selectionIndex == 49)
+        {
+          resourceMessage resourceMsg = parseMessage<resourceMessage>(msg);
+          myResourceTotalStage = resourceMsg.total;
+          myResourceAvailableStage = resourceMsg.available;
+        }
+      } break;
+    case URANIUM_MESSAGE: { //Only works on KSP2
+        if (msgSize == sizeof(resourceMessage) && selectionIndex == 52)
+        {
+          resourceMessage resourceMsg = parseMessage<resourceMessage>(msg);
+          myResourceTotalShip = resourceMsg.total;
+          myResourceAvailableShip = resourceMsg.available;
+        }
+      } break;
+
+
     case ELECTRIC_MESSAGE: { // (Note: For this to work on KSP1 this needs the mod ARP to be installed)
         if (msgSize == sizeof(resourceMessage) && selectionIndex == 6)
         {

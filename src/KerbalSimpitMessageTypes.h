@@ -58,6 +58,32 @@ enum OutboundPackets
         Messages on this channel contain a resourceMessage. */
     EVA_MESSAGE = 18,
 
+    // |-------------------|
+    // | Resources in KSP2 |
+    // |-------------------|
+
+    /** Intake air available to the vessel. Only works in KSP2.
+         Messages on this channel contain a resourceMessage. */
+    INTAKE_AIR_MESSAGE = 52,
+    /** Hydrogen in the vessel. Only works in KSP2.
+         Messages on this channel contain a resourceMessage.*/
+    HYDROGEN_MESSAGE = 53,
+    /** Hydrogen in the current Stage. Only works in KSP2.
+         Messages on this channel contain a resourceMessage.*/
+    HYDROGEN_STAGE_MESSAGE = 54,
+    /** Uranium in the vessel. Only works in KSP2.
+         Messages on this channel contain a resourceMessage.*/
+    URANIUM_MESSAGE = 55,
+
+    //KSP2 offers some more resources, but they don't seem to be in use
+    //TEST_ROCKS_MESSAGE = xx,
+    //METHALOX_MESSAGE = xx,
+    //METHALOX_STAGE_MESSAGE = xx,
+    //METHANE_AIR_MESSAGE = xx,
+    //METHANE_AIR_STAGE_MESSAGE = xx,
+    //XENON_EC_MESSAGE = xx,
+    //XENON_EC_STAGE_MESSAGE = xx,
+
     // |------------------|
     // | Vessel Resources |
     // |------------------|
