@@ -737,7 +737,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
       } break;
     case HYDROGEN_MESSAGE: { //Only works on KSP2
-        if (msgSize == sizeof(resourceMessage) && selectionIndex == 49)
+        if (msgSize == sizeof(resourceMessage) && selectionIndex == 48)
         {
           resourceMessage resourceMsg = parseMessage<resourceMessage>(msg);
           myResourceTotalShip = resourceMsg.total;
@@ -745,7 +745,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
       } break;
     case HYDROGEN_STAGE_MESSAGE: { //Only works on KSP2
-        if (msgSize == sizeof(resourceMessage) && selectionIndex == 49)
+        if (msgSize == sizeof(resourceMessage) && selectionIndex == 48)
         {
           resourceMessage resourceMsg = parseMessage<resourceMessage>(msg);
           myResourceTotalStage = resourceMsg.total;
@@ -753,7 +753,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
       } break;
     case URANIUM_MESSAGE: { //Only works on KSP2
-        if (msgSize == sizeof(resourceMessage) && selectionIndex == 52)
+        if (msgSize == sizeof(resourceMessage) && selectionIndex == 49)
         {
           resourceMessage resourceMsg = parseMessage<resourceMessage>(msg);
           myResourceTotalShip = resourceMsg.total;
@@ -911,7 +911,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         }
       } break;
     case ROTATION_DATA_MESSAGE: {
-        if (msgSize == sizeof(vesselPointingMessage) && selectionIndex == 20 || selectionIndex == 21 || selectionIndex == 22)
+        if (msgSize == sizeof(vesselPointingMessage) && (selectionIndex == 20 || selectionIndex == 21 || selectionIndex == 22))
         {
           vesselPointingMessage vesselPointingMsg = parseMessage<vesselPointingMessage>(msg);
           myFloatStorage1 = vesselPointingMsg.heading;
