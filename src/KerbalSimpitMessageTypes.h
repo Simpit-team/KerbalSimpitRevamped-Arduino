@@ -178,7 +178,9 @@ enum OutboundPackets
     // |----------------|
 
     /** Action groups.
-         Messages on this channel contain a single byte representing the
+        All KSP1 Action Groups are available here, but some KSP2 Action Groups 
+        (like Solar and Radiators) are missing. Use ADVANCED_ACTIONSTATUS_MESSAGE for those.
+        Messages on this channel contain a single byte representing the
         currently active action groups. A given action group can be checked
         by performing a
         <a href="http://playground.arduino.cc/Code/BitMath#bitwise_and">bitwise AND</a>
@@ -199,6 +201,10 @@ enum OutboundPackets
         - SAS_ACTION
         - BRAKES_ACTION
         - ABORT_ACTION 
+
+        The mixed state (some on, some off) from KSP2 is not included.
+        Use ADVANCED_ACTIONSTATUS_MESSAGE if you want to see this state.
+        "Mixed state" will be false/"off" in this message.
     */
     ACTIONSTATUS_MESSAGE = 37,
     /** Amount of deltaV of the current vessel in the current situation.
@@ -214,7 +220,11 @@ enum OutboundPackets
     /** Current status of all the custom action groups.
 	    Messages on this channel contains a cagStatusMessage. 
 		This cagStatusMessage has a is_action_activated method 
-		taking the action group number as an argumetnt. */
+		taking the action group number as an argumetnt. 
+        
+        The mixed state (some on, some off) from KSP2 is not included. 
+        Use ADVANCED_CAGSTATUS_MESSAGE if you want to see this state.
+        "Mixed state" will be false/"off" in this message.*/
     CAGSTATUS_MESSAGE = 41,
 	/** Current maximum temperature of the any vessel part.
 		This message contains the maximum percentage value of the temperature
@@ -222,6 +232,12 @@ enum OutboundPackets
 		skin temperature. The two maximum percentage can come from different parts.
 		Messages on this channel contain an tempLimitMessage. */
     TEMP_LIMIT_MESSAGE = 42,
+    /** Default Action groups
+        Messages on this channel contain an advancedActionStatusMessage */
+    ADVANCED_ACTIONSTATUS_MESSAGE = 56,
+    /** Custom Action groups
+        Messages on this channel contain an advancedActionStatusMessage */
+    ADVANCED_CAGSTATUS_MESSAGE = 57,
 
     // |----------------------|
     // | External Environment |
@@ -377,6 +393,45 @@ enum ActionGroupIndexes
     /** Bitmask for the Abort action group. */
     ABORT_ACTION = 64
 };
+
+/** Advanced Action Group Indexes
+    These are used to get the velues in the ADVANCED_ACTIONSTATUS_MESSAGE. */
+enum AdvancedActionGroupIndexes
+{
+    /** Index for the Stage action group. */
+    ADVANCED_STAGE_ACTION = 0,
+    /** Index for the Gear action group. */
+    ADVANCED_GEAR_ACTION = 1,
+    /** Index for the Light action group. */
+    ADVANCED_LIGHT_ACTION = 2,
+    /** Index for the RCS action group. */
+    ADVANCED_RCS_ACTION = 3,
+    /** Index for the SAS action group. */
+    ADVANCED_SAS_ACTION = 4,
+    /** Index for the Brakes action group. */
+    ADVANCED_BRAKES_ACTION = 5,
+    /** Index for the Abort action group. */
+    ADVANCED_ABORT_ACTION = 6,
+    /** Index for the Solar action group. */
+    ADVANCED_SOLAR_ACTION = 7,
+    /** Index for the Radiator action group. */
+    ADVANCED_RADIATOR_ACTION = 8
+};
+
+/** Advanced Action Group States
+    These are the values returned by advancedActionStatusMessage::get_action_status in the ADVANCED_ACTIONSTATUS_MESSAGE. */
+enum AdvancedActionGroupStates
+{
+    /** Value if the action group is not available. */
+    ADVANCED_AG_STATE_NOT_AVAILABLE = 0,
+    /** Value if the action group is on. */
+    ADVANCED_AG_STATE_ON = 1,
+    /** Value if the action group is off. */
+    ADVANCED_AG_STATE_OFF = 2,
+    /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. */
+    ADVANCED_AG_STATE_MIXED = 3
+};
+
 
 /** Timewarp command
     These are used for a TIMEWARP_MESSAGE. 

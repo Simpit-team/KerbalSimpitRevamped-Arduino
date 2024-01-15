@@ -15,7 +15,7 @@ bool lastButtonState = HIGH;       // To find when the button changes state
 
 KerbalSimpit mySimpit(Serial);  // Declare a KerbalSimpit object that will communicate using the "Serial" device.
 
-const int NUMBER_OF_STEPS = 50;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
+const int NUMBER_OF_STEPS = 52;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
 int selectionIndex = 0;             // increased when pushing the continue button to display different Values
 unsigned long timestampLastSent;    // When was the last time something was sent to print on screen
 const int SENDING_INTERVAL = 1000;  // in milliseconds. How often to print data to screen
@@ -30,6 +30,7 @@ int32_t myTimeToPeriapsis;
 byte myCurrentSASMode;
 int16_t mySASModeAvailability;
 bool myCustomActionGroups[10];
+byte myAdvancedActionGroups[10];
 // You probably want a different variable for each value you use, just like in the echo and altitutde example above.
 // Because here only a handful of variables are used at the same time, 
 // they get shared between different messages (depending on my selectionIndex)
@@ -145,6 +146,8 @@ void setup() {
   mySimpit.registerChannel(BURNTIME_MESSAGE);
   mySimpit.registerChannel(CAGSTATUS_MESSAGE);
   mySimpit.registerChannel(TEMP_LIMIT_MESSAGE);
+  mySimpit.registerChannel(ADVANCED_ACTIONSTATUS_MESSAGE);
+  mySimpit.registerChannel(ADVANCED_CAGSTATUS_MESSAGE);
   // | External Environment |
   mySimpit.registerChannel(TARGETINFO_MESSAGE);
   mySimpit.registerChannel(SOI_MESSAGE);
@@ -432,6 +435,26 @@ void loop()
       case 49: { //Uranium
           mySimpit.printToKSP("Uranium " + String(myResourceAvailableShip, 3) + "/" + String(myResourceTotalShip, 3), PRINT_TO_SCREEN);
         } break;
+      case 50: { //Advanced Action Group State Info
+          mySimpit.printToKSP(
+            "B" + String((int)myAdvancedActionGroups[ADVANCED_BRAKES_ACTION]) + 
+            " L" + String((int)myAdvancedActionGroups[ADVANCED_LIGHT_ACTION]) + 
+            " G" + String((int)myAdvancedActionGroups[ADVANCED_GEAR_ACTION]) + 
+            " S" + String((int)myAdvancedActionGroups[ADVANCED_SOLAR_ACTION]) + 
+            " A" + String((int)myAdvancedActionGroups[ADVANCED_ABORT_ACTION]) + 
+            " R" + String((int)myAdvancedActionGroups[ADVANCED_RADIATOR_ACTION]) + 
+            " Sas" + String((int)myAdvancedActionGroups[ADVANCED_SAS_ACTION]) + 
+            " Rcs" + String((int)myAdvancedActionGroups[ADVANCED_RCS_ACTION]), PRINT_TO_SCREEN);
+        } break;
+      case 51: { //Advanced Custom Action Group State Info
+          mySimpit.printToKSP(
+            "1:" + String((int)myAdvancedActionGroups[0]) + 
+            " 2:" + String((int)myAdvancedActionGroups[1]) + 
+            " 3:" + String((int)myAdvancedActionGroups[2]) + 
+            " 4:" + String((int)myAdvancedActionGroups[3]) + 
+            " 5:" + String((int)myAdvancedActionGroups[4]), PRINT_TO_SCREEN);
+            //And so on for all 10 action groups
+        } break;
       default: {
           //mySimpit.printToKSP("Unknown selectionIndex", PRINT_TO_SCREEN);
         } break;
@@ -488,6 +511,8 @@ void loop()
       myByte8 = 0xFF;
 
       myString = "xxx";
+
+      for(int i = 0; i < sizeof(myAdvancedActionGroups)/sizeof(myAdvancedActionGroups[0]); i++) myAdvancedActionGroups[i] = 0;
 
       //Request the channel we are currently looking at to get an updated value
       switch(selectionIndex)
@@ -625,6 +650,12 @@ void loop()
           break;
         case 49: 
           mySimpit.requestMessageOnChannel(URANIUM_MESSAGE); 
+          break;
+        case 50: 
+          mySimpit.requestMessageOnChannel(ADVANCED_ACTIONSTATUS_MESSAGE); 
+          break;
+        case 51: 
+          mySimpit.requestMessageOnChannel(ADVANCED_CAGSTATUS_MESSAGE); 
           break;
       }
     }
@@ -923,7 +954,26 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
           myFloatStorage7 = vesselPointingMsg.surfaceVelocityPitch;
         }
       } break;
-
+    case ADVANCED_ACTIONSTATUS_MESSAGE: {
+        if (msgSize == sizeof(advancedActionStatusMessage) && selectionIndex == 50)
+        {
+          advancedActionStatusMessage actionStatusMsg = parseMessage<advancedActionStatusMessage>(msg);
+          for(int i = 0; i < 9; i++)
+          {
+            myAdvancedActionGroups[i] = actionStatusMsg.getActionStatus(i);
+          }
+        }
+      } break;
+    case ADVANCED_CAGSTATUS_MESSAGE: {
+        if (msgSize == sizeof(advancedActionStatusMessage) && selectionIndex == 51)
+        {
+          advancedActionStatusMessage cagStatusMsg = parseMessage<advancedActionStatusMessage>(msg);
+          for(int i = 0; i < 10; i++)
+          {
+            myAdvancedActionGroups[i] = cagStatusMsg.getActionStatus(i);
+          }
+        }
+      } break;
 
 
     case ROTATION_CMD_MESSAGE: {
