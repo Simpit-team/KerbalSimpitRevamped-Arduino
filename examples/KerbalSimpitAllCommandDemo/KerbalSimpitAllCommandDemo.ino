@@ -159,6 +159,10 @@ void setup() {
   // |------------------------------------------------------------|
   // | Other default Action Groups: Gear, Light, SAS, RCS, Breaks |
   // |------------------------------------------------------------|
+  /*  Old way of activating and deactivating action groups. 
+      Does not support all Action Groups for KSP2. 
+      Use SETSINGLE_AG_MESSAGE instead as shown below.
+
   mySimpit.printToKSP("Step : Act & Deact Gear", PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
@@ -176,6 +180,31 @@ void setup() {
     }
   }
   WaitForContinueButtonReleased();
+  */
+  
+  mySimpit.printToKSP("Step : Act & Deact Gear", PRINT_TO_SCREEN);
+  while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
+  {
+    if(digitalRead(ACTION_INPUT_PIN) == LOW && lastInputButtonState == HIGH) //Button got pressed down
+    {
+      lastInputButtonState = LOW;
+      setSingleActionGroupMessage ag_msg(ADVANCED_GEAR_ACTION, AG_ACTION_ACTIVATE);
+      mySimpit.send(SETSINGLE_AG_MESSAGE, ag_msg);
+      delay(100);
+    }
+    else if(digitalRead(ACTION_INPUT_PIN) == HIGH && lastInputButtonState == LOW) //Button was released
+    {
+      lastInputButtonState = HIGH;
+      setSingleActionGroupMessage ag_msg(ADVANCED_GEAR_ACTION, AG_ACTION_DEACTIVATE);
+      mySimpit.send(SETSINGLE_AG_MESSAGE, ag_msg);
+      delay(100);
+    }
+  }
+  WaitForContinueButtonReleased();
+
+  /*  Old way of toggling action groups. 
+      Does not support all Action Groups for KSP2. 
+      Use SETSINGLE_AG_MESSAGE instead as shown below.
 
   mySimpit.printToKSP("Step : Toggle Gear", PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
@@ -187,12 +216,25 @@ void setup() {
     WaitForActionButtonReleased();
   }
   WaitForContinueButtonReleased();
+  */
+
+  mySimpit.printToKSP("Step : Toggle Gear", PRINT_TO_SCREEN);
+  while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
+  {
+    if(digitalRead(ACTION_INPUT_PIN) == LOW)
+    {
+      setSingleActionGroupMessage ag_msg(ADVANCED_GEAR_ACTION, AG_ACTION_TOGGLE);
+      mySimpit.send(SETSINGLE_AG_MESSAGE, ag_msg);
+    }
+    WaitForActionButtonReleased();
+  }
+  WaitForContinueButtonReleased();
 
   //The others work the same, to make the code shorter they are in this separate function
-  TestActionGroup("Light", LIGHT_ACTION);
-  TestActionGroup("SAS", SAS_ACTION);
-  TestActionGroup("RCS", RCS_ACTION);
-  TestActionGroup("Brakes", BRAKES_ACTION);
+  TestActionGroup("Light", ADVANCED_LIGHT_ACTION);
+  TestActionGroup("SAS", ADVANCED_SAS_ACTION);
+  TestActionGroup("RCS", ADVANCED_RCS_ACTION);
+  TestActionGroup("Brakes", ADVANCED_BRAKES_ACTION);
 
   // |----------|
   // | Rotation |
@@ -654,13 +696,15 @@ void TestActionGroup(String name, byte actionGroupIndex)
     if(digitalRead(ACTION_INPUT_PIN) == LOW && lastInputButtonState == HIGH) //Button got pressed down
     {
       lastInputButtonState = LOW;
-      mySimpit.activateAction(actionGroupIndex);
+      setSingleActionGroupMessage ag_msg(actionGroupIndex, AG_ACTION_ACTIVATE);
+      mySimpit.send(SETSINGLE_AG_MESSAGE, ag_msg);
       delay(100);
     }
     else if(digitalRead(ACTION_INPUT_PIN) == HIGH && lastInputButtonState == LOW) //Button was released
     {
       lastInputButtonState = HIGH;
-      mySimpit.deactivateAction(actionGroupIndex);
+      setSingleActionGroupMessage ag_msg(actionGroupIndex, AG_ACTION_DEACTIVATE);
+      mySimpit.send(SETSINGLE_AG_MESSAGE, ag_msg);
       delay(100);
     }
   }
@@ -671,7 +715,8 @@ void TestActionGroup(String name, byte actionGroupIndex)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
     {
-      mySimpit.toggleAction(actionGroupIndex);
+      setSingleActionGroupMessage ag_msg(actionGroupIndex, AG_ACTION_TOGGLE);
+      mySimpit.send(SETSINGLE_AG_MESSAGE, ag_msg);
     }
     WaitForActionButtonReleased();
   }

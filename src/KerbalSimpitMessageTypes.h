@@ -310,6 +310,14 @@ enum InboundPackets
     AGDEACTIVATE_MESSAGE = 14,
     /** Toggle the given standard Action Group(s). */
     AGTOGGLE_MESSAGE = 15,
+    /** Set one of the standard Action Group(s). 
+        The payload should be a single byte, 
+        with the first 6 bits as which action group to set as in the AdvancedActionGroupIndexes enum
+        and the last 2 bits the state/action of the action group as in the ActionGroupSettings enum
+       in the AutopilotMode enum.*/
+    SETSINGLE_AG_MESSAGE = 58,
+    /** Set one of the custom Action Group(s). */
+    SETSINGLE_CAG_MESSAGE = 59,
     /** Send vessel rotation commands.
 	    If set and not 0, those command will supersede SAS command. The SAS will appear not the work when the jostick is in use.
 	    If this is the case for you, make sure you are sending 0 command to KSP on all used axis.*/
@@ -395,7 +403,7 @@ enum ActionGroupIndexes
 };
 
 /** Advanced Action Group Indexes
-    These are used to get the velues in the ADVANCED_ACTIONSTATUS_MESSAGE. */
+    These are used to get the values in the ADVANCED_ACTIONSTATUS_MESSAGE. */
 enum AdvancedActionGroupIndexes
 {
     /** Index for the Stage action group. */
@@ -416,6 +424,20 @@ enum AdvancedActionGroupIndexes
     ADVANCED_SOLAR_ACTION = 7,
     /** Index for the Radiator action group. */
     ADVANCED_RADIATOR_ACTION = 8
+};
+
+/** Action Group Settings for single action groups
+    These are used to set the values in the SETSINGLE_AG_MESSAGE and SETSINGLE_CAG_MESSAGE. */
+enum ActionGroupSettings
+{
+    /** Don't do anything with this action group. */
+    AG_ACTION_NOTHING = 0,
+    /** Activate the action group. */
+    AG_ACTION_ACTIVATE = 1,
+    /** Deactivate the action group. */
+    AG_ACTION_DEACTIVATE = 2,
+    /** Toggle the action group. */
+    AG_ACTION_TOGGLE = 3
 };
 
 /** Advanced Action Group States

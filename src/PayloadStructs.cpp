@@ -127,6 +127,11 @@ flightStatusMessage parseFlightStatusMessage(byte msg[]){
 
 // Helper functions for using bitmask
 
+setSingleActionGroupMessage::setSingleActionGroupMessage(byte advancedActionGroupIndex, ActionGroupSettings setting){
+	this->actionGroupAndSetting = advancedActionGroupIndex<<2;
+	this->actionGroupAndSetting |= setting;
+}
+
 rotationMessage::rotationMessage(){
   this->mask = 0;
 }
