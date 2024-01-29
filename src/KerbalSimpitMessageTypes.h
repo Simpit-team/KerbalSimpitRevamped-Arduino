@@ -420,9 +420,9 @@ enum AdvancedActionGroupIndexes
     ADVANCED_BRAKES_ACTION = 5,
     /** Index for the Abort action group. */
     ADVANCED_ABORT_ACTION = 6,
-    /** Index for the Solar action group. */
+    /** Index for the Solar action group. Only for KSP2. */
     ADVANCED_SOLAR_ACTION = 7,
-    /** Index for the Radiator action group. */
+    /** Index for the Radiator action group. Only for KSP2. */
     ADVANCED_RADIATOR_ACTION = 8
 };
 

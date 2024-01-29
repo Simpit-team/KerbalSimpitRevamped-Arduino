@@ -178,7 +178,7 @@ struct vesselPointingMessage {
 struct advancedActionStatusMessage {
     uint32_t status; /**< List of all the action status with 2 bits per action group. Read them with the get_action_status method.*/
 
-    /** param: index of the action group as it is defined in AdvancedActionGroupIndexes or a number from 0 to 9 for custom action groups
+    /** param: index of the action group as it is defined in AdvancedActionGroupIndexes or a number from 1 to 10 for custom action groups
         returns: 0 for not available, 1 for on, 2 for off and 3 for mixed*/
     byte getActionStatus(byte groupIndex) { return (status >> (groupIndex * 2)) & 3; }
 } __attribute__((packed));
@@ -187,7 +187,7 @@ struct advancedActionStatusMessage {
 struct setSingleActionGroupMessage {
     byte actionGroupAndSetting; /**< 6 bits of which action group to set and 2 bits of what to to with said action group. */
 
-    /** param: index of the action group as it is defined in AdvancedActionGroupIndexes or a number from 0 to 9 for custom action groups.*/
+    /** param: index of the action group as it is defined in AdvancedActionGroupIndexes or a number from 1 to 10 for custom action groups.*/
     setSingleActionGroupMessage(byte advancedActionGroupIndex, ActionGroupSettings setting);
 } __attribute__((packed));
 
