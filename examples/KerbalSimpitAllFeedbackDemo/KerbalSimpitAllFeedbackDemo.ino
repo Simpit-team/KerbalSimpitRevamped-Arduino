@@ -448,7 +448,7 @@ void loop()
         } break;
       case 51: { //Advanced Custom Action Group State Info
           mySimpit.printToKSP(
-            "1:" + String((int)myAdvancedActionGroups[0]) + 
+            "1:"  + String((int)myAdvancedActionGroups[0]) + 
             " 2:" + String((int)myAdvancedActionGroups[1]) + 
             " 3:" + String((int)myAdvancedActionGroups[2]) + 
             " 4:" + String((int)myAdvancedActionGroups[3]) + 
@@ -958,7 +958,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         if (msgSize == sizeof(advancedActionStatusMessage) && selectionIndex == 50)
         {
           advancedActionStatusMessage actionStatusMsg = parseMessage<advancedActionStatusMessage>(msg);
-          for(int i = 0; i < 9; i++)
+          for(int i = 0; i < 9; i++) //There are 9 action groups (stage, gear, ...), they are listed in the AdvancedActionGroupIndexes enum. Some are only available for KSP2
           {
             myAdvancedActionGroups[i] = actionStatusMsg.getActionStatus(i);
           }
@@ -970,7 +970,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
           advancedActionStatusMessage cagStatusMsg = parseMessage<advancedActionStatusMessage>(msg);
           for(int i = 0; i < 10; i++)
           {
-            myAdvancedActionGroups[i] = cagStatusMsg.getActionStatus(i);
+            myAdvancedActionGroups[i] = cagStatusMsg.getActionStatus(i+1); //the myAdvancedActionGroups array starts counting at 0, but the custom action groups are addressed from 1 to 10. That's why there is (i+1) 
           }
         }
       } break;
@@ -1052,7 +1052,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
           cagStatusMessage cagStatusMsg = parseMessage<cagStatusMessage>(msg);
           for(int i = 0; i < 10; i++)
           {
-            myCustomActionGroups[i] = cagStatusMsg.is_action_activated(i);
+            myCustomActionGroups[i] = cagStatusMsg.is_action_activated(i+1); //the myAdvancedActionGroups array starts counting at 0, but the custom action groups are addressed from 1 to 10. That's why there is (i+1) 
           }
         }
       } break;

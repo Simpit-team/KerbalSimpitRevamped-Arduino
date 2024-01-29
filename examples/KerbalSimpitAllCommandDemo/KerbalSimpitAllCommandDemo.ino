@@ -94,6 +94,9 @@ void setup() {
   // |------------------------------------------------------|
   // | Activate, Deactivate and Toggle Custom Action Groups |
   // |------------------------------------------------------|
+  /*  Old way of activating and deactivating action groups. 
+      Use SETSINGLE_CAG_MESSAGE instead as shown below.
+
   mySimpit.printToKSP("Step : Actv&Deac CAG 1&2", PRINT_TO_SCREEN);
   mySimpit.printToKSP("Use Action Button to act/deac", PRINT_TO_SCREEN);
   //Wait for the continue button to be pressed
@@ -126,6 +129,48 @@ void setup() {
     {
       mySimpit.toggleCAG(1);
       mySimpit.toggleCAG(2);
+    }
+    WaitForActionButtonReleased();
+  }
+  WaitForContinueButtonReleased();
+  */
+
+  mySimpit.printToKSP("Step : Actv&Deac CAG 1&2", PRINT_TO_SCREEN);
+  mySimpit.printToKSP("Use Action Button to act/deac", PRINT_TO_SCREEN);
+  while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
+  {
+    //Note: The activation and deactivation is better suited for a lever / switch than a button. But a button is what we have right now, so let's use it
+    //Wait for the change from LOW to HIGH or from HIGH to LOW
+    if(digitalRead(ACTION_INPUT_PIN) == LOW && lastInputButtonState == HIGH) //Button got pressed down
+    {
+      lastInputButtonState = LOW;
+      setSingleActionGroupMessage ag_msg(1, AG_ACTION_ACTIVATE);
+      mySimpit.send(SETSINGLE_CAG_MESSAGE, ag_msg);
+      setSingleActionGroupMessage ag_msg2(2, AG_ACTION_ACTIVATE);
+      mySimpit.send(SETSINGLE_CAG_MESSAGE, ag_msg2);
+      delay(100);
+    }
+    else if(digitalRead(ACTION_INPUT_PIN) == HIGH && lastInputButtonState == LOW) //Button was released
+    {
+      lastInputButtonState = HIGH;
+      setSingleActionGroupMessage ag_msg(1, AG_ACTION_DEACTIVATE);
+      mySimpit.send(SETSINGLE_CAG_MESSAGE, ag_msg);
+      setSingleActionGroupMessage ag_msg2(2, AG_ACTION_DEACTIVATE);
+      mySimpit.send(SETSINGLE_CAG_MESSAGE, ag_msg2);
+      delay(100);
+    }
+  }
+  WaitForContinueButtonReleased();
+
+  mySimpit.printToKSP("Step : Toggle CAG 1&2", PRINT_TO_SCREEN);
+  while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
+  {
+    if(digitalRead(ACTION_INPUT_PIN) == LOW)
+    {
+      setSingleActionGroupMessage ag_msg(1, AG_ACTION_TOGGLE);
+      mySimpit.send(SETSINGLE_CAG_MESSAGE, ag_msg);
+      setSingleActionGroupMessage ag_msg2(2, AG_ACTION_TOGGLE);
+      mySimpit.send(SETSINGLE_CAG_MESSAGE, ag_msg2);
     }
     WaitForActionButtonReleased();
   }
