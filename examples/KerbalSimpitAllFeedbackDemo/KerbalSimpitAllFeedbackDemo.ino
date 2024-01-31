@@ -93,8 +93,8 @@ void setup() {
   // Turn off the built-in LED to indicate handshaking is complete.
   digitalWrite(LED_BUILTIN, LOW);
   // Display a message on screen in KSP
-  if (mySimpit.connectedToKSP2()) mySimpit.printToKSP("Connected to KSP2", PRINT_TO_SCREEN);
-  else mySimpit.printToKSP("Connected to KSP1", PRINT_TO_SCREEN);
+  if (mySimpit.connectedToKSP2()) mySimpit.printToKSP(F("Connected to KSP2"), PRINT_TO_SCREEN);
+  else mySimpit.printToKSP(F("Connected to KSP1"), PRINT_TO_SCREEN);
 
   // Sets our callback function. The KerbalSimpit library will
   // call this function every time a packet is received.
@@ -161,7 +161,7 @@ void setup() {
   // | Echo & Echo Request |
   // |---------------------|
   //Send an Echo Request Message and wait for an answer
-  mySimpit.printToKSP("Test Echo", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Test Echo"), PRINT_TO_SCREEN);
   while (!echoReceived)  //The echoReceived get's set in the messageHandler() down below
   {
     mySimpit.send(ECHO_REQ_MESSAGE, "", 1);
@@ -170,7 +170,7 @@ void setup() {
     // Check for new serial messages.
     mySimpit.update();
   }
-  mySimpit.printToKSP("Echo received", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Echo received"), PRINT_TO_SCREEN);
   //Deregister the echo response channel
   mySimpit.deregisterChannel(ECHO_RESP_MESSAGE);
 }
@@ -374,10 +374,10 @@ void loop()
       case 38: { //Scene or Vessel Change
           if(myBool1)
           {
-            if(myByte1 == 0) mySimpit.printToKSP("Scene Changed to flight", PRINT_TO_SCREEN);
-            else mySimpit.printToKSP("Scene Changed leaving flight", PRINT_TO_SCREEN);
+            if(myByte1 == 0) mySimpit.printToKSP(F("Scene Changed to flight"), PRINT_TO_SCREEN);
+            else mySimpit.printToKSP(F("Scene Changed leaving flight"), PRINT_TO_SCREEN);
           }
-          if(myBool2) mySimpit.printToKSP("Vessel Changed", PRINT_TO_SCREEN);
+          if(myBool2) mySimpit.printToKSP(F("Vessel Changed"), PRINT_TO_SCREEN);
           myBool1 = false;
           myBool2 = false;
         } break;
@@ -456,7 +456,7 @@ void loop()
             //And so on for all 10 action groups
         } break;
       default: {
-          //mySimpit.printToKSP("Unknown selectionIndex", PRINT_TO_SCREEN);
+          //mySimpit.printToKSP(F("Unknown selectionIndex"), PRINT_TO_SCREEN);
         } break;
     }
 
@@ -623,6 +623,7 @@ void loop()
         case 38: 
           mySimpit.requestMessageOnChannel(SCENE_CHANGE_MESSAGE);
           mySimpit.requestMessageOnChannel(VESSEL_CHANGE_MESSAGE);
+          mySimpit.printToKSP(F("Only printing events now"), PRINT_TO_SCREEN);
           break;
         case 39: 
         case 40: 

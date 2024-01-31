@@ -59,16 +59,16 @@ void setup() {
   // | Display text on screen, write to log |
   // |--------------------------------------|
   // Display a message on screen in KSP and write to the log
-  mySimpit.printToKSP("Starting test sequence", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Starting test sequence"), PRINT_TO_SCREEN);
   // Write to log
-  mySimpit.printToKSP("Verbose Logging", VERBOSE_ONLY);
-  mySimpit.printToKSP("No Header", NO_HEADER); 
+  mySimpit.printToKSP(F("Verbose Logging"), VERBOSE_ONLY);
+  mySimpit.printToKSP(F("No Header"), NO_HEADER); 
   delay(1000);
 
   // |---------------------------------------------------------------------------|
   // | Echo Request & Response, subscribing and unsubscribing to / from messages |
   // |---------------------------------------------------------------------------|
-  mySimpit.printToKSP("Test Echo", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Test Echo"), PRINT_TO_SCREEN);
   //Register the echo response channel
 	mySimpit.registerChannel(ECHO_RESP_MESSAGE);
   delay(1000);
@@ -76,17 +76,17 @@ void setup() {
   while(!echoReceived) //The echoReceived get's set in the messageHandler() down below
   {
     mySimpit.send(ECHO_REQ_MESSAGE, "", 1);
-    mySimpit.printToKSP("Waiting for echo response", PRINT_TO_SCREEN);
+    mySimpit.printToKSP(F("Waiting for echo response"), PRINT_TO_SCREEN);
     delay(1000);
     // Check for new serial messages.
     mySimpit.update();
   }
-  mySimpit.printToKSP("Echo received", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Echo received"), PRINT_TO_SCREEN);
   //Deregister the echo response channel
 	mySimpit.deregisterChannel(ECHO_RESP_MESSAGE);
 
   delay(1000);
-  mySimpit.printToKSP("Press continue button", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Press continue button"), PRINT_TO_SCREEN);
   //Wait for the continue button to be pressed and released.
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH);
   WaitForContinueButtonReleased();
@@ -97,8 +97,8 @@ void setup() {
   /*  Old way of activating and deactivating action groups. 
       Use SETSINGLE_CAG_MESSAGE instead as shown below.
 
-  mySimpit.printToKSP("Step : Actv&Deac CAG 1&2", PRINT_TO_SCREEN);
-  mySimpit.printToKSP("Use Action Button to act/deac", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Actv&Deac CAG 1&2"), PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Use Action Button to act/deac"), PRINT_TO_SCREEN);
   //Wait for the continue button to be pressed
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
@@ -121,8 +121,8 @@ void setup() {
   }
   WaitForContinueButtonReleased();
 
-  mySimpit.printToKSP("Step : Toggle CAG 1&2", PRINT_TO_SCREEN);
-  mySimpit.printToKSP("Use Action Button to toggle CAG1&2", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Toggle CAG 1&2"), PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Use Action Button to toggle CAG1&2"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -135,8 +135,8 @@ void setup() {
   WaitForContinueButtonReleased();
   */
 
-  mySimpit.printToKSP("Step : Actv&Deac CAG 1&2", PRINT_TO_SCREEN);
-  mySimpit.printToKSP("Use Action Button to act/deac", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Actv&Deac CAG 1&2"), PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Use Action Button to act/deac"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     //Note: The activation and deactivation is better suited for a lever / switch than a button. But a button is what we have right now, so let's use it
@@ -162,7 +162,7 @@ void setup() {
   }
   WaitForContinueButtonReleased();
 
-  mySimpit.printToKSP("Step : Toggle CAG 1&2", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Toggle CAG 1&2"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -179,7 +179,7 @@ void setup() {
   // |-----------------|
   // | Stage and Abort |
   // |-----------------|
-  mySimpit.printToKSP("Step : Activate Stage", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Activate Stage"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -190,7 +190,7 @@ void setup() {
   }
   WaitForContinueButtonReleased();
 
-  mySimpit.printToKSP("Step : Activate Abort", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Activate Abort"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -208,7 +208,7 @@ void setup() {
       Does not support all Action Groups for KSP2. 
       Use SETSINGLE_AG_MESSAGE instead as shown below.
 
-  mySimpit.printToKSP("Step : Act & Deact Gear", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Act & Deact Gear"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW && lastInputButtonState == HIGH) //Button got pressed down
@@ -227,7 +227,7 @@ void setup() {
   WaitForContinueButtonReleased();
   */
   
-  mySimpit.printToKSP("Step : Act & Deact Gear", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Act & Deact Gear"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW && lastInputButtonState == HIGH) //Button got pressed down
@@ -251,7 +251,7 @@ void setup() {
       Does not support all Action Groups for KSP2. 
       Use SETSINGLE_AG_MESSAGE instead as shown below.
 
-  mySimpit.printToKSP("Step : Toggle Gear", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Toggle Gear"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -263,7 +263,7 @@ void setup() {
   WaitForContinueButtonReleased();
   */
 
-  mySimpit.printToKSP("Step : Toggle Gear", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Toggle Gear"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -284,7 +284,7 @@ void setup() {
   // |----------|
   // | Rotation |
   // |----------|
-  mySimpit.printToKSP("Step : Rotation test (analog)", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Rotation test (analog)"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     rotationMessage rot_msg;
@@ -311,7 +311,7 @@ void setup() {
   // |-------------|
   // | Translation |
   // |-------------|
-  mySimpit.printToKSP("Step : Translation (analog)", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Translation (analog)"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     translationMessage trans_msg;
@@ -331,7 +331,7 @@ void setup() {
   // |--------|
   // | Wheels |
   // |--------|
-  mySimpit.printToKSP("Step : Wheels test (analog)", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Wheels test (analog)"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     wheelMessage wheel_msg;
@@ -349,7 +349,7 @@ void setup() {
   // |----------|
   // | Throttle |
   // |----------|
-  mySimpit.printToKSP("Step : Throttle test (analog)", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Throttle test (analog)"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     throttleMessage throttle_msg;
@@ -365,7 +365,7 @@ void setup() {
   // |-----------|
   // | SAS modes |
   // |-----------|
-  mySimpit.printToKSP("Step : Set SAS Modes", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Set SAS Modes"), PRINT_TO_SCREEN);
   
   // Make sure SAS is activated before setting it.
   mySimpit.activateAction(SAS_ACTION);
@@ -378,37 +378,37 @@ void setup() {
       switch (lastState)
       {
         case AP_MANEUVER:
-            mySimpit.printToKSP("Stability assist", PRINT_TO_SCREEN);
+            mySimpit.printToKSP(F("Stability assist"), PRINT_TO_SCREEN);
             mySimpit.setSASMode(AP_STABILITYASSIST);
             lastState = AP_STABILITYASSIST;
           break;
         case AP_STABILITYASSIST:
           //The other SAS modes work the same, to make the code shorter they are in this separate function
-          TestSas("Progragde", AP_PROGRADE);
+          TestSas(F("Progragde"), AP_PROGRADE);
           break;
         case AP_PROGRADE:
-          TestSas("Retrograde", AP_RETROGRADE);
+          TestSas(F("Retrograde"), AP_RETROGRADE);
           break;
         case AP_RETROGRADE:
-          TestSas("Normal", AP_NORMAL);
+          TestSas(F("Normal"), AP_NORMAL);
           break;
         case AP_NORMAL:
-          TestSas("Antinormal", AP_ANTINORMAL);
+          TestSas(F("Antinormal"), AP_ANTINORMAL);
           break;
         case AP_ANTINORMAL:
-          TestSas("Radial In", AP_RADIALIN);
+          TestSas(F("Radial In"), AP_RADIALIN);
           break;
         case AP_RADIALIN:
-          TestSas("Radial Out", AP_RADIALOUT);
+          TestSas(F("Radial Out"), AP_RADIALOUT);
           break;
         case AP_RADIALOUT:
-          TestSas("Target", AP_TARGET);
+          TestSas(F("Target"), AP_TARGET);
           break;
         case AP_TARGET:
-          TestSas("Antitarget", AP_ANTITARGET);
+          TestSas(F("Antitarget"), AP_ANTITARGET);
           break;
         case AP_ANTITARGET:
-          TestSas("Maneuver", AP_MANEUVER);
+          TestSas(F("Maneuver"), AP_MANEUVER);
           break;
       }
       WaitForActionButtonReleased();
@@ -419,7 +419,7 @@ void setup() {
   // |--------------|
   // | Camera modes |
   // |--------------|
-  mySimpit.printToKSP("Step : Set Camera Modes", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Set Camera Modes"), PRINT_TO_SCREEN);
   delay(1000);
   lastState = FLIGHT_CAMERA_LOCKED;
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
@@ -429,39 +429,39 @@ void setup() {
       switch (lastState)
       {
         case FLIGHT_CAMERA_LOCKED:
-            mySimpit.printToKSP("Camera Flight Mode", PRINT_TO_SCREEN);
+            mySimpit.printToKSP(F("Camera Flight Mode"), PRINT_TO_SCREEN);
             mySimpit.setCameraMode(CAMERA_MODE_FLIGHT);
             lastState = CAMERA_MODE_FLIGHT;
           break;
         case CAMERA_MODE_FLIGHT:
           //The other SAS modes work the same, to make the code shorter they are in this separate function
-          TestCamera("Camera Auto Mode", FLIGHT_CAMERA_AUTO);
+          TestCamera(F("Camera Auto Mode"), FLIGHT_CAMERA_AUTO);
           break;
         case FLIGHT_CAMERA_AUTO:
-          TestCamera("Camera Free Mode", FLIGHT_CAMERA_FREE);
+          TestCamera(F("Camera Free Mode"), FLIGHT_CAMERA_FREE);
           break;
         case FLIGHT_CAMERA_FREE:
-          TestCamera("Camera Orbital Mode", FLIGHT_CAMERA_ORBITAL);
+          TestCamera(F("Camera Orbital Mode"), FLIGHT_CAMERA_ORBITAL);
           break;
         case FLIGHT_CAMERA_ORBITAL:
-          TestCamera("Camera Chase Mode", FLIGHT_CAMERA_CHASE);
+          TestCamera(F("Camera Chase Mode"), FLIGHT_CAMERA_CHASE);
           break;
         case FLIGHT_CAMERA_CHASE:
-          TestCamera("Camera Locked Mode", FLIGHT_CAMERA_LOCKED);
+          TestCamera(F("Camera Locked Mode"), FLIGHT_CAMERA_LOCKED);
           break;
       }
       WaitForActionButtonReleased();
     }
   }
   WaitForContinueButtonReleased();
-  mySimpit.printToKSP("Next Camera Mode", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Next Camera Mode"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW) mySimpit.setCameraMode(CAMERA_NEXT_MODE);
     WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
-  mySimpit.printToKSP("Previous Camera Mode", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Previous Camera Mode"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW) mySimpit.setCameraMode(CAMERA_PREVIOUS_MODE);
@@ -472,7 +472,7 @@ void setup() {
   // |-----------------|
   // | Camera Rotation |
   // |-----------------|
-  mySimpit.printToKSP("Camera Rotation (analog)", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Camera Rotation (analog)"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     cameraRotationMessage camRot_msg;
@@ -632,7 +632,7 @@ void setup() {
   // |-----------------------|
   // | Change Timewarp Speed |
   // |-----------------------|
-  mySimpit.printToKSP("Step : TW up", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : TW up"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -644,7 +644,7 @@ void setup() {
     WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
-  mySimpit.printToKSP("Step : TW down", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : TW down"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -656,7 +656,7 @@ void setup() {
     WaitForActionButtonReleased();  
   }
   WaitForContinueButtonReleased();
-  mySimpit.printToKSP("Step : TW stop", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : TW stop"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -672,7 +672,7 @@ void setup() {
   // |---------------------------|
   // | Timewarp To Point in Time |
   // |---------------------------|
-  mySimpit.printToKSP("TW to now +5min", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("TW to now +5min"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -685,18 +685,18 @@ void setup() {
   WaitForContinueButtonReleased();
 
   //The others work the same, to make the code shorter they are in this separate function
-  TestTimewarpTo("TW to Mnvr -90sec", TIMEWARP_TO_NEXT_MANEUVER, -90);
-  TestTimewarpTo("TW to Burn - 10sec", TIMEWARP_TO_NEXT_BURN, -10);
-  TestTimewarpTo("TW to next SOI", TIMEWARP_TO_NEXT_SOI, 0);
-  TestTimewarpTo("TW to Ap -60sec", TIMEWARP_TO_APOAPSIS, -60);
-  TestTimewarpTo("TW to Pe -60sec", TIMEWARP_TO_PERIAPSIS, -60);
-  TestTimewarpTo("TW to 1h after morning", TIMEWARP_TO_NEXT_MORNING, 60*60);
+  TestTimewarpTo(F("TW to Mnvr -90sec"), TIMEWARP_TO_NEXT_MANEUVER, -90);
+  TestTimewarpTo(F("TW to Burn - 10sec"), TIMEWARP_TO_NEXT_BURN, -10);
+  TestTimewarpTo(F("TW to next SOI"), TIMEWARP_TO_NEXT_SOI, 0);
+  TestTimewarpTo(F("TW to Ap -60sec"), TIMEWARP_TO_APOAPSIS, -60);
+  TestTimewarpTo(F("TW to Pe -60sec"), TIMEWARP_TO_PERIAPSIS, -60);
+  TestTimewarpTo(F("TW to 1h after morning"), TIMEWARP_TO_NEXT_MORNING, 60*60);
 
   // |--------------------|
   // | Keyboard emulation |
   // |--------------------|
   //For more details see the KerbalSimpitKeyboardDemo
-  mySimpit.printToKSP("Step : Keyboard emulation (map)", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Keyboard emulation (map)"), PRINT_TO_SCREEN);
   const int M_KEY = 0x4D;
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
@@ -712,7 +712,7 @@ void setup() {
   // |-------------|
   // | Custom Axis |
   // |-------------|
-  mySimpit.printToKSP("Step : Custom Axis (analog)", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Custom Axis (analog)"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     customAxisMessage customAxis_msg;
@@ -734,7 +734,7 @@ void setup() {
   // |--------------|
   // | NavBall Mode |
   // |--------------|
-  mySimpit.printToKSP("Step : Cycle NavBall", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Step : Cycle NavBall"), PRINT_TO_SCREEN);
   while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
   {
     if(digitalRead(ACTION_INPUT_PIN) == LOW)
@@ -748,7 +748,7 @@ void setup() {
   // |-------------------|
   // | Serial Connection |
   // |-------------------|
-  mySimpit.printToKSP("Test completed. Closing.", PRINT_TO_SCREEN);
+  mySimpit.printToKSP(F("Test completed. Closing."), PRINT_TO_SCREEN);
   mySimpit.closeSerialConnection();
 
 }
