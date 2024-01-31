@@ -97,8 +97,8 @@ enum OutboundPackets
     /** Ablator in the vessel.
          Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
     AB_MESSAGE = 20,
-    /** Ablator in the current stage. Currently only works in KSP1.
-        Messages on this channel contain a resourceMessage. Need ARP to work for KSP1.*/
+    /** Ablator in the current stage. Only works in KSP1.
+        Messages on this channel contain a resourceMessage. Need ARP to work.*/
     AB_STAGE_MESSAGE = 21,
     /** TAC Life Support ressources. Only works in KSP1. 
         Messages on this channel contain a TACLSRessourceMessage. Need ARP and TACLS to work.*/
@@ -458,40 +458,71 @@ enum AdvancedActionGroupStates
 /** Timewarp command
     These are used for a TIMEWARP_MESSAGE. 
     The warp rates given here are for KSP1.
-    Setting Timewarp in KSP2 works, but the rates are different 
-    and there might be differences concerning physical warp. */
+    TIMEWARP_UP, TIMEWARP_DOWN and TIMEWARP_CANCEL_AUTOWARP work for both KSP1 and KSP2
+    Use the TIMEWARP_KSP2_XN for setting KSP2 timewarp rates as those rates are different. */
 enum Timewarp
 {
     /** Set Timewarp to x1. */
     TIMEWARP_X1 = 0,
-    /** Set Timewarp to x5 (no effect in atmosphere). */
+    /** KSP1: Set Timewarp to x5 (no effect in atmosphere). */
     TIMEWARP_X5 = 1,
-    /** Set Timewarp to x10 (no effect in atmosphere). */
+    /** KSP1: Set Timewarp to x10 (no effect in atmosphere). */
     TIMEWARP_X10 = 2,
-    /** Set Timewarp to x50 (no effect in atmosphere). */
+    /** KSP1: Set Timewarp to x50 (no effect in atmosphere). */
     TIMEWARP_X50 = 3,
-    /** Set Timewarp to x100 (no effect in atmosphere). */
+    /** KSP1: Set Timewarp to x100 (no effect in atmosphere). */
     TIMEWARP_X100 = 4,
-    /** Set Timewarp to x1000 (no effect in atmosphere). */
+    /** KSP1: Set Timewarp to x1000 (no effect in atmosphere). */
     TIMEWARP_X1000 = 5,
-    /** Set Timewarp to x10000 (no effect in atmosphere). */
+    /** KSP1: Set Timewarp to x10000 (no effect in atmosphere). */
     TIMEWARP_X10000 = 6,
-    /** Set Timewarp to x100000 (no effect in atmosphere). */
+    /** KSP1: Set Timewarp to x100000 (no effect in atmosphere). */
     TIMEWARP_X100000 = 7,
-    /** Set Timewarp to x1 in atmosphere (no effect out of atmosphere). */
+    /** KSP1: Set Timewarp to x1 in atmosphere (no effect out of atmosphere). */
     TIMEWARP_X1_PHYSICAL = 8,
-    /** Set Timewarp to x2 in atmosphere (no effect out of atmosphere). */
+    /** KSP1: Set Timewarp to x2 in atmosphere (no effect out of atmosphere). */
     TIMEWARP_X2_PHYSICAL = 9,
-    /** Set Timewarp to x3 in atmosphere (no effect out of atmosphere). */
+    /** KSP1: Set Timewarp to x3 in atmosphere (no effect out of atmosphere). */
     TIMEWARP_X3_PHYSICAL = 10,
-    /** Set Timewarp to x4 in atmosphere (no effect out of atmosphere). */
+    /** KSP1: Set Timewarp to x4 in atmosphere (no effect out of atmosphere). */
     TIMEWARP_X4_PHYSICAL = 11,
-    /** Set Timewarp the next rate available. */
+    /** KSP1 and KSP2: Set Timewarp the next rate available. */
     TIMEWARP_UP = 12,
-    /** Set Timewarp the previous rate available. */
+    /** KSP1 and KSP2: Set Timewarp the previous rate available. */
     TIMEWARP_DOWN = 13,
-    /** Cancel the current auto-timewarp and reset it to x1. */
+    /** KSP1 and KSP2: Cancel the current auto-timewarp and reset it to x1. */
     TIMEWARP_CANCEL_AUTOWARP = 255
+};
+
+/** Timewarp command
+    These are used for a TIMEWARP_MESSAGE.
+    The warp rates given here are for KSP2.
+    Use the TIMEWARP_XN for setting KSP1 timewarp rates as those rates are different.
+    TIMEWARP_UP, TIMEWARP_DOWN and TIMEWARP_CANCEL_AUTOWARP from the KSP1 set of Timewarp rates work for both KSP1 and KSP2. */
+enum TimewarpKsp2
+{
+    /** KSP2: Set Timewarp to x1. */
+    TIMEWARP_KSP2_X1 = 0,
+    /** KSP2: SSet Timewarp to x2. */
+    TIMEWARP_KSP2_X2 = 1,
+    /** KSP2: SSet Timewarp to x4. */
+    TIMEWARP_KSP2_X4 = 2,
+    /** KSP2: SSet Timewarp to x10. */
+    TIMEWARP_KSP2_X10 = 3,
+    /** KSP2: SSet Timewarp to x50. */
+    TIMEWARP_KSP2_X50 = 4,
+    /** KSP2: SSet Timewarp to x100. */
+    TIMEWARP_KSP2_X100 = 5,
+    /** KSP2: SSet Timewarp to x1000. */
+    TIMEWARP_KSP2_X1000 = 6,
+    /** KSP2: SSet Timewarp to x10000. */
+    TIMEWARP_KSP2_X10000 = 7,
+    /** KSP2: SSet Timewarp to x100 000. */
+    TIMEWARP_KSP2_X100000 = 8,
+    /** KSP2: SSet Timewarp to x1 000 000. */
+    TIMEWARP_KSP2_X1000000 = 9,
+    /** KSP2: SSet Timewarp to x10 000 000 */
+    TIMEWARP_KSP2_X10000000 = 10
 };
 
 /** Timewarp command

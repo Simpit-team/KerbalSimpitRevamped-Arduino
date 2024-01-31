@@ -491,83 +491,143 @@ void setup() {
   mySimpit.send(CAMERA_ROTATION_MESSAGE, camRot_msg);
   WaitForContinueButtonReleased();
 
-  // |--------------------|
-  // | Set Timewarp Speed |
-  // |--------------------|
-  mySimpit.printToKSP("Step : Set TW outside Atmo", PRINT_TO_SCREEN);
-  lastState = TIMEWARP_X100000;
-  while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
+  // |----------------------------|
+  // | Set Timewarp Speed in KSP1 |
+  // |----------------------------|
+  if(!mySimpit.connectedToKSP2())
   {
-    if(digitalRead(ACTION_INPUT_PIN) == LOW)
+    mySimpit.printToKSP(F("Step : Set TW outside Atmo"), PRINT_TO_SCREEN);
+    lastState = TIMEWARP_X100000;
+    while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
     {
-      switch (lastState)
+      if(digitalRead(ACTION_INPUT_PIN) == LOW)
       {
-        case TIMEWARP_X100000:
-            mySimpit.printToKSP("TW x1", PRINT_TO_SCREEN);
-            timewarpMessage tw_msg;
-            tw_msg.command = TIMEWARP_X1;
-            mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
-            lastState = TIMEWARP_X1;
-          break;
-        case TIMEWARP_X1:
-          TestTimewarp("TW x5", TIMEWARP_X5);
-          break;
-        case TIMEWARP_X5:
-          TestTimewarp("TW x10", TIMEWARP_X10);
-          break;
-        case TIMEWARP_X10:
-          TestTimewarp("TW x50", TIMEWARP_X50);
-          break;
-        case TIMEWARP_X50:
-          TestTimewarp("TW x100", TIMEWARP_X100);
-          break;
-        case TIMEWARP_X100:
-          TestTimewarp("TW x1000", TIMEWARP_X1000);
-          break;
-        case TIMEWARP_X1000:
-          TestTimewarp("TW x10000", TIMEWARP_X10000);
-          break;
-        case TIMEWARP_X10000:
-          TestTimewarp("TW x100000", TIMEWARP_X100000);
-          break;
+        switch (lastState)
+        {
+          case TIMEWARP_X100000:
+              mySimpit.printToKSP(F("TW KSP1 x1"), PRINT_TO_SCREEN);
+              timewarpMessage tw_msg;
+              tw_msg.command = TIMEWARP_X1;
+              mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
+              lastState = TIMEWARP_X1;
+            break;
+          case TIMEWARP_X1:
+            TestTimewarp(F("TW KSP1 x5"), TIMEWARP_X5);
+            break;
+          case TIMEWARP_X5:
+            TestTimewarp(F("TW KSP1 x10"), TIMEWARP_X10);
+            break;
+          case TIMEWARP_X10:
+            TestTimewarp(F("TW KSP1 x50"), TIMEWARP_X50);
+            break;
+          case TIMEWARP_X50:
+            TestTimewarp(F("TW KSP1 x100"), TIMEWARP_X100);
+            break;
+          case TIMEWARP_X100:
+            TestTimewarp(F("TW KSP1 x1 000"), TIMEWARP_X1000);
+            break;
+          case TIMEWARP_X1000:
+            TestTimewarp(F("TW KSP1 x10 000"), TIMEWARP_X10000);
+            break;
+          case TIMEWARP_X10000:
+            TestTimewarp(F("TW KSP1 x100 000"), TIMEWARP_X100000);
+            break;
+        }
+        WaitForActionButtonReleased();
       }
-      WaitForActionButtonReleased();
     }
-  }
-  WaitForContinueButtonReleased();
+    WaitForContinueButtonReleased();
 
-  mySimpit.printToKSP("Step : set phys TW in Atmo", PRINT_TO_SCREEN);
-  lastState = TIMEWARP_X4_PHYSICAL;
-  while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
-  {
-    if(digitalRead(ACTION_INPUT_PIN) == LOW)
+    mySimpit.printToKSP(F("Step : set phys TW in Atmo"), PRINT_TO_SCREEN);
+    lastState = TIMEWARP_X4_PHYSICAL;
+    while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
     {
-      switch (lastState)
+      if(digitalRead(ACTION_INPUT_PIN) == LOW)
       {
-        case TIMEWARP_X4_PHYSICAL:
-          if(digitalRead(ACTION_INPUT_PIN) == LOW)
-          {
-            mySimpit.printToKSP("TW phys x1", PRINT_TO_SCREEN);
-            timewarpMessage tw_msg;
-            tw_msg.command = TIMEWARP_X1_PHYSICAL;
-            mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
-            lastState = TIMEWARP_X1_PHYSICAL;
-          }
-          break;
-        case TIMEWARP_X1_PHYSICAL:
-          if(digitalRead(ACTION_INPUT_PIN) == LOW) TestTimewarp("TW phys x2", TIMEWARP_X2_PHYSICAL);
-          break;
-        case TIMEWARP_X2_PHYSICAL:
-          if(digitalRead(ACTION_INPUT_PIN) == LOW) TestTimewarp("TW phys x3", TIMEWARP_X3_PHYSICAL);
-          break;
-        case TIMEWARP_X3_PHYSICAL:
-          if(digitalRead(ACTION_INPUT_PIN) == LOW) TestTimewarp("TW phys x4", TIMEWARP_X4_PHYSICAL);
-          break;
+        switch (lastState)
+        {
+          case TIMEWARP_X4_PHYSICAL:
+            if(digitalRead(ACTION_INPUT_PIN) == LOW)
+            {
+              mySimpit.printToKSP(F("TW phys x1"), PRINT_TO_SCREEN);
+              timewarpMessage tw_msg;
+              tw_msg.command = TIMEWARP_X1_PHYSICAL;
+              mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
+              lastState = TIMEWARP_X1_PHYSICAL;
+            }
+            break;
+          case TIMEWARP_X1_PHYSICAL:
+            if(digitalRead(ACTION_INPUT_PIN) == LOW) TestTimewarp("TW phys x2", TIMEWARP_X2_PHYSICAL);
+            break;
+          case TIMEWARP_X2_PHYSICAL:
+            if(digitalRead(ACTION_INPUT_PIN) == LOW) TestTimewarp("TW phys x3", TIMEWARP_X3_PHYSICAL);
+            break;
+          case TIMEWARP_X3_PHYSICAL:
+            if(digitalRead(ACTION_INPUT_PIN) == LOW) TestTimewarp("TW phys x4", TIMEWARP_X4_PHYSICAL);
+            break;
+        }
+        WaitForActionButtonReleased();
       }
-      WaitForActionButtonReleased();
     }
+    WaitForContinueButtonReleased();
   }
-  WaitForContinueButtonReleased();
+
+  // |----------------------------|
+  // | Set Timewarp Speed in KSP2 |
+  // |----------------------------|
+  if(mySimpit.connectedToKSP2())
+  {
+    mySimpit.printToKSP(F("Step : Set TW"), PRINT_TO_SCREEN);
+    lastState = TIMEWARP_KSP2_X10000000;
+    while (digitalRead(CONTINUE_TEST_PIN) == HIGH)
+    {
+      if(digitalRead(ACTION_INPUT_PIN) == LOW)
+      {
+        switch (lastState)
+        {
+          case TIMEWARP_KSP2_X10000000:
+              mySimpit.printToKSP(F("TW KSP2 x1"), PRINT_TO_SCREEN);
+              timewarpMessage tw_msg;
+              tw_msg.command = TIMEWARP_X1;
+              mySimpit.send(TIMEWARP_MESSAGE, tw_msg);
+              lastState = TIMEWARP_KSP2_X1;
+            break;
+          case TIMEWARP_X1:
+            TestTimewarp(F("TW KSP2 x2"), TIMEWARP_KSP2_X2);
+            break;
+          case TIMEWARP_KSP2_X2:
+            TestTimewarp(F("TW KSP2 x4"), TIMEWARP_KSP2_X4);
+            break;
+          case TIMEWARP_KSP2_X4:
+            TestTimewarp(F("TW KSP2 x10"), TIMEWARP_KSP2_X10);
+            break;
+          case TIMEWARP_KSP2_X10:
+            TestTimewarp(F("TW KSP2 x50"), TIMEWARP_KSP2_X50);
+            break;
+          case TIMEWARP_KSP2_X50:
+            TestTimewarp(F("TW KSP2 x100"), TIMEWARP_KSP2_X100);
+            break;
+          case TIMEWARP_KSP2_X100:
+            TestTimewarp(F("TW KSP2 x1 000"), TIMEWARP_KSP2_X1000);
+            break;
+          case TIMEWARP_KSP2_X1000:
+            TestTimewarp(F("TW KSP2 x10 000"), TIMEWARP_KSP2_X10000);
+            break;
+          case TIMEWARP_KSP2_X10000:
+            TestTimewarp(F("TW KSP2 x100 000"), TIMEWARP_KSP2_X100000);
+            break;
+          case TIMEWARP_KSP2_X100000:
+            TestTimewarp(F("TW KSP2 x1 000 000"), TIMEWARP_KSP2_X1000000);
+            break;
+          case TIMEWARP_KSP2_X1000000:
+            TestTimewarp(F("TW KSP2 x10 000 000"), TIMEWARP_KSP2_X10000000);
+            break;
+        }
+        WaitForActionButtonReleased();
+      }
+    }
+    WaitForContinueButtonReleased();
+  }
 
   // |-----------------------|
   // | Change Timewarp Speed |
