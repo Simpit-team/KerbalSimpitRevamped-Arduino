@@ -140,10 +140,10 @@ struct velocityMessage {
 struct targetMessage {
   float distance; /**< Distance to target. */
   float velocity; /**< Velocity relative to target. */
-  float heading; /**< Heading of the target. */
-  float pitch; /**< Pitch of the target. */
-  float velocityHeading; /**< Heading of the velocity to the target. */
-  float velocityPitch; /**< Pitch of the velocity to the target. */
+  float heading; /**< Heading of the target. Only available in KSP1. */
+  float pitch; /**< Pitch of the target. Only available in KSP1. */
+  float velocityHeading; /**< Heading of the velocity to the target. Only available in KSP1. */
+  float velocityPitch; /**< Pitch of the velocity to the target. Only available in KSP1. */
 } __attribute__((packed));
 
 /** An Airspeed information message. */
@@ -159,19 +159,19 @@ struct maneuverMessage {
   float deltaVNextManeuver; /**< Delta to the next planned maneuver. */
   float durationNextManeuver; /**< Duration of the burn for the next planned maneuver. */
   float deltaVTotal; /**< DeltaV of all the planned maneuvers. */
-  float headingNextManeuver; /**< Heading of the next maneuver. */
-  float pitchNextManeuver; /**< Pitch of the next maneuver. */
+  float headingNextManeuver; /**< Heading of the next maneuver. Only available in KSP1. */
+  float pitchNextManeuver; /**< Pitch of the next maneuver. Only available in KSP1. */
 } __attribute__((packed));
 
 /** A vessel orientation information message, including velocity orientation. */
 struct vesselPointingMessage {
   float heading; /**< Heading of the vessel (between 0 and 360, as indicated in the navball. 90 when pointing east, 180 when pointing south).*/
   float pitch; /**< Pitch angle of the vessel (between -90 and +90. 0 for an horizontal craft, +90 when pointing up, -90 when pointing down). */
-  float roll; /**< Roll angle of the vessel (between -180 and +180. 0 for a plane on the runway, ready to takeoff). */
-  float orbitalVelocityHeading; /**< Heading of the orbital velocity. */
-  float orbitalVelocityPitch; /**< Pitch of the orbital velocity. */
-  float surfaceVelocityHeading; /**< Heading of the surface velocity. */
-  float surfaceVelocityPitch; /**< Pitch of the surface velocity. */
+  float roll; /**< Roll angle of the vessel (between -180 and +180. 0 for a plane on the runway, ready to takeoff). Values may differ between KSP1 and KSP2. */
+  float orbitalVelocityHeading; /**< Heading of the orbital velocity. Only available in KSP1. */
+  float orbitalVelocityPitch; /**< Pitch of the orbital velocity. Only available in KSP1. */
+  float surfaceVelocityHeading; /**< Heading of the surface velocity. Only available in KSP1. */
+  float surfaceVelocityPitch; /**< Pitch of the surface velocity. Only available in KSP1. */
 } __attribute__((packed));
 
 /** A advanced action group information message. */

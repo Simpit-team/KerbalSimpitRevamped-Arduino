@@ -16,7 +16,7 @@ bool lastButtonState = HIGH;       // To find when the button changes state
 KerbalSimpit mySimpit(Serial);  // Declare a KerbalSimpit object that will communicate using the "Serial" device.
 
 const int NUMBER_OF_STEPS = 52;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
-int selectionIndex = 0;             // increased when pushing the continue button to display different Values
+int selectionIndex = 14;             // increased when pushing the continue button to display different Values
 unsigned long timestampLastSent;    // When was the last time something was sent to print on screen
 const int SENDING_INTERVAL = 1000;  // in milliseconds. How often to print data to screen
 
@@ -237,7 +237,7 @@ void loop()
           mySimpit.printToKSP("Mnv Time " + String(myFloatStorage1, 0) + " dvNxt " + String(myFloatStorage2, 0) + " dur " + String(myFloatStorage3, 0), PRINT_TO_SCREEN);
         } break;
       case 15: { //Maneuver part 2
-          mySimpit.printToKSP("Mnv dvTotal " + String(myFloatStorage1, 0) + " HDG " + String(myFloatStorage2, 0) + " Ptch " + String(myFloatStorage3, 0), PRINT_TO_SCREEN);
+          mySimpit.printToKSP("Mnv dvTtl " + String(myFloatStorage4, 0) + " HDG " + String(myFloatStorage5, 0) + " Ptch " + String(myFloatStorage6, 0), PRINT_TO_SCREEN);
         } break;
       case 16: { //SAS
           String myCurrentSasString = "SAS "; //One or two letters for the current mode will get added
