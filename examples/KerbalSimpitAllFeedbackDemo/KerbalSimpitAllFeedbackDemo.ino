@@ -16,7 +16,7 @@ bool lastButtonState = HIGH;       // To find when the button changes state
 KerbalSimpit mySimpit(Serial);  // Declare a KerbalSimpit object that will communicate using the "Serial" device.
 
 const int NUMBER_OF_STEPS = 52;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
-int selectionIndex = 14;             // increased when pushing the continue button to display different Values
+int selectionIndex = 0;             // increased when pushing the continue button to display different Values
 unsigned long timestampLastSent;    // When was the last time something was sent to print on screen
 const int SENDING_INTERVAL = 1000;  // in milliseconds. How often to print data to screen
 
@@ -418,10 +418,10 @@ void loop()
           mySimpit.printToKSP("Signal:" + String((int)myByte6) + "% Stg:" + String((int)myByte7) + " Typ:" + String((int)myByte8), PRINT_TO_SCREEN);
         } break;
       case 44: { //Athmospheric Conditions
-          mySimpit.printToKSP("Athmo:" + String(myBool1) + " Ox:" + String(myBool2) + " In:" + String(myBool3), PRINT_TO_SCREEN);
+          mySimpit.printToKSP("Athmo:" + String(myBool1) + " Ox:" + String(myBool2) + " InAtm:" + String(myBool3), PRINT_TO_SCREEN);
         } break;
       case 45: { //Athmospheric Conditions
-          mySimpit.printToKSP("Dens:" + String(myFloatStorage1, 0) + " Temp:" + String(myFloatStorage2, 0) + " Press" + String(myFloatStorage3, 0), PRINT_TO_SCREEN);
+          mySimpit.printToKSP("Dens:" + String(myFloatStorage1, 2) + " Temp:" + String(myFloatStorage2, 0) + " Pres:" + String(myFloatStorage3, 0), PRINT_TO_SCREEN);
         } break;
       case 46: { //Vessel Name
           mySimpit.printToKSP("Vessel Name: '" + myString + "'", PRINT_TO_SCREEN);
@@ -443,8 +443,9 @@ void loop()
             " S" + String((int)myAdvancedActionGroups[ADVANCED_SOLAR_ACTION]) + 
             " A" + String((int)myAdvancedActionGroups[ADVANCED_ABORT_ACTION]) + 
             " R" + String((int)myAdvancedActionGroups[ADVANCED_RADIATOR_ACTION]) + 
-            " Sas" + String((int)myAdvancedActionGroups[ADVANCED_SAS_ACTION]) + 
-            " Rcs" + String((int)myAdvancedActionGroups[ADVANCED_RCS_ACTION]), PRINT_TO_SCREEN);
+            " SA" + String((int)myAdvancedActionGroups[ADVANCED_SAS_ACTION]) + 
+            " RC" + String((int)myAdvancedActionGroups[ADVANCED_RCS_ACTION]) + 
+            " Sc" + String((int)myAdvancedActionGroups[ADVANCED_SCIENCE_ACTION]), PRINT_TO_SCREEN);
         } break;
       case 51: { //Advanced Custom Action Group State Info
           mySimpit.printToKSP(
@@ -959,7 +960,7 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         if (msgSize == sizeof(advancedActionStatusMessage) && selectionIndex == 50)
         {
           advancedActionStatusMessage actionStatusMsg = parseMessage<advancedActionStatusMessage>(msg);
-          for(int i = 0; i < 9; i++) //There are 9 action groups (stage, gear, ...), they are listed in the AdvancedActionGroupIndexes enum. Some are only available for KSP2
+          for(int i = 0; i < 10; i++) //There are 9 action groups (stage, gear, ...), they are listed in the AdvancedActionGroupIndexes enum. Some are only available for KSP2
           {
             myAdvancedActionGroups[i] = actionStatusMsg.getActionStatus(i);
           }

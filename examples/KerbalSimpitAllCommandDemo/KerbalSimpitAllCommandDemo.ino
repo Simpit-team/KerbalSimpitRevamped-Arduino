@@ -280,6 +280,9 @@ void setup() {
   TestActionGroup("SAS", ADVANCED_SAS_ACTION);
   TestActionGroup("RCS", ADVANCED_RCS_ACTION);
   TestActionGroup("Brakes", ADVANCED_BRAKES_ACTION);
+  TestActionGroup("Solar", ADVANCED_SOLAR_ACTION);
+  TestActionGroup("Radiators", ADVANCED_RADIATOR_ACTION);
+  TestActionGroup("Science", ADVANCED_SCIENCE_ACTION);
 
   // |----------|
   // | Rotation |

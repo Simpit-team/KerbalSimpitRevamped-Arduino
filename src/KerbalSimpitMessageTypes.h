@@ -423,7 +423,9 @@ enum AdvancedActionGroupIndexes
     /** Index for the Solar action group. Only for KSP2. */
     ADVANCED_SOLAR_ACTION = 7,
     /** Index for the Radiator action group. Only for KSP2. */
-    ADVANCED_RADIATOR_ACTION = 8
+    ADVANCED_RADIATOR_ACTION = 8,
+    /** Index for the Science action group. Only for KSP2. */
+    ADVANCED_SCIENCE_ACTION = 9
 };
 
 /** Action Group Settings for single action groups
@@ -451,7 +453,11 @@ enum AdvancedActionGroupStates
     /** Value if the action group is off. */
     ADVANCED_AG_STATE_OFF = 2,
     /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. */
-    ADVANCED_AG_STATE_MIXED = 3
+    ADVANCED_AG_STATE_MIXED = 3,
+    /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. */
+    ADVANCED_AG_STATE_BITMASK_SCIENCE_AVAILABLE = 1,
+    /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. */
+    ADVANCED_AG_STATE_BITMASK_EXPERIMENTS_IN_PROGRESS = 2
 };
 
 
