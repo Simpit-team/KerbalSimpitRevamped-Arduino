@@ -146,6 +146,16 @@ struct targetMessage {
   float velocityPitch; /**< Pitch of the velocity to the target. Only available in KSP1. */
 } __attribute__((packed));
 
+/** A Intersect information message. If an intersect does not exist, the according values are negative. */
+struct intersectsMessage {
+    float distanceAtIntersect1; /**< Relative distance at the first intercept. */
+    int32_t timeToIntersect1; /**< Time to the first intercept in seconds. */
+    float velocityAtIntersect1; /**< Relative velocity at the first intercept. */
+    float distanceAtIntersect2; /**< Relative distance at the second intercept. */
+    int32_t timeToIntersect2; /**< Time to the second intercept in seconds. */
+    float velocityAtIntersect2; /**< Relative velocity at the second intercept. */
+} __attribute__((packed));
+
 /** An Airspeed information message. */
 struct airspeedMessage {
   float IAS; /**< Indicated airspeed. */

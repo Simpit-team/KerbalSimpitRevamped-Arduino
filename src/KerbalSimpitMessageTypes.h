@@ -271,8 +271,11 @@ enum OutboundPackets
 		  1 for vessel switching
 		  2 for docking
 		  3 for undocking. */
-    VESSEL_CHANGE_MESSAGE = 51
-
+    VESSEL_CHANGE_MESSAGE = 51,
+    /** Information about intersects with a target orbit.
+        This channel delivers messages about the intersects between the
+        active vessel and a target. Messages on this channel contain a intersectsMessage. */
+    INTERSECTS_MESSAGE = 60
 };
 
 /** Inbound packets.
@@ -304,7 +307,7 @@ enum InboundPackets
       result in the next stage being activated.
       For all other action groups, multiple activate requests will have
       no effect.
-  */
+    */
     AGACTIVATE_MESSAGE = 13,
     /** Deactivate the given standard Action Group(s). */
     AGDEACTIVATE_MESSAGE = 14,

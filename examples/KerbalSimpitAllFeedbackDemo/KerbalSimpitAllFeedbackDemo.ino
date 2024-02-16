@@ -15,7 +15,7 @@ bool lastButtonState = HIGH;       // To find when the button changes state
 
 KerbalSimpit mySimpit(Serial);  // Declare a KerbalSimpit object that will communicate using the "Serial" device.
 
-const int NUMBER_OF_STEPS = 52;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
+const int NUMBER_OF_STEPS = 54;     //The selectionIndex will be reset to 0 after reaching NUMBER_OF_STEPS-1
 int selectionIndex = 0;             // increased when pushing the continue button to display different Values
 unsigned long timestampLastSent;    // When was the last time something was sent to print on screen
 const int SENDING_INTERVAL = 1000;  // in milliseconds. How often to print data to screen
@@ -25,8 +25,8 @@ const int SENDING_INTERVAL = 1000;  // in milliseconds. How often to print data 
 bool echoReceived = false;
 float myAltitudeSeaLevel;
 float myAltitudeSurface;
-int32_t myTimeToApoapsis;
-int32_t myTimeToPeriapsis;
+int32_t myTime1;
+int32_t myTime2;
 byte myCurrentSASMode;
 int16_t mySASModeAvailability;
 bool myCustomActionGroups[10];
@@ -156,6 +156,7 @@ void setup() {
   mySimpit.registerChannel(ATMO_CONDITIONS_MESSAGE);
   mySimpit.registerChannel(VESSEL_NAME_MESSAGE);
   mySimpit.registerChannel(VESSEL_CHANGE_MESSAGE);
+  mySimpit.registerChannel(INTERSECTS_MESSAGE);
 
   // |---------------------|
   // | Echo & Echo Request |
@@ -231,7 +232,7 @@ void loop()
           mySimpit.printToKSP("Apoapsis " + String(myFloatStorage2, 0) + " Periapsis " + String(myFloatStorage1, 0), PRINT_TO_SCREEN);
         } break;
       case 13: { //Apsides Times
-          mySimpit.printToKSP("Time to Ap " + String(myTimeToApoapsis) + " Time to Pe " + String(myTimeToPeriapsis), PRINT_TO_SCREEN);
+          mySimpit.printToKSP("Time to Ap " + String(myTime1) + " Time to Pe " + String(myTime2), PRINT_TO_SCREEN);
         } break;
       case 14: { //Maneuver part 1
           mySimpit.printToKSP("Mnv Time " + String(myFloatStorage1, 0) + " dvNxt " + String(myFloatStorage2, 0) + " dur " + String(myFloatStorage3, 0), PRINT_TO_SCREEN);
@@ -456,6 +457,12 @@ void loop()
             " 5:" + String((int)myAdvancedActionGroups[4]), PRINT_TO_SCREEN);
             //And so on for all 10 action groups
         } break;
+      case 52: { //Intersect info first intersect
+          mySimpit.printToKSP("Intsct1 d " + String(myFloatStorage1, 0) + " v " + String(myFloatStorage2, 0) + " t " + String(myTime1), PRINT_TO_SCREEN);
+        } break;
+      case 53: { //Intersect info second intersect
+          mySimpit.printToKSP("Intsct2 d " + String(myFloatStorage3, 0) + " v " + String(myFloatStorage4, 0) + " t " + String(myTime2), PRINT_TO_SCREEN);
+        } break;
       default: {
           //mySimpit.printToKSP(F("Unknown selectionIndex"), PRINT_TO_SCREEN);
         } break;
@@ -640,9 +647,6 @@ void loop()
         case 46: 
           mySimpit.requestMessageOnChannel(VESSEL_NAME_MESSAGE);
           break;
-
-
-          
         case 47: 
           mySimpit.requestMessageOnChannel(INTAKE_AIR_MESSAGE); 
           break;
@@ -658,6 +662,10 @@ void loop()
           break;
         case 51: 
           mySimpit.requestMessageOnChannel(ADVANCED_CAGSTATUS_MESSAGE); 
+          break;
+        case 52: 
+        case 53: 
+          mySimpit.requestMessageOnChannel(INTERSECTS_MESSAGE); 
           break;
       }
     }
@@ -905,8 +913,8 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         if (msgSize == sizeof(apsidesTimeMessage) && selectionIndex == 13)
         {
           apsidesTimeMessage apsidesTimeMsg = parseMessage<apsidesTimeMessage>(msg);
-          myTimeToPeriapsis = apsidesTimeMsg.periapsis;
-          myTimeToApoapsis = apsidesTimeMsg.apoapsis;
+          myTime1 = apsidesTimeMsg.apoapsis;
+          myTime2 = apsidesTimeMsg.periapsis;
         }
       } break;
     case MANEUVER_MESSAGE: {
@@ -1141,6 +1149,18 @@ void messageHandler(byte messageType, byte msg[], byte msgSize) {
         if (selectionIndex == 38) 
         {
           myBool2 = true;
+        }
+      } break;
+    case INTERSECTS_MESSAGE: {
+        if (msgSize == sizeof(intersectsMessage) && (selectionIndex == 52 || selectionIndex == 53)) 
+        {
+          intersectsMessage intersectsMsg = parseMessage<intersectsMessage>(msg);
+          myFloatStorage1 = intersectsMsg.distanceAtIntersect1;
+          myFloatStorage2 = intersectsMsg.velocityAtIntersect1;
+          myTime1 = intersectsMsg.timeToIntersect1;
+          myFloatStorage3 = intersectsMsg.distanceAtIntersect2;
+          myFloatStorage4 = intersectsMsg.velocityAtIntersect2;
+          myTime2 = intersectsMsg.timeToIntersect2;
         }
       } break;
     default: {
