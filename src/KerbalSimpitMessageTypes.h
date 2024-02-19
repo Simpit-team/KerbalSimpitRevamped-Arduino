@@ -274,7 +274,8 @@ enum OutboundPackets
     VESSEL_CHANGE_MESSAGE = 51,
     /** Information about intersects with a target orbit.
         This channel delivers messages about the intersects between the
-        active vessel and a target. Messages on this channel contain a intersectsMessage. */
+        active vessel and a target. Messages on this channel contain a intersectsMessage. 
+		Only available in KSP2. */
     INTERSECTS_MESSAGE = 60
 };
 
