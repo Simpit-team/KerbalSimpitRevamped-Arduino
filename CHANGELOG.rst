@@ -1,6 +1,18 @@
 Kerbal Simpit Changelog
 =======================
 
+* **2.4.0**: 2024-02-20
+
+  * Fix action groups activating instead of toggling in AllCommandDemo example.
+  * Added KSP game version flag.
+  * Updated keywords and docs.
+  * Added example AllTheFeedbackDemo to show how all the outgoing messages are used.
+  * Added KSP2 resource channels
+  * Added Advanced Action Group Message (it supports all KSP2 Action Groups)
+  * Added Set Single Action Group Message (it supports all KSP2 Action Groups)
+  * Added Time warp commands for KSP2
+  * Added Intersects Message
+
 * **2.0.0**: 2021-09-11
 
   * Improve the init process by purging the whole USB buffer before attemping an handshake (this prevent an issue preventing the handshake to take place in some cases after an Arduino reset)
