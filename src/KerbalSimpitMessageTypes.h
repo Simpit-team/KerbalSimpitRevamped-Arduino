@@ -326,7 +326,9 @@ enum InboundPackets
 	    If set and not 0, those command will supersede SAS command. The SAS will appear not the work when the jostick is in use.
 	    If this is the case for you, make sure you are sending 0 command to KSP on all used axis.*/
     ROTATION_MESSAGE = 16,
-    /** Send vessel translation commands. */
+    /** Send vessel translation commands.
+		Works only for vessels in KSP1. Use keyboard emulation when on EVA.
+		Works for vessels and Kerbals on EVA in KSP2. */
     TRANSLATION_MESSAGE = 17,
     /** Send wheel steering/throttle commands. */
     WHEEL_MESSAGE = 18,
@@ -450,17 +452,23 @@ enum ActionGroupSettings
     These are the values returned by advancedActionStatusMessage::get_action_status in the ADVANCED_ACTIONSTATUS_MESSAGE. */
 enum AdvancedActionGroupStates
 {
-    /** Value if the action group is not available. */
+    /** Value if the action group is not available. 
+        Use like this: if(myAdvancedActionStatusMessage.getActionStatus(ADVANCED_LIGHT_ACTION) == ADVANCED_AG_STATE_NOT_AVAILABLE) */
     ADVANCED_AG_STATE_NOT_AVAILABLE = 0,
-    /** Value if the action group is on. */
+    /** Value if the action group is on. 
+        Use like this: if(myAdvancedActionStatusMessage.getActionStatus(ADVANCED_LIGHT_ACTION) == ADVANCED_AG_STATE_ON) */
     ADVANCED_AG_STATE_ON = 1,
-    /** Value if the action group is off. */
+    /** Value if the action group is off. 
+        Use like this: if(myAdvancedActionStatusMessage.getActionStatus(ADVANCED_LIGHT_ACTION) == ADVANCED_AG_STATE_OFF) */
     ADVANCED_AG_STATE_OFF = 2,
-    /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. */
+    /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. 
+        Use like this: if(myAdvancedActionStatusMessage.getActionStatus(ADVANCED_LIGHT_ACTION) == ADVANCED_AG_STATE_MIXED) */
     ADVANCED_AG_STATE_MIXED = 3,
-    /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. */
+    /** This bit is on if there is science available, it mirrors the flashing blue light in the UI.
+        Use it like this: if((myAdvancedActionStatusMessage.getActionStatus(ADVANCED_SCIENCE_ACTION) & ADVANCED_AG_STATE_BITMASK_SCIENCE_AVAILABLE) != 0) */
     ADVANCED_AG_STATE_BITMASK_SCIENCE_AVAILABLE = 1,
-    /** Value if the action group is mixed, meaning some parts associated with it are on and others are off. */
+    /** This bit is on if a science experiment is running, the same as when the flask is blinking green.
+        Use it like this: if((myAdvancedActionStatusMessage.getActionStatus(ADVANCED_SCIENCE_ACTION) & ADVANCED_AG_STATE_BITMASK_EXPERIMENTS_IN_PROGRESS) != 0) */
     ADVANCED_AG_STATE_BITMASK_EXPERIMENTS_IN_PROGRESS = 2
 };
 
