@@ -1,2 +1,6 @@
 # Required
 version: 2
+
+# Build documentation in the "docs/" directory with Sphinx
+sphinx:
+  configuration: extras/docs/conf.py
