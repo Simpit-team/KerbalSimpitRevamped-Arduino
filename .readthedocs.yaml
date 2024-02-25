@@ -1,6 +1,17 @@
-# Required
 version: 2
 
-# Build documentation in the "docs/" directory with Sphinx
+build:
+  os: "ubuntu-22.04"
+  tools:
+    python: "3.10"
+  jobs:
+    pre_build:
+      - doxygen ./extras/docs/Doxyfile
+
 sphinx:
-  configuration: extras/docs/conf.py
+  builder: html
+  configuration: ./extras/docs/conf.py
+
+python:
+  install:
+    - requirements: ./extras/docs/requirements.txt
